@@ -3,16 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="function.js"></script>
+    <!--<script src="function.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
 
-<div>box1111111</div>
-<!--<script>-->
-    <!--window.onload=()=>{-->
-        <!--var name='111'-->
-        <!--console.log(name);-->
-    <!--}-->
-<!--</script>-->
+<div id="app">
+        <h1>this is list </h1>
+        <ul>
+            <li v-for="item,index in list" :class="{'done':item.state}" @click="click($event,index)">
+                <label >
+                    <input type="checkbox" :checked="item.state">{{item.thing}}       </label>
+            </li>
+        </ul>
+
+    <p>
+        add new todo
+        <input type="text" @keyup.enter="addItem" v-model="input">
+    </p>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!',
+            list:[
+                {
+                  thing:'go to shop',
+                  state:true
+                },
+                {
+                   thing:'see movies',
+                   state:false
+                },
+                {
+                    thing:'go to kill',
+                    state:true
+                },
+                ],
+            input:''
+        },
+        methods:{
+            click(event,index){  //调用中传递$event 获取当前事件对象
+                // let className=event.currentTarget.getAttribute('class')
+                // if(className){
+                //     event.currentTarget.removeAttribute('class')
+                // }else{
+                //     event.currentTarget.className +='done'
+                // }
+                console.log(index)  //传递index操作原data
+                this.list[index].state=!this.list[index].state
+                console.log(this.$set)
+                // this.$set(this.list,0,{
+                //     thing:'111111',
+                //     state:true})
+                // console.log(this.list)
+            },
+            addItem(){
+                console.log(this.input)
+                let user_input=this.input.trim()
+                user_input?this.list.push({
+                    thing:user_input,
+                    state:false
+                }):null
+                this.input=''
+            }
+        },
+
+
+    })
+</script>
+<style>
+    .done{
+        background-color: gray;
+    }
+</style>
 </body>
 </html>
