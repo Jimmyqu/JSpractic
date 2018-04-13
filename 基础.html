@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+            <h2></h2>
+    </div>
+
+    <script>
+
+        window.onload= ()=>{
+            let obj={};
+            let text='';
+            let h2 =document.getElementsByTagName('h2')[0]
+            console.log(h2)
+
+            //给obj添加属性text
+            Object.defineProperty(obj, 'text', {
+                get: function ()　{ //读取时返回变量text
+                    return text;
+                },
+                set: function (newVal) {
+                    text = newVal; //设置时绑定到变量text
+                    h2.innerHTML = text;
+                }
+            });
+            obj.text='hahaha'
+            console.log(text)  //实际是设置了text
+            text='asdasdfasfa'
+            console.log(obj.text)
+        }
+
+    </script>
+</body>
+</html>

@@ -21,10 +21,33 @@
         add new todo
         <input type="text" @keyup.enter="addItem" v-model="input">
     </p>
+
+    <div>
+        <h2>番茄钟</h2>
+        <h3>{{title}}</h3>
+        <span>{{computed_min}}</span>:<span>{{computed_sec}}</span>
+        <button @click="startClock" :disabled="btn_state==='started'">start</button>
+        <button @click="pausedClock" :disabled="btn_state!=='started'">paused</button>
+        <button @click="stopClock" :disabled="btn_state!=='started'&&btn_state!== 'paused'">stop</button>
+    </div>
 </div>
 
 
 <script>
+
+    const time_state={
+        work:'work',
+        rest:'rest'
+    }
+    const btn_state={
+        start:'started',
+        paused:'paused',
+        stop:'stoped',
+
+    }
+    const work_time=25
+    const rest_time =5
+
     new Vue({
         el: '#app',
         data: {
@@ -43,7 +66,12 @@
                     state:true
                 },
                 ],
-            input:''
+            input:'',
+            min:work_time,
+            sec:0,
+            clock_state:time_state.work,
+            interval:null,
+            btn_state:null
         },
         methods:{
             click(event,index){  //调用中传递$event 获取当前事件对象
@@ -60,6 +88,7 @@
                 //     thing:'111111',
                 //     state:true})
                 // console.log(this.list)
+
             },
             addItem(){
                 console.log(this.input)
@@ -69,8 +98,59 @@
                     state:false
                 }):null
                 this.input=''
+            },
+            tic(){
+                if(this.sec!==0){
+                    this.sec--
+                    return
+                }
+                if(this.min!==0){
+                    this.min--;
+                    this.sec=59
+                    return
+                }
+                if(this.min===0&&this.sec===0){
+                    this.clock_state==='work'?this.clock_state='rest':this.clock_state='work'
+                }
+                this.clock_state=(this.clock_state==='work'?'work':'rest')
+                this.clock_state==='work'? this.min=work_time:this.min=rest_time
+            },
+            startClock(){
+                if(this.btn_state===btn_state.start){
+                    return
+                }
+                this.btn_state=btn_state.start
+                this.tic()
+                this.interval=setInterval(this.tic,1000)
+            },
+            stopClock(){
+                this.btn_state=btn_state.stop
+                clearInterval(this.interval)
+                this.min=work_time
+                this.sec=0
+            },
+            pausedClock(){
+                this.btn_state=btn_state.paused
+                clearInterval(this.interval)
             }
         },
+        computed:{
+            computed_sec(){ //小于10返回拼接字符串 否则返回原字符串
+                if(this.sec<10){
+                    return "0"+this.sec
+                }
+                return this.sec
+            },
+            computed_min(){
+                if(this.min<10){
+                    return "0"+this.min
+                }
+                return this.min
+            },
+            title(){
+                return this.clock_state==='work'?'work':'rest'
+            }
+        }
 
 
     })
