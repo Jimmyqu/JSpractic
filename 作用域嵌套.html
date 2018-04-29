@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    window.onload=()=>{
+        //foo(3)  //ReferenceError 函数运行时b未定义
+        let b=3;
+        function foo(a) {
+            console.log(a+b)
+        }
+        foo(2)
+
+        // // 声明i为全局变量
+        // for(var i= 0;i<4;i++){
+        //     console.log(i)
+        // }
+        // //最后一次调用++后 i值为4
+        // console.log(i)
+
+
+        for (var i=1; i<=5; i++) { (function(x) {
+            setTimeout( function timer() { console.log(x);
+            }, i*1000 );
+        })(i);
+        }
+
+        for (let j=1; j<=5; j++){
+            setTimeout( function timer() { console.log(j);
+            }, j*1000 );
+        }
+    }
+
+
+</script>
+</body>
+</html>

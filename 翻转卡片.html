@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box1{
+            background-color: #f3b32e;
+            width: 150px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        #box2{
+            background-color: rebeccapurple;
+            width: 150px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            top:-200px;
+            backface-visibility: hidden;
+            /*隐藏被旋转的 div 元素的背面：*/
+        }
+
+        #container:hover #box2{
+            transition: transform 1s;
+            transform: rotateY(180deg);
+        }
+        #box2{
+            transition: transform 1s;
+            transform: rotateY(0deg);
+        }
+
+        #container:hover #box1{
+            transition: transform 1s;
+            transform: rotateY(0deg);
+        }
+        #box1{
+            transition: transform 1s;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="box1">
+            font
+    </div>
+    <div id="box2">
+            back
+    </div>
+</div>
+
+</body>
+</html>
