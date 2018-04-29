@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+
+<template id="form">
+    <div>
+        <label for="name">what's your name ?</label>
+        <input
+            type="text"
+            id="name"
+            @input="onInput"
+
+            ><!--3.绑定$emit事件到method事件-->
+    </div>
+</template>
+
+
+<div id="app">
+    <!--数据只能在自己模板内使用-->
+    <form-view  v-model="name" >
+    </form-view>
+    {{name}}
+</div>
+<script>
+    Vue.component('form-view', {
+        template: '#form',
+        methods:{
+            onInput: function (event) {  //1.创建事件
+                //2. 使用$emit来触发一个自定义事件，并传递一个参数
+                this.$emit('input', event.target.value)
+            }
+        },
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hello',
+            fatherMsg:'father',
+            name:'asdasd1111'
+        },
+        methods:{
+            // showMsg(date){
+            //     console.log(date)
+            //     this.name=date
+            // }
+        },
+        watch:{
+            name(){
+                console.log(this.name)
+            }
+        }
+    })
+</script>
+</body>
+</html>
