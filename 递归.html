@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr=[]
+    function foo(num) {
+        if (num!==0){
+            arr.push(num)
+            foo(num-=1)
+        }
+        console.log(arr)
+    }
+    foo(5)
+
+    let arr1=[1,2,3,4,5,6,6,7,8,9]
+    function isIn(arr,item) {
+        return arr.indexOf(item) !==-1
+    }
+
+
+</script>
+</body>
+</html>
