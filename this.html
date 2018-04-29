@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+//     function foo() {
+//         console.log(this)  //window
+//     }
+//     foo()
+//
+// foo.call('asd')  //call 改变函数this指向并调用
+// foo.bind('asdasd')() // bind 改变函数this指向
+
+function bzz(){
+    return ()=>{
+        console.log(this.a)
+    }
+ }
+
+var obj1={
+    a:'asd',
+    i:function () {
+        console.log(this.a)
+    }
+}
+obj1.i()
+
+var obj2={
+    a:'asd',
+    i:()=>{
+        console.log(this.a)
+    }
+}
+function goo() {
+    return ()=>{
+        console.log(this.a)
+    }
+}
+
+goo.call(obj2)()
+
+</script>
+</body>
+</html>

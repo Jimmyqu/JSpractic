@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 120px;
+            height: 100px;
+            background-color: cadetblue;
+            margin: 10px auto;
+        }
+
+        #b1{
+            /*旋转*/
+            transform: rotate(45deg);
+        }
+
+        #b2{
+            /*缩放 x轴 y轴*/
+            transform: scale(0.5,1);
+        }
+        #b3{
+            /*倾斜转换 x轴 y轴*/
+            transform: skew(45deg,0deg);
+        }
+        #b4{
+            /*2D转换 x轴 y轴 */
+            transform: translate(0,50%);
+        }
+        #b5{
+            background-color: aqua;
+        }
+        #b6{
+
+            transform: translate(0,50%) skew(45deg,0deg) scale(.5,1) rotate(45deg);
+
+
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <div id="b1" class="box">
+
+    </div>
+    <div id='b2' class="box">
+
+    </div>
+    <div id='b3' class="box">
+
+    </div>
+    <div id='b4' class="box">
+
+    </div>
+    <div id='b5' class="box">
+
+    </div>
+    <div id='b6' class="box">
+
+    </div>
+
+
+
+</body>
+</html>
