@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            margin: 0 auto;
+            transition: all 1s;
+        }
+
+        #box:hover{
+            transform:scale(2,2) rotate(720deg);
+            width: 400px;
+        }
+
+
+        @keyframes change {
+            0% {
+                padding: 0;
+            }
+            50% {
+                padding: 0 20px;
+                background-color:rgba(190, 206, 235, 0.2);
+            }
+            100% {
+                padding: 0 100px;
+                background-color:rgba(190, 206, 235, 0.9);
+            }
+        }
+
+        #box1:hover {
+           animation: change 1.5s infinite alternate;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box" class="box">
+        <h1 style="color: #fff;">box</h1>
+    </div>
+
+<div id="box1" class="box" style="margin-top: 50px">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            margin: 200px auto;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        #one{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container >#one:target{
+            animation:easeOut 1s 1;
+        }
+        #two{
+            position: absolute;
+
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        .container >#two:target{
+            opacity: 1;
+            animation:easeLeft 1s 1;
+        }
+
+        #three{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        .container >#three:target{
+            opacity: 1;
+            animation:easeTop 1s 1;
+        }
+
+        #four{
+            position: absolute;
+            left:0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        .container >#four:target{
+            opacity: 1;
+            animation:easeSize 1s 1;
+        }
+        .slider{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-direction: row;
+            position: absolute;
+            bottom: 0;
+            /*position: absolute;后脱离文档流 忘记自己的宽度 display:flex失败 设置width*/
+            display: flex;
+            width:100%
+        }
+        .slider>li {
+            flex: 1;
+            text-align: center;
+        }
+        li :active img{
+            opacity: 0.6;
+        }
+        .slider>li img{
+            width: 120px;
+            height: 80px;
+        }
+
+
+
+        @keyframes easeOut {
+            from {
+                opacity:0;
+            }
+            to{
+                opacity:1;
+            }
+        }
+
+        @keyframes easeLeft {
+            from {
+                left:-600px;
+            }
+            to{
+                left:0px;
+            }
+        }
+        @keyframes easeTop {
+            from {
+                top:-400px;
+            }
+            to{
+                top:0px;
+            }
+        }
+
+        @keyframes easeSize {
+            from {
+                transform:scale(0) rotate(0);
+            }
+            to{
+                transform:scale(1) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="one"  src="http://www.nationmultimedia.com/img/news/2018/03/05/30340188/0a5c42899e9d1cb5b9de5750e81027d1.jpeg" alt="">
+        <img id="two" src="https://gq-images.condecdn.net/image/V6ax445dpx8/crop/405/landscape/f/Eva-Green-05-GQ-04Aug14_Marc-Hom_b.jpg" alt="">
+        <img id="three"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs4W-LQbtW0Jkai0PkowPV0L4yvYlgqy6OB0q_aRW16KJpt9Hd" alt="">
+        <img id="four"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAuQR21Ct5KEMShL3MX24bvDAsRVRWBwPmjvV3hm-l1Tb0GXht6w" alt="">
+        <ul class="slider">
+            <li>
+                <a href="#one">
+                    <label for="" style="display:inline-block;width: 100%;height: 100%">
+                        <input type="text" style="display: none">
+                        <img src="http://www.nationmultimedia.com/img/news/2018/03/05/30340188/0a5c42899e9d1cb5b9de5750e81027d1.jpeg" alt="">
+                    </label>
+                </a>
+
+            </li>
+            <li>
+                <a href="#two" ><label for="" style="display:inline-block;width: 100%;height: 100%">
+                    <input type="text" style="display: none">
+                    <img src="https://gq-images.condecdn.net/image/V6ax445dpx8/crop/405/landscape/f/Eva-Green-05-GQ-04Aug14_Marc-Hom_b.jpg" alt="">
+                </label></a>
+            </li>
+            <li>
+                <a href="#three">
+                    <label for="" style="display:inline-block;width: 100%;height: 100%">
+                        <input type="text" style="display: none">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs4W-LQbtW0Jkai0PkowPV0L4yvYlgqy6OB0q_aRW16KJpt9Hd" alt="">
+                    </label>
+                </a>
+
+            </li>
+            <li>
+                <a href="#four">
+                    <label for="" style="display:inline-block;width: 100%;height: 100%">
+                        <input type="text" style="display: none">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAuQR21Ct5KEMShL3MX24bvDAsRVRWBwPmjvV3hm-l1Tb0GXht6w" alt="">
+                    </label>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

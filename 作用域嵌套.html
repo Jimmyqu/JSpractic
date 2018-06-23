@@ -10,11 +10,11 @@
 
     window.onload=()=>{
         //foo(3)  //ReferenceError 函数运行时b未定义
-        let b=3;
-        function foo(a) {
-            console.log(a+b)
-        }
-        foo(2)
+        // let b=3;
+        // function foo(a) {
+        //     console.log(a+b)
+        // }
+        // foo(2)
 
         // // 声明i为全局变量
         // for(var i= 0;i<4;i++){
@@ -24,15 +24,39 @@
         // console.log(i)
 
 
-        for (var i=1; i<=5; i++) { (function(x) {
-            setTimeout( function timer() { console.log(x);
-            }, i*1000 );
-        })(i);
+        for (var i=1; i<=5; i++) {
+            (function(x) {
+                setTimeout( function timer() {
+                    console.log(x);
+                }, x*1000 );
+            })(i);
         }
 
         for (let j=1; j<=5; j++){
             setTimeout( function timer() { console.log(j);
             }, j*1000 );
+        }
+
+        a() //'a'
+        function a() {
+            console.log('a')
+        }
+        a()
+
+        console.log(b)  //undefined
+        var b='b'
+
+        animate(2) //函数提升
+        function animate(x) {
+            console.log(x)
+            setTimeout(()=>{
+                 console.log(y)  //变量没有提升
+                 console.log(x)//变量没有提升
+                 console.log(Math.abs(x))  //abs undefine 为NAN
+                 var x= Math.abs(x)
+                 var y='11'
+                 console.log(x) //输出NaN
+            },10)
         }
     }
 

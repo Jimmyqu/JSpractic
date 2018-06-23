@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            margin: 200px auto;
+        }
+
+    </style>
+</head>
+<body>
+<script>
+    var clock = '';
+    var nums = 10;
+    var btn;
+    function sendCode(thisBtn)
+
+    {
+        btn = thisBtn;
+        btn.disabled = true; //将按钮置为不可点击
+        btn.value = nums+'秒后可重新获取';
+        clock = setInterval(doLoop, 1000); //一秒执行一次
+
+    }
+
+    function doLoop()
+
+    {
+        nums--;
+        if(nums > 0){
+            btn.value = nums+'秒后可重新获取';
+        }else{
+
+            clearInterval(clock); //清除js定时器
+            btn.disabled = false;
+            btn.value = '点击发送验证码';
+            nums = 10; //重置时间
+        }
+
+    }
+</script>
+<div id="box">
+    <button id="btn">click</button>
+    <input type="button" style="height:32px;width:120px;" value="点击发送验证码" onclick="sendCode(this)" />
+</div>
+
+<script>
+    window.onload=()=>{
+
+
+        let btn=document.getElementById('btn')
+        function djs() {
+            let time=6
+            console.log()
+            let oldVal=this.innerText
+            let that=this
+            let id=setInterval(function () {
+                if(time>0){
+                    time--
+                    that.innerText=time
+                    that.disabled=true
+                }else {
+                    window.clearInterval(id);
+                    that.innerText=oldVal
+                    that.disabled=false
+                }
+            },1000)
+        }
+
+       btn.addEventListener('click',djs)
+
+    }
+</script>
+</body>
+</html>

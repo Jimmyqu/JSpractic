@@ -10,6 +10,7 @@
         rotateZ  角度旋转
         perspective 拉伸 越小显示视角越大
         透视距离太小，物体可能会被扭曲。如果太大，3D效果将减少到没有。著作权归作者所有。
+        translateZ的功能就是配合perspective让元素在自己的眼前或近或远
         */
         #container{
             margin: 0 auto;
@@ -17,7 +18,7 @@
             height: 200px;
             transform-style: preserve-3d;
             position: relative;
-            perspective: 800px;
+
         }
        #font{
            width: 200px;
@@ -50,7 +51,7 @@
             position: absolute;
             top: 0;
             left:0;
-
+            transform: translateY(-100px) rotateX(90deg);
         }
         #bottom{
             width: 200px;
@@ -63,6 +64,29 @@
             left:0;
             transform: translateY(100px) rotateX(90deg);
         }
+        #left{
+            width: 200px;
+            height: 200px;
+            background-color: rebeccapurple;
+            opacity: .5;
+            border: 1px saddlebrown  solid;
+            position: absolute;
+            top: 0;
+            left:0;
+            transform: translateX(-100px) rotateY(90deg);
+        }
+        #right{
+            width: 200px;
+            height: 200px;
+            background-color: rebeccapurple;
+            opacity: .5;
+            border: 1px saddlebrown  solid;
+            position: absolute;
+            top: 0;
+            left:0;
+            transform: translateX(100px) rotateY(90deg);
+        }
+
 
     </style>
 </head>
