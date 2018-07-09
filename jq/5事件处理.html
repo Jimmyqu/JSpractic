@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jq.js"></script>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: rebeccapurple;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #inside{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #inside div{
+            width: 50px;
+            height: 50px;
+            background-color: beige;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <div id="inside">
+        <div id="target">
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // //事件冒泡 都有点击事件 会从内向外触发
+        // $('#target').on('click',function (e) {
+        //     e.stopPropagation()  //停止冒泡
+        //     console.log(3)
+        // })
+        // $('#inside').on('click',function () {
+        //     console.log(2)
+        // })
+        // $('#box').on('click',function () {
+        //     console.log(1)
+        // })
+
+        $('#a1').on('click',function () {   // 直接绑定未渲染的DOM  false
+            console.log('a1')
+        })
+
+        $('body').on('click','a',function () {  //事件委可以添加事件到还未渲染的DOM
+            console.log('a12')
+        });
+
+        $('body').append("<a id='a1'>append content</a>")
+
+        $('#target').one('mouseover',function () {  //只触发一次
+            $(this).animate({
+                width:'80px',
+                height:'80px',
+            })
+        })
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <title>Title</title>
+    <style>
+        .container{
+            display: flex;
+            margin: 200px auto 0 auto;
+            flex-wrap: wrap
+        }
+        .item{
+            width: 20%;
+        }
+        .item>img{
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+            height: 150px;
+        }
+        .item>p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <div style="display: flex;justify-content: center">
+        <ul class="pagination" id="box" style="margin:0 auto">
+
+        </ul>
+        <p id="p1"></p>
+    </div>
+
+
+
+<script src="js/jq.js"></script>
+<script src="js/jqPaginator.js"></script>
+<script>
+$(function () {
+    $.ajax({
+        url:'https://api.douban.com/v2/movie/search',
+        type:'get',
+        data:{
+            q:"%E5%BC%A0%E5%9B%BD%E8%8D%A3",
+            count:10
+        },
+        dataType:'jsonp',
+        success:function (data) {
+            console.log(data)
+            let html=''
+            for (let item of data.subjects){
+                let itemTMP=
+                    `<div class="item">
+                        <img src="${item.images.small}" alt="">
+                        <p>${item.original_title}</p>
+                     </div>`
+                html+=itemTMP
+            }
+            $('.container').append(html)
+            let totalPage=Math.floor(data.total/10)
+            $.jqPaginator('#box', {
+                totalPages: totalPage,
+                visiblePages: 10,
+                currentPage: 1,
+                onPageChange: function (num, type) {
+                    $('#p1').text(type + '：' + num);
+                    if(num!=1){
+                        $.ajax({
+                            url:'https://api.douban.com/v2/movie/search',
+                            type:'get',
+                            data:{
+                                q:"%E5%BC%A0%E5%9B%BD%E8%8D%A3",
+                                start:num*10,
+                                count:10
+                            },
+                            dataType:'jsonp',
+                            success:(data)=>{
+                                console.log(data)
+                                $('.container').html('')
+                                let html=''
+                                for (let item of data.subjects){
+                                    let itemTMP=
+                                        `<div class="item">
+                                    <img src="${item.images.small}" alt="">
+                                    <p>${item.original_title}</p>
+                                 </div>`
+                                    html+=itemTMP
+                                }
+                                $('.container').append(html)
+                            }
+                        })
+                    }
+
+                },
+                prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+                next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+                page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+            });
+        },
+        error:(e)=>{
+           console.log(e)
+        }
+    })
+
+})
+</script>
+</body>
+</html>

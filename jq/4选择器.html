@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jq.js"></script>
+    <style>
+        .box{
+            background-color: rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+
+<div>11111111111111</div>
+<div class="h">2222222222 <b>222222</b></div>
+<div>333333333333333</div>
+<p></p>
+<div id="box">
+    box
+</div>
+
+<script>
+    $(function () {
+        console.log($('div').length);
+        console.log($("div:eq(0)").text());
+        $('div:eq(0)').text(" this is 1");
+        $("p").text(" new text.");
+
+        console.log($("div:eq(1)").text()); //只能获取文字
+        console.log($("div:eq(1)").html()); //可以获取标签
+        $('div:eq(1)').html(" this is 222 <b>2222222</b>");  //可以渲染标签
+        $('div:eq(2)').text(" this is 333 <b>33333</b>"); //只能渲染文字
+
+        $('#box').attr('class','box')
+        console.log($('#box').attr('class'))
+    })
+</script>
+</body>
+</html>

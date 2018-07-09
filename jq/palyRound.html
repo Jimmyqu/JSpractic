@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jq.js"></script>
+    <style>
+        .bg{
+            height: 800px;
+        }
+        span{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<button>111</button>
+<button>222</button>
+<button>333</button>
+<div class="bg" style="background-color: #482507">
+    <span>11111111111</span>
+</div>
+<div class="bg" style="background-color: rebeccapurple">
+    <span style="">2222222222222222</span>
+</div>
+<div class="bg" style="background-color: goldenrod">
+    <span>13333333333333</span>
+</div>
+
+
+<script>
+    $(function () {
+        console.log(document.body.clientWidth)
+        console.log($(window).height())  //可见高度
+        console.log($(document).height())  //文档实际高度
+
+
+        $(window).scroll(function () {
+            console.log($(window).scrollTop())
+        })
+
+        //offset()元素相对根节点位置
+        let h1=$('div:eq(0)').offset().top;
+
+        let h2=$('div:eq(1)').offset().top;
+        let h3=$('div:eq(2)').offset().top;
+        console.log(h1)
+        console.log(h2)
+        $('button:eq(0)').on('one',function () {
+            $('html,body').animate({
+                'scrollTop':h1
+            },600)
+        })
+        $('button:eq(1)').on('one',function () {
+            $('html,body').animate({
+                'scrollTop':h2
+            },600)
+        })
+        $('button:eq(2)').on('one',function () {
+            $('html,body').animate({
+                'scrollTop':h3
+            },600)
+        })
+    })
+</script>
+</body>
+</html>

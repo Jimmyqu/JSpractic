@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            position:absolute
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+<script src="js/jq.js"></script>
+<script>
+    $(function () {
+        //animated({属性},持续时间，过渡动画，回调函数)
+
+        $('#box').on('click',function () {
+            console.log($(this))
+            $(this).animate({
+                top:'200px',
+                left:'200px'
+            },function () {
+                $(this).hide()
+            })
+        })
+    })
+</script>
+</body>
+</html>
