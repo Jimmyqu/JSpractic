@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input{
+            border: 0;
+            border-bottom: 1px solid rebeccapurple;
+            outline: none;
+        }
+        input:focus{
+        }
+        input:focus+span{
+            transition: top 0.5s;
+            top:-20px
+        }
+        label{
+            position: relative
+        }
+        span{
+            content: 'asdasdas';
+            display: inline-block;
+            position: absolute;
+            top:0;
+            left: 0;
+            transition: top 0.5s;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div style=" margin: 50px auto;width: 200px;">
+        <label >
+            <input type="text">
+            <span>
+                asdasdas
+
+            </span>
+        </label>
+    </div>
+    <script src="jq.js"></script>
+    <script>
+        $(function () {
+            $('input').blur(function () {
+                $('input').val()?$('span').hide():$('span').show()
+            })
+        })
+    </script>
+</body>
+</html>

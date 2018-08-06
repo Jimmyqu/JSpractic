@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       ul li {
+            float: left;
+            display: inline-block;
+           margin-right: 10px;
+        }
+        ul:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <head-com></head-com>
+        <router-view></router-view>
+
+    </div>
+
+
+
+
+<template id="header">
+    <div>
+        <h1>header</h1>
+        <ul>
+            <li @click="tofoo">1111</li>
+            <li @click="tobar">2222</li>
+        </ul>
+    </div>
+</template>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    const Foo = { template: '<div>foo</div>' }
+    const Bar = { template: '<div>bar</div>' }
+
+    const routes = [
+        { path: '/foo', component: Foo },
+        { path: '/bar', component: Bar }
+    ]
+
+    const router = new VueRouter({
+        routes
+    })
+
+    Vue.component('HeadCom', {
+        template: '#header',
+        methods:{
+            tofoo(){
+                this.$router.push('foo')
+            },
+            tobar(){
+                this.$router.push('bar')
+            }
+        },
+    });
+
+
+
+    const app = new Vue({
+        el:'#app',
+        router
+    })
+
+
+
+
+</script>
+</body>
+</html>

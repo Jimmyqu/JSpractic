@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            height: 21px;
+            overflow: hidden;
+        }
+        ul{
+            margin: 0 ;
+            padding:0;
+            animation: 2s sliderUp linear infinite normal;
+        }
+        li{
+            list-style:none;
+        }
+        ul:hover{
+            animation-play-state:paused;
+        }
+        @keyframes sliderUp {
+            0 %{
+                transform: translate3d(0, 0, 0);
+            }
+            33 %{
+                transform: translate3d(0, -21px, 0);
+            }
+
+            66 %{
+                transform: translate3d(0, -42px, 0);
+            }
+            100%{
+                transform: translate3d(0, -63px, 0);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>111111111111111111111111111111</li>
+            <li>222222222222222222222222222222</li>
+            <li>333333333333333333333333333333</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            margin: 0 auto;
+            width: 400px;
+        }
+        ul:after{
+            content:'';
+            display: block;
+            clear: both;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            width: 400px;
+        }
+        li{
+            list-style: none;
+            float: left;
+            position: relative;
+        }
+
+        p{
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 150px;
+            margin: 0;
+            color: #fff;
+            word-wrap:break-word;
+            background-color: #000;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        img:hover+p{
+            opacity: 0.5;
+        }
+        p:hover{
+            opacity: 0.5;
+        }
+        img{
+            width: 100px;
+            height: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>
+                <img src="https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2520176067.jpg" alt="">        <p>
+                    11111111111111111111111111111111
+                </p>
+            </li>
+            <li><img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2521349435.jpg" alt="">
+                <p>
+                    222222222222222222222
+                </p>
+            </li>
+            <li><img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2460262060.jpg" alt="">
+                <p>
+                    133333333333333333333333333333333333
+                </p>
+            </li>
+            <li><img src="https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2522625038.jpg" alt="">
+
+                <p>
+                    444444444444444444444444444444
+                </p>
+            </li>
+        </ul>
+    </div>
+
+
+    <script>
+        let arr=[1,2,3,4,5,6,7,8,9]
+        let k=0
+        let arr1=[]
+        for(let i =0;i<3;i++){
+            arr1.push(arr.slice(k,k+3))
+            k+=3
+        }
+        console.log(arr1)
+    </script>
+</body>
+</html>

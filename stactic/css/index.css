@@ -1,0 +1,20 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+}
+.comm {
+  width: 1000px;
+  min-width: 1000px;
+  background-color: #d69a44;
+  margin: 0 auto;
+  height: 100%;
+  border: 1px solid rebeccapurple;
+}
+header,
+footer {
+  flex: 1;
+}
+section {
+  flex: 5;
+}
