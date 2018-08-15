@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function findSmallest(arr) {
+        let smallest = arr[0]
+        for (let i of arr){
+            if (i<smallest){
+                smallest=i
+            }
+        }
+        return (arr.indexOf(smallest))
+    }
+
+    let arr1=[9,2,4,25,7,3,8,6,5]
+//    findSmallest(arr1)
+//    console.log(arr1.splice(findSmallest(arr1),1))
+//    console.log(arr1)
+    function sortBy(arr) {
+        let newarr = [];
+        for(let i=0;i<9;i++){
+            newarr.push(arr.splice(findSmallest(arr),1))
+        }
+        console.log(newarr)
+
+        let arr2=[]
+        for (let i in newarr){
+            arr2.push(newarr[i][0])
+        }
+        console.log(arr2)
+    }
+    sortBy(arr1)
+
+
+
+</script>
+</body>
+</html>
