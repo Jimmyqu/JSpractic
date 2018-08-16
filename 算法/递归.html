@@ -5,6 +5,29 @@
     <title>Title</title>
 </head>
 <body>
+<script>
+    function countDown(num) {
+        console.log(num);
+        if(num===0){  //基线条件
+            return false
+        }else {   //>0 递归条件
+            countDown(num-1)
+        }
+    }
+    countDown(10)
 
+
+    function sumArr(arr) {
+        console.log(arr)
+        if(arr.length===0){
+            return 0
+        }else if (arr.length === 1){
+            return arr[0];
+        } else {
+            return arr[0] + sumArr(arr.slice(1));//slice() 方法从已有的数组中返回选定的元素。
+        }
+    }
+    console.log(sumArr([2,3,1]))
+</script>
 </body>
 </html>

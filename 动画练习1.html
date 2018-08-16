@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width: 800px;
+            height: 800px;
+            margin: 50px auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box{
+            background-color: rebeccapurple;
+            width: 20px;
+            height: 20px;
+            border: 1px solid slategray;
+            box-sizing: border-box;
+            transition:transform 1s;
+        }
+        .box:hover{
+            background-color: #e85a5e;
+            transform: scale(2,2) rotate(720deg) ;
+            transition: background-color 0.5s;
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="box" v-for="i in Array(1600)">
+
+        </div>
+    </div>
+
+    <script>
+        var vm =new Vue({
+            el:'.container',
+            data:{
+                msg:null
+            },
+            created(){
+                //Array =new Array 简写 同理 String Date
+                //Array(10)稀疏数组 不能循环
+                console.log(Date())
+                for(let i in Array(10).fill(0)){
+                    console.log(i)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
