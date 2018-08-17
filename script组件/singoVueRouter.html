@@ -14,59 +14,45 @@
             display: block;
             clear: both;
         }
+        .bar{
+            background-color: #e85a5e;
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <head-com></head-com>
+        <my-header></my-header>
         <router-view></router-view>
-
     </div>
-
-
-
-
-<template id="header">
-    <div>
-        <h1>header</h1>
-        <ul>
-            <li @click="tofoo">1111</li>
-            <li @click="tobar">2222</li>
-        </ul>
-    </div>
-</template>
 
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="header.js"></script>
+<script src="foo.js"></script>
+<script src="bar.js"></script>
+
 <script>
-
-    const Foo = { template: '<div>foo</div>' }
-    const Bar = { template: '<div>bar</div>' }
-
     const routes = [
-        { path: '/foo', component: Foo },
-        { path: '/bar', component: Bar }
-    ]
+        {
+            path: '/foo',
+            component: foo
+        },
+        {
+            path: '/bar',
+            component: bar
+        },
+        {
+            path:'/',
+            component:foo
+        }
+    ];
+
 
     const router = new VueRouter({
         routes
-    })
-
-    Vue.component('HeadCom', {
-        template: '#header',
-        methods:{
-            tofoo(){
-                this.$router.push('foo')
-            },
-            tobar(){
-                this.$router.push('bar')
-            }
-        },
     });
-
-
 
     const app = new Vue({
         el:'#app',
