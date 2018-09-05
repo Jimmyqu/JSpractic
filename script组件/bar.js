@@ -4,8 +4,13 @@
 
 let barTemplate = `
     <div class="bar">
-        <h1 @click="handlerClick">{{bar}}</h1>
-         <p v-for="i in [1,2,3,4,5]">{{i}}</p>
+        <div>
+            <h1 @click="handlerClick">{{bar}}</h1>
+             <p v-for="i in [1,2,3,4,5]">{{i}}</p>
+        </div>
+        <div class="bar-2th">
+            <div></div><div></div><div></div>
+        </div>
     </div>`
 
 

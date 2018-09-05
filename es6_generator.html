@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Generator 函数是 ES6 提供的一种异步编程解决方案
+    //返回保存状态的遍历器对象
+    function* firstGenerator() {
+        yield 'hello'
+        yield 'world'
+        return 'done'
+    }
+    let foo = firstGenerator()
+
+    console.log(foo)
+
+
+    //Generator 函数可以不用yield表达式，这时就变成了一个单纯的暂缓执行函数
+    function* f() {
+        console.log('执行了！')
+    }
+    let generator = f();
+    setTimeout(function () {
+        generator.next()
+    }, 2000);
+
+
+</script>
+</body>
+</html>

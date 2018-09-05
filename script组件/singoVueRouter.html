@@ -4,25 +4,95 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        ul{
+            padding: 0;
+            width: 200px;
+            margin: 0 auto;
+        }
        ul li {
+
             float: left;
             display: inline-block;
-           margin-right: 10px;
+           font-size: 24px;
+           width: 100px;
+           height: 60px;
+           text-align: center;
+           line-height: 60px;
+           border-radius: 10px;
+
         }
         ul:after{
             content: '';
             display: block;
             clear: both;
         }
+        .foo{
+            display: flex;
+            flex-direction: column;
+        }
+        .foo div{
+            height: 600px;
+        }
+        .foo>:nth-child(1){
+            background-color: #00abef;
+        }
+        .foo>:nth-child(2){
+            background-color: goldenrod;
+        }
+        .foo>:nth-child(3){
+            background-color: #e4b9c0;
+        }
         .bar{
             background-color: #e85a5e;
         }
+        .bar-2th{
+            display: flex;
+            flex-direction: row;
+        }
+        .bar-2th div{
+            flex: 1;
+            height: 400px;
+        }
+        .bar-2th>:nth-child(1){
+            background-color: #1b6d85;
+        }
+        .bar-2th>:nth-child(2){
+            background-color: khaki;
+        }
+        .bar-2th>:nth-child(3){
+            background-color: chartreuse;
+        }
+       .router-link-active{
+           transition: background-color 1s;
+           background-color: rebeccapurple;
+           color: #e85a5e;
+       }
+        .footer{
+            background-color: slategray;
+        }
+        .footer h1,h2{
+            margin: 0;
+            text-align: center;
+        }
+        .btn{
+            height: 60px;
+            width: 60px;
+            background-color: rebeccapurple;
+            border-radius: 50%;
+            position: fixed;
+            bottom:100px;
+            right: 50px;
+        }
     </style>
 </head>
-<body>
+<body style="margin: 0">
     <div id="app">
-        <my-header></my-header>
+        <my-header ref="header" id="header"></my-header>
         <router-view></router-view>
+        <my-footer></my-footer>
+        <div ref="btn" class="btn">
+
+        </div>
     </div>
 
 
@@ -32,7 +102,7 @@
 <script src="header.js"></script>
 <script src="foo.js"></script>
 <script src="bar.js"></script>
-
+<script src="footer.js"></script>
 <script>
     const routes = [
         {
@@ -45,18 +115,32 @@
         },
         {
             path:'/',
-            component:foo
+            redirect:'foo'
         }
     ];
-
 
     const router = new VueRouter({
         routes
     });
 
+    router.beforeEach((to, from, next) => {
+        console.log(1)
+        next();
+    });
+
     const app = new Vue({
         el:'#app',
-        router
+        router,
+        mounted(){
+            let header=document.getElementById('header')
+            console.log(header)
+            console.log(this.$refs.header.$el)
+            this.$refs.btn.addEventListener('click',function () {
+                header.scrollIntoView({
+                    behavior:'smooth'
+                })
+            })
+        }
     })
 
 

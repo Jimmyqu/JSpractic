@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" style=" height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #btn{
+            height: 50px;
+            width: 50px;
+            background-color: #e85a5e;
+            border-radius: 50%;
+            position: fixed;
+            right: 50px;
+            bottom: 80px;
+        }
+    </style>
+</head>
+<body style=" height: 200%;margin: 0">
+    <div id="header" style="height: 80px;background-color: rebeccapurple">
+
+    </div>
+<div id="btn" >
+
+</div>
+
+    <script>
+        let btn = document.getElementById('btn')
+        let header=document.getElementById('header')
+        btn.addEventListener('click',function () {
+            header.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        })
+    </script>
+</body>
+</html>

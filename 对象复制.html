@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //深复制 不能复制方法？ 说明方法是不属于某个对象的，有自己单独的内存地址
+    let obj1  =  {
+        a:1,
+        foo:function () {console.log(this.a)},
+        arr:[1,2]
+    }
+
+    obj1.foo()
+    console.log(obj1)
+
+    console.log(JSON.stringify(obj1))
+    let obj2 = JSON.parse(JSON.stringify(obj1))
+
+    console.log('深复制改变原对象后 obj2.a:'+obj2.a)
+
+    //浅复制 复制原对象的指针,他们指向同一地址 改变其中1后 另一个也会改变
+    //Object.assign(原对象，新对象)
+    let obj3  =Object.assign(obj1,{})
+    console.log(obj3===obj1)
+    obj3.arr=[1,2,3,4]
+    console.log(obj1)
+</script>
+</body>
+</html>

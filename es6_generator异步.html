@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* gen(x) {
+        let y = yield x+1
+        return y
+    }
+
+    let g = gen(1)
+    console.log(g.next())
+    //第二个next方法带有参数2传入Generator 函数，作为上个阶段异步任务的返回结果
+    console.log(g.next(10))
+    console.log(g.next())
+
+
+    function* myFetch() {
+        let url = 'https://api.github.com/users/github';
+        let res = yield fetch(url)
+        console.log(res.bio)
+        return res.bio
+        //return 1111
+    }
+
+    let goo = myFetch()
+    console.log(goo.next().value.then(res=>{
+        console.log(res)
+        return res.json()
+    }).then(data=>{
+        console.log(goo.next(data))
+        //goo.next(data)
+    }))
+
+</script>
+</body>
+</html>
