@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj = {
+        a:2
+    };
+    //试图引用对象属性时会触发[[get]]操作
+    // 先检查对象本身是否有此属性
+    // 如果不在对象本身，就会使用对象的[[prototype]]链
+    // Object.create会创建对象并将这个对象的[[prototype]]关联到指定对象，并不是复制属性
+    console.log(obj.a);
+    let anotherObj= Object.create(obj)
+    console.log(anotherObj.a)
+    console.log(obj);
+    console.log(anotherObj)
+
+    // for in 遍历对象时会查找[[prototype]]链
+    for(let i in anotherObj){
+        console.log(i)
+    }
+    //所有普通[[prototype]]链最终都指向内置object.prototype
+    //浏览器支持非标准的方法来访问内部 [[Prototype]] 属性
+    console.log(anotherObj.__proto__)
+
+</script>
+
+</body>
+</html>

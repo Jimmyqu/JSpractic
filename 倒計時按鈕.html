@@ -27,9 +27,7 @@
 
     }
 
-    function doLoop()
-
-    {
+    function doLoop() {
         nums--;
         if(nums > 0){
             btn.value = nums+'秒后可重新获取';
@@ -50,8 +48,6 @@
 
 <script>
     window.onload=()=>{
-
-
         let btn=document.getElementById('btn')
         function djs() {
             let time=6
@@ -70,7 +66,6 @@
                 }
             },1000)
         }
-
        btn.addEventListener('click',djs)
 
     }

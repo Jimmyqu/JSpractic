@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Task={
+        setId(Id){
+            this.id=Id
+        },
+        outputId(){
+            console.log(this.id)
+        }
+    }
+
+    //XYZ通过Object.create将[[Prototype]]委托了Task对象
+    let XYZ = Object.create(Task)
+
+    XYZ.prepareTask=function (Id,Label) {
+        this.label=Label
+        this.setId(Id)  //找不到setId方法到[[prototype]]链上找
+    }
+
+    XYZ.outputDetail =function () {
+        this.outputId()
+        console.log(this.label)
+    }
+
+    XYZ.prepareTask('xyz','xyzlabel')
+    XYZ.outputDetail()
+</script>
+</body>
+</html>
