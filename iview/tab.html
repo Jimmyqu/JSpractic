@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//vuejs.org/js/vue.min.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.js"></script>
+    <style>
+        .ivu-menu{
+            width: 200px!important;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <layout>
+        <sider hide-trigger class="sider">
+            <i-menu theme="light" active-name="1-1" :open-names="['1']">
+                <Submenu name="1">
+                    <template slot="title">
+                        内容管理
+                        <Icon type="ios-paper" />
+
+                    </template>
+                    <menu-item name="1-1" @click.native="handleClick(1111)">1111</menu-item>
+                    <menu-item name="1-2" @click.native="handleClick(2222)">2222</menu-item>
+                    <menu-item name="1-3" @click.native="handleClick(3333)">3333</menu-item>
+                </Submenu>
+            </i-menu>
+        </sider>
+        <layout>
+            <content>
+                <tabs type="card" :value="active" closable @on-tab-remove="handleTabRemove">
+                    <tab-pane  v-for="item in list"
+                               :label="item"
+                               :name="item"
+                              >
+                        <div v-if="item=='1111'" >
+                            this 1
+                        </div>
+                        <div v-else-if="item=='2222'" >
+                            this 2
+                        </div>
+                        <div v-else-if="item=='3333'">
+                            this 3
+                        </div>
+                    </tab-pane>
+                    <!--<tab-pane label="标签一" v-if="tab0">标签一的内容</tab-pane>-->
+                    <!--<tab-pane label="标签二" v-if="tab1">标签二的内容</tab-pane>-->
+                    <!--<tab-pane label="标签三" v-if="tab2">标签三的内容</tab-pane>-->
+                </tabs>
+            </content>
+        </layout>
+    </layout>
+
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            list:[1111],
+            active:'1111'
+        },
+        methods: {
+            handleTabRemove (name) {
+                this.list.map((x,index)=>{
+                    if(x==name){
+                        console.log(index)
+                        this.list.splice(index,1)
+                        console.log(this.list)
+                    }
+                })
+            },
+            handleClick(e){
+                console.log(this.list)
+                this.list.push(e)
+                this.list=Array.from(new Set(this.list))
+                this.active=e
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

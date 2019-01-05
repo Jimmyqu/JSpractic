@@ -27,9 +27,20 @@ module.exports = {
     plugins:[
         new HtmlPlugin({
             title:'webpack app',  //生成title
-            filename:'HtmlPlugin.html',  //生成的html,
+            filename:'index.html',  //生成的html,
             template:'src/user.html'  //要使用的模板文件
         })  //html 插件 自动生成了index.html 并引入output的输出文件
     ],
-    mode:'development' //开发模式 不压缩输出文件
+    mode:'development', //开发模式 不压缩输出文件
+    devServer:{  //安装webpack-server-dev 后可配置
+        contentBase: './dist/index.html',  //配置 DevServer HTTP 服务器的文件根目录
+        port:9000,  //端口
+        open:true,  //自动打开浏览器
+        proxy:{  //设置代理 这个URI会跳转到指定target
+            '/api':{
+                target:'http://localhost:9999/admin/'
+            }
+        },
+        hot:true  //热更新
+    }
 };

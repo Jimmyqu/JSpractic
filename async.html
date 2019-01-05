@@ -36,9 +36,12 @@
     async function asyncFoo() {
         let res  = await awaitfoo()
         console.log('done')
+        console.log(res)
         return res
     }
-    asyncFoo().then((res)=>console.log(res))
+    // asyncFoo().then((res)=>console.log(res))
+    asyncFoo()
+
 </script>
 </body>
 </html>

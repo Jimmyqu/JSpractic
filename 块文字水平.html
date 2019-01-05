@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #container{
+            margin:50px auto;
+            width: 300px;
+        }
+        #box{
+            float:left;
+            font-size:20px
+        }
+        #container ul{
+            float: left;
+            margin: 0;
+            height: 26px;
+            line-height: 35px;
+            vertical-align: bottom;
+        }
+        #container ul li{
+            font-size: 12px;
+            display: inline-block;
+            margin: 0;
+            height: 26px;
+            margin-right: 20px;
+            list-style: none;
+        }
+        #container ul :nth-child(1){
+            color: #ff9d50;
+            vertical-align: top;
+        }
+        #container:after{
+            content: '```';
+            display: block;
+            clear: both;
+            visibility: hidden;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="box">
+        asdasd
+    </div>
+    <ul>
+        <li style="vertical-align: super;">11111</li>
+        <li style="vertical-align: bottom">22222</li>
+        <li>33333</li>
+    </ul>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style>
+        #item{
+            width: 50px;
+            height: 50px;
+            background-color: #00abef;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="item" class="animated">
+
+</div>
+<script src="js/jq.js"></script>
+<script>
+    $(function () {
+        $('#item').on('click',function (e) {
+            if($(this).hasClass('bounceInDown')){
+                return
+            }
+            $(this).addClass('bounceInDown')
+            setTimeout(function () {
+                $('#item').removeClass('bounceInDown')
+            },1000)
+        })
+    })
+</script>
+</body>
+</html>
