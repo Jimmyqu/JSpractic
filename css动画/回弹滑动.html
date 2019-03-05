@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .container{
+            background-color: #00bdf6;
+            height: 80vh;
+            padding-top: 20vh;
+        }
+        .slider{
+            margin-top: 0;
+            height: 50vh;
+            background-color: green;
+            overflow: scroll;
+            -webkit-overflow-scrolling:touch;
+        }
+        .slider ul li{
+            font-size: 8rem;
+        }
+    </style>
+</head>
+<body style="margin: 0">
+
+
+<div class="container">
+    <div class="slider">
+        <ul>
+            <li>1111</li>
+            <li>222</li>
+            <li>333</li>
+            <li>4444</li>
+            <li>5555</li>
+            <li>666</li>
+            <li>7777</li>
+            <li>8888</li>
+            <li>5555</li>
+            <li>666</li>
+            <li>7777</li>
+            <li>8888</li>
+        </ul>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+
+    let touchnow=0
+    let touchend=0
+    let move=0
+    let topLine=200
+    $('.slider').on('touchstart',(e)=>{
+        touchstart=e.originalEvent.changedTouches[0].pageY
+    });
+
+    $('.slider').on('touchmove',function(e){
+        touchnow=e.originalEvent.changedTouches[0].pageY
+        move=touchnow-touchstart
+        if(parseInt($('ul').css('margin-top'))>=0){
+            console.log($('ul').css('margin-top'))
+            $('ul').animate({
+                marginTop:move
+            },0)
+        }else {
+            $('ul').animate({
+                marginTop:move
+            },0)
+        }
+
+    })
+
+    $('.slider').on('touchend',(e)=>{
+        if(parseInt($('ul').css('margin-top'))>=0){
+            $('ul').animate({
+                marginTop:0
+            },100,'swing')
+        }else {
+            return
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

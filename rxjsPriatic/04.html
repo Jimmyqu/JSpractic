@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //1,观察者模式
+    class Producer {
+        constructor() {
+            this.listeners = [];
+        }
+        // 加入監聽的方法
+        addListener(listener) {
+            if(typeof listener === 'function') {
+                this.listeners.push(listener)
+            } else {
+                throw new Error('listener 必須是 function')
+            }
+        }
+        // 移除監聽的方法
+        removeListener(listener) {
+            this.listeners.splice(this.listeners.indexOf(listener), 1)
+        }
+
+        // 發送通知的方法
+        notify(message) {
+            this.listeners.forEach(listener => {
+                listener(message);
+            })
+        }
+    }
+
+    let p1 = new Producer()
+
+    function listener1(message) {
+        console.log(message + 'from listener1');
+    }
+
+    function listener2(message) {
+        console.log(message + 'from listener2');
+    }
+
+    p1.addListener(listener1) // 註冊監聽
+    p1.addListener(listener2)
+    p1.notify('a new notify')
+
+
+    //2 迭代器模式
+
+</script>
+</body>
+</html>
