@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+</head>
+<body>
+    <div id="app" style="margin: 50px auto;width: 400px">
+        <p>{{data.name}}</p>
+        <ul>
+            <tree-item :item="item" v-for="item in data.children">
+            </tree-item>
+        </ul>
+    </div>
+
+    <script type="text/x-template" id="item-template">
+        <li >
+            <p @click="toggle">{{ item.name }} <span v-if="hasChild">{{isOpen?'-':'+'}}</span></p>
+            <ul v-show="isOpen" v-if="hasChild">
+                <tree-item
+                    class="item"
+                    v-for="(child, index) in item.children"
+                    :key="index"
+                    :item="child"
+                >
+                </tree-item>
+            </ul>
+        </li>
+    </script>
+
+    <script>
+        // demo data
+        let treeData = {
+            name: 'My Tree',
+            children: [
+                { name: 'hello' },
+                { name: 'wat' },
+                {
+                    name: 'child folder',
+                    children: [
+                        {
+                            name: 'child folder1',
+                            children: [
+                                { name: 'hello' },
+                                { name: 'wat' }
+                            ]
+                        },
+                        { name: 'hello' },
+                        { name: 'wat' },
+                        {
+                            name: 'child folder2',
+                            children: [
+                                { name: 'hello' },
+                                { name: 'wat' }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        Vue.component('tree-item', {  //递归组件 模板内调用自身
+            template: '#item-template',
+            props: {
+                item: Object
+            },
+            data: function () {
+                return {
+                    isOpen:false
+                }
+            },
+            computed: {
+                hasChild(){
+                    return this.item.children&&this.item.children.length
+                }
+            },
+            methods: {
+                toggle(){
+                    if(this.hasChild){
+                        this.isOpen=!this.isOpen
+                    }else{
+                        return
+                    }
+                }
+            }
+        })
+
+        let Vm =new Vue({
+            el:'#app',
+            data(){
+                return {
+                    data:treeData
+                }
+            },
+            methods:{
+
+            },
+            mounted(){
+
+            },
+            computed:{
+
+            }
+        })
+    </script>
+</body>
+</html>
