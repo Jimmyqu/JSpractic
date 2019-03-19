@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        #box{
+            position: absolute;
+            top:200px;
+            left:400px;
+            width: 80px;
+            height: 80px;
+            background-color: red;
+            z-index: 1
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+<div id="box">
+
+</div>
+
+<div id="target" style=" z-index: 2;position: absolute;top:0px;left:400px;margin:100px auto;width: 20px;height: 20px;background-color: rebeccapurple">
+
+</div>
+
+<script>
+    let div=document.getElementById('box')
+    let target =document.getElementById('target')
+    div.addEventListener('mousedown',function(e){
+        console.log(this)
+        let moveX = e.clientX - div.offsetLeft
+        let moveY = e.clientY - div.offsetTop
+        div.style.backgroundColor = 'red'
+        document.onmousemove=(e)=>{
+            div.style.left = e.clientX-div.offsetWidth/2+'px'
+            div.style.top =e.clientY-div.offsetHeight/2+'px'
+            // console.log(`x:${e.clientX}--y:${e.clientY}`)
+            // console.log(`targetX:${target.offsetLeft}--targetY:${target.offsetTop}`)
+            let disX = target.offsetLeft+target.offsetWidth
+            let disY = target.offsetTop+target.offsetHeight
+            //
+            // console.log(`范围X ${target.offsetLeft}-${disX}`)
+            // console.log(`范围Y ${target.offsetTop}-${disY}`)
+
+            if((e.clientX>target.offsetLeft&&e.clientX<disX)&&(e.clientY>target.offsetTop&&e.clientY<disY)){
+                console.log('in')
+            }else {
+                console.log('out')
+            }
+            // div.style.left =e.clientX - moveX+'px'
+            // div.style.top =e.clientY - moveY+'px'
+            // if(checkIntersect(div,target,-50)){
+            //     div.style.left= target.offsetLeft+'px'
+            //     div.style.top= target.offsetTop+'px'
+            //     div.style.backgroundColor = '#00D1B2'
+            //     document.onmousemove = null;
+            //     document.onmouseup = null;
+            // }
+        }
+
+        document.addEventListener('mouseup',(e)=>{
+            div.style.backgroundColor = '#00D1B2'
+            document.onmousemove = null;
+            document.onmouseup = null;
+        })
+    })
+</script>
+</body>
+</html>
