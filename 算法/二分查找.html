@@ -13,7 +13,6 @@
         let high = arr.length-1
         while (low<= high){
             let mid = Math.floor((low+high)/2)
-
             let guess = arr[mid]
             if(guess === item){
                 return mid
@@ -28,7 +27,7 @@
         return 'no'
     }
 
-    console.log(find_item(arr,15))
+    console.log(find_item(arr,3))
 </script>
 </body>
 </html>
