@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let a='abcdef'
+    let b= 'acf'
+
+    let foo=(x,y)=>{
+        let res =''
+        Array.from(x).forEach(i=>{
+          Array.from(y).filter(j=>j==i?res+=j:res+='')
+        })
+        return res
+    }
+    console.log(foo(a,b))
+</script>
+</body>
+</html>
