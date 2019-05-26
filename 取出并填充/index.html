@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+
+<script>
+window.onload=()=>{
+    let arr= [1,2,3,4,5,6,7,8,9,10,11,12].sort(()=>Math.random()>0.5?1:-1)
+    let doneArr=[]
+    let arr3=arr.splice(0,3)
+    console.log(arr3.splice(0,1))
+
+    console.log(arr3.splice(0,0,arr.splice(0,1)[0]))
+    console.log(arr3)
+    console.log(arr)
+
+}
+</script>
 </body>
 </html>
