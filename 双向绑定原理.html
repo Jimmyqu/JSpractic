@@ -6,6 +6,7 @@
 </head>
 <body>
     <div>
+        <input type="text">
             <h2></h2>
     </div>
 
@@ -15,7 +16,7 @@
             let obj={};
             let text='';
             let h2 =document.getElementsByTagName('h2')[0]
-            console.log(h2)
+            let input =document.getElementsByTagName('input')[0]
 
             //给obj添加属性text
             Object.defineProperty(obj, 'text', {
@@ -29,8 +30,14 @@
             });
             obj.text='hahaha'
             console.log(text)  //实际是设置了text
-            text='asdasdfasfa'
+            text='111111111111111'
             console.log(obj.text)
+            
+            console.log(input)
+            input.addEventListener('input',e=>{
+                console.log(e.target.value)
+                obj.text=e.target.value
+            })
         }
 
     </script>
