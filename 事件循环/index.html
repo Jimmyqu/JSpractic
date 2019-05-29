@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .container{
+                width: 400px;
+                border:1px solid saddlebrown;
+                height: 40px;
+            }
+            .container p{
+                background-color: rebeccapurple;
+                width: auto;
+                height: 20px;
+                /* margin-left: -10px;
+                margin-right: -20px; */
+                margin-top:-5px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- 任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。
+        同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；
+        异步任务指的是，不进入主线程、而进入"任务队列"（task queue）的任务，只有"任务队列"通知主线程，
+        某个异步任务可以执行了，该任务才会进入主线程执行。 -->
+        <div class="container">
+            <p>
+            </p>
+        </div>
+        <img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014100801.jpg" alt="">
+        <script >
+        // setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在"任务队列"的尾部添加一个事件，
+        // 因此要等到同步任务和"任务队列"现有的事件都处理完，才会得到执行。   
+
+            setTimeout(()=>{
+                console.log('timeout')
+            },0)
+            const p =   new Promise(function(resolve) {
+                console.log('resolve');  //Promise的  resolve()是立即执行的
+                resolve();
+            }).then(function() {
+                console.log('5') //Promise的 then()进入"任务队列"
+            })
+            console.log('start')
+
+            let axios =(url,method)=>{
+                return  new Promise((resolve,reject)=>{
+                 fetch(url,{
+                    method:method
+                }).then(res=>res.json()).then(res=>resolve(res)).catch(e=>reject(e))
+            })
+            }
+
+           let res= axios('https://www.easy-mock.com/mock/5a769ac93c4ca20b4f1dd692/example_copy/user','get')
+           res.then(res=>{
+               console.log(res)
+           }).catch(e=>console.log(e))     
+           
+           async function wait(){
+               try{
+                    let res=await axios('https://www.easy-mock.com/mock/5a769ac93c4ca20b4f1dd692/example_copy/user','get')
+                    console.log(res.data)
+                    let res1 = await axios(`http://192.168.0.20:9091/pst-salary-api/v1/user/${res.data.discount}`,'get')
+                    console.log(res1)
+               }catch(e){
+                   console.log(e)
+               }
+           }
+
+           wait()
+        </script>
+    </body>
+</html>
