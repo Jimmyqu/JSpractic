@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .after-center:after{
+                height: 100%;
+                content: '';
+                display: inline-block;
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h1>inline-block 水平居中</h1>
+         <p style="text-align: center">
+            <span>span 父元素p text-align:center</span>
+         </p> 
+         <p>
+             <span style="margin: 0 auto;display: block;width: 200px;">block元素自身margin auto</span>
+         </p>
+         <h2>垂直居中</h2>      
+         <div style="height: 200px;line-height: 200px;text-align: center;background: cyan">
+            <span >父元素line-height = height </span>
+         </div>
+         <div style="background: crimson;padding: 90px 0;text-align: center">
+                <span>父元素padding 挤压子元素居中 </span>
+         </div>
+         <div style="height: 200px;background: rebeccapurple;display: flex;align-items: center;justify-content: center">
+             <span>父元素flexbox  </span>
+         </div>
+         <div style="height: 200px;background: teal;position: relative;">
+                <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);background: tomato">
+                    子元素绝对定位后margin-left -宽度（已知宽度）
+                    transform:translate(-50%,-50%) (未知宽度)                   
+                </span>
+         </div>
+         <div style="height: 200px;background: gold;text-align: center" class="after-center">
+                <span style="background-color: greenyellow;vertical-align: middle">
+                    父元素伪元素高相同,设置inline-block同是inline-block的子元素 vertical-align对齐             
+                </span>
+         </div>
+         <div style="height: 200px;width: 100vw;background: red;text-align: center;display: table-cell;text-align: center;vertical-align: middle" >
+                <span >
+                        父元素 display: table-cell后设置vertical-align: middle但父元素会失去宽度
+                </span>
+         </div>
+         
+    </body>
+</html>
