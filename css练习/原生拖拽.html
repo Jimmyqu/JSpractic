@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .box{
+                height: 100px;
+                width: 100px;
+                background-color: gold;
+                position: absolute;
+            }
+            .container{
+                border: 1px saddlebrown solid;
+                width: 400px;
+                height: 200px;
+                background-color: rebeccapurple;
+                
+                
+            }
+        </style>
+    </head>
+    <body>
+      <div class="box" draggable="true" style="left: 0;top:0">
+
+      </div>
+      <div class="container">
+
+      </div>
+      <script>
+          var box = document.querySelector('.box')
+          var container= document.querySelector('.container')
+          let startX=0,startY=0,endX=0,endY=0,boxX,boxY;
+          box.ondragstart=(e)=>{
+            boxX=parseInt(box.style.left)
+            boxY=parseInt(box.style.top )
+            startX=e.offsetX
+            startY=e.offsetY
+            console.log('dragstart-在元素开始被拖动时候触发')
+          }
+          box.ondrag = (e)=>{
+            console.log('drag-在元素被拖动时候反复触发')
+          }
+          box.ondragend = (e)=>{
+            endX=e.offsetX
+            endY=e.offsetY
+            let moveX=endX-startX
+            let moveY=endY-startY
+            console.log(moveX +'-'+moveY)
+            box.style.left =boxX+moveX+'px'
+            box.style.top =boxY+moveY+'px'
+            console.log('dragend-在拖动操作完成时触发')
+          }
+
+          container.ondragenter=(e)=>{
+            console.log('handle_enter-当元素进入目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+          }
+
+          container.ondragover =(e)=>{
+            console.log('handle_over-当元素在目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+          }
+          container.ondragleave =(e)=>{
+            console.log('handle_leave-当元素离开目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+          }
+
+          container.ondrop = (e)=>{
+            console.log('handle_drop-当元素在目的地放下时触发')
+            var t = Date.now()
+            container.innerHTML = ''
+            container.append(t + '-拖放触发的事件。')
+            e.preventDefault()
+        }
+
+      </script>
+    </body>
+</html>
