@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            width: 800px;
+            height: 800px;
+            margin: 50px auto;
+           
+        }
+        .box{
+            position: relative
+        }
+        .box span{
+            position: absolute;
+            left:0px;
+            transition: transform .5s; 
+            opacity: 0;
+        }
+        input:focus{
+            color: aqua
+        }
+        input:focus+span{
+            transform: translate(-100%,0);
+            transition: opacity transform .5s;    
+            opacity: 1;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+             <input type="text">
+             <span>1111</span>
+        </div>
+        
+    </div>
+
+</body>
+</html>

@@ -7,8 +7,46 @@
 <body>
 
 <script >
-    let arr = [1,2,3,4,5,6]
-    console.log(arr.includes(2))
+ let arr = [1,2,3,4,5,[1,2,3,[1,2,3],[4,5,6,7,[8,9,0]]]]
+
+   
+ let newArr=[]
+ flat=function (arr){
+       if(Array.isArray(arr)){
+         arr.map(item=>{
+            if(!Array.isArray(item)){
+                newArr.push(item)   
+            }else{
+                flat(item)
+            }
+         })
+       }
+       return newArr
+   }
+
+   let res = flat(arr)
+   console.log(res)
+
+   class myArr extends Array{
+        constructor(...args) { 
+            super(...args); 
+            this.name=name
+        }
+        myMap(fn){
+           let arr= new myArr()
+           for(let i of this){
+            arr.push(fn(i))
+           }
+           return arr
+        }
+
+   }
+
+   let arr1= new myArr(2,3,4,name='myArr')
+   console.log(arr1.__proto__)
+   console.log(arr1.map(item=>item*2))
+   console.log(arr1.myMap(item=>item*4))
+  
 </script>
 </body>
 </html>

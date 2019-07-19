@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            div{
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <script>
+           let foo=function(fn,wait=1000){
+               let timer=null
+                return function(...arg){
+                    if (timer) clearTimeout(timer)
+                    // 开始设定一个新的定时器，定时器结束后执行传入的函数 fn
+                    timer = setTimeout(() => {
+                        fn(arg)
+                    }, wait)
+                }
+           }
+
+           let res = foo((e)=>console.log(1111))
+           window.addEventListener('scroll',res)
+        </script>
+    </body>
+</html>

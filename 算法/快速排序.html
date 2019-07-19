@@ -32,46 +32,46 @@
 <script>
         $(function(){
 
-            function qsort(arr){
-                if(arr.length<2){
-                    return arr
-                }else{
-                    let base  = arr[0].innerText
-                    let b = arr[0]
-                    arr.splice(0,1)
-                    let less = arr.filter(i=>i.innerText<base);
-                    let bigger = arr.filter(i=>i.innerText>base)
-                    return (qsort(less).concat(b).concat(qsort(bigger)))
-                }
-            }
+            // function qsort(arr){
+            //     if(arr.length<2){
+            //         return arr
+            //     }else{
+            //         // let base  = arr[0].innerText
+            //         let b = arr[0]
+            //         arr.splice(0,1)
+            //         let less = arr.filter(i=>i.innerText<base);
+            //         let bigger = arr.filter(i=>i.innerText>base)
+            //         return (qsort(less).concat(b).concat(qsort(bigger)))
+            //     }
+            // }
 
-            let h_arr=[]
-            for (let i of $('.box div')){
-                h_arr.push(i)
-                $(i).css({
-                    height:i.innerText*2
-                })
-            }
+            // let h_arr=[]
+            // for (let i of $('.box div')){
+            //     h_arr.push(i)
+            //     $(i).css({
+            //         height:i.innerText*2
+            //     })
+            // }
             
         })
 </script>
 <script>
-//  let arr1=[2,3,45,67,8,9,0,11]
+ let arr1=[2,3,45,67,8,9,0,11]
 
-// function qsort(arr){
-//     if(arr.length<2){
-//         return arr
-//     }else{
-//         console.log(arr[0])
-//         let base  = arr[0]
-//         arr.splice(0,1)
-//         let less = arr.filter(i=>i<base);
-//         let bigger = arr.filter(i=>i>base)
-//         return (qsort(less).concat(base).concat(qsort(bigger)))
-//     }
-// }
+function qsort(arr){
+    if(arr.length<2){
+        return arr
+    }else{
+        console.log(arr[0])
+        let base  = arr[0]
+        arr.splice(0,1)
+        let less = arr.filter(i=>i<base);
+        let bigger = arr.filter(i=>i>base)
+        return (qsort(less).concat(base).concat(qsort(bigger)))
+    }
+}
 
-// console.log(qsort(h_arr))
+console.log(qsort(arr1))
 </script>
 
 

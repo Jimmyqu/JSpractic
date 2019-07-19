@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script>
+        //    (async ()=>{
+        //         let getData =async ()=>{
+        //         let res = await fetch('http://192.168.0.20:9090/pst-oa-api/v2/dept/list')
+        //             return res.json()
+        //         }
+
+        //     let [r, e ]= await getData().then(res=>[res.data,null]).catch(e=>[null,e])
+        //     console.log(r)
+        //     console.log(e)
+        //    }) ()
+
+
+        (async () => {
+            let getData = async () => {
+                let res = await fetch('http://192.168.0.20:9090/pst-oa-api/v2/dept/list')
+                return res.json()
+            }
+
+            const awaitWrap = (promise) => {
+                return promise
+                    .then(data => [null, data])
+                    .catch(err => {
+                        console.log(err)
+                        [err, null]
+                    })
+            }
+
+            let [e, r] = await awaitWrap(getData())
+            console.log(r)
+            console.log(e)
+        })()
+
+    </script>
+</body>
+
+</html>

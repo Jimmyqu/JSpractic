@@ -46,17 +46,18 @@
         let h3=$('div:eq(2)').offset().top;
         console.log(h1)
         console.log(h2)
-        $('button:eq(0)').on('one',function () {
+        $('button:eq(0)').on('click',function () {
+            console.log(1)
             $('html,body').animate({
                 'scrollTop':h1
             },600)
         })
-        $('button:eq(1)').on('one',function () {
+        $('button:eq(1)').on('click',function () {
             $('html,body').animate({
                 'scrollTop':h2
             },600)
         })
-        $('button:eq(2)').on('one',function () {
+        $('button:eq(2)').on('click',function () {
             $('html,body').animate({
                 'scrollTop':h3
             },600)
