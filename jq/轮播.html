@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            div{
+                width: 400px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+            ul{
+                padding: 0;
+                margin: 0;
+                width: 2000px;
+            }
+            ul li{
+                float: left;
+                width: 400px;
+                list-style: none;
+                height: 300px;
+            }
+            ul::after{
+                content:'';
+                display: block;
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div>
+            <ul>
+                <li style="background-color: aquamarine">111</li>
+                <li style="background-color: palegreen">222</li>
+                <li style="background-color: goldenrod">333</li>
+                <li style="background-color: rebeccapurple">444</li>
+                <li style="background-color: aquamarine">111</li>
+            </ul>
+        </div>
+        <script src="js/jq.js"></script>
+        <script>
+            (function(w,$){
+               let ul = $('ul')
+               let index=0
+               let timeId=null
+               function move(){
+                    timeId = setInterval(function(){
+                    if(index<5){
+                        console.log(index)
+                        ul.animate({'marginLeft':-400*index},1000)
+                        index++ 
+                    }else{
+                        index=1
+                        ul.css({'marginLeft':0})
+                    }
+                },2000)
+               }
+              move()
+                
+                $('div').hover(function(){
+                    clearInterval(timeId)
+                    console.log(index)
+                },function(){
+                    move()
+                })
+               
+            })(window,$)
+        </script>
+    </body>
+</html>
