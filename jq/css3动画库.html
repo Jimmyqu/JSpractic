@@ -21,14 +21,25 @@
 <script src="js/jq.js"></script>
 <script>
     $(function () {
-        $('#item').on('click',function (e) {
-            if($(this).hasClass('bounceInDown')){
-                return
+        // $('#item').on('click',function (e) {
+        //     if($(this).hasClass('bounceInDown')){
+        //         return
+        //     }
+        //     $(this).addClass('bounceInDown')
+        //     setTimeout(function () {
+        //         $('#item').removeClass('bounceInDown')
+        //     },1000)
+        // })
+        const url = location.href.split('#')[0];
+        let aurl=encodeURIComponent(url)
+        $.ajax({
+            type:'post',
+            url:'https://payroll.joyousoa.com/pst-salary-api/weixin/share',
+            dataType:'json',
+            data:`url=${url}`,
+            success:(res)=>{
+                console.log(res)
             }
-            $(this).addClass('bounceInDown')
-            setTimeout(function () {
-                $('#item').removeClass('bounceInDown')
-            },1000)
         })
     })
 </script>

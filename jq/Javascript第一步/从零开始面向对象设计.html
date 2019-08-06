@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script >
+        function Person(name,sex='femals'){
+            this.name=name
+            this.sex = sex
+            this.greeting=function(){
+                console.log(`hi i'm ${this.name}, i'm a ${this.sex}`)
+            }
+        };
+
+        let jina = new Person('Jina');
+        let Joho = new Person('Joho','males')
+        console.log(jina)
+        console.log(Joho)
+        jina.greeting()
+        Joho.greeting()
+        console.log(jina.greeting==Joho.greeting)
+        //内部声明函数 使用构造函数创建实例会 重复声明
+        
+        
+        function Person1(name,sex='femals'){
+            this.name=name
+            this.sex = sex
+            
+        };
+        Person1.prototype.greeting=function(){
+            console.log(`P1 : hi i'm ${this.name}, i'm a ${this.sex}`)
+        }
+
+        let j1 = new Person1('J1','males')
+        let P1_b = new Person1('P1_b')
+        console.log(j1.greeting==P1_b.greeting)
+        //prototype添加 所有实例用的同一个函数
+
+
+        //Object()构造函数
+        var person1 = new Object({
+            name : 'Chris',
+            age : 38,
+            greeting : function() {
+                alert('Hi! I\'m ' + this.name + '.');
+            }
+        });
+
+        var person2 = Object.create(person1);
+        console.log(person1.greeting==person2.greeting)
+
+
+        </script>
+    </body>
+</html>
