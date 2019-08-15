@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body style="margin: 0 ;padding: 0">
+    <canvas id='canvas'>
+    </canvas>
+    <script>
+        let canvas = document.getElementById('canvas')
+        let width = canvas.width = window.innerWidth / 2
+        let height = canvas.height = window.innerHeight / 2
+
+        let ctx = canvas.getContext('2d') //获取上下文
+        ctx.fillStyle = 'rgb(111, 222,77)';
+        ctx.fillRect(0, 0, width, height);
+
+        //矩形
+        // ctx.fillStyle = 'rgb(255, 0, 0)';
+        // ctx.fillRect(50, 50, 100, 100);
+        // ctx.fillStyle = 'rgb(0, 255, 0)';
+        // ctx.fillRect(75, 75, 100, 100);
+        // ctx.fillStyle = 'rgba(255, 0, 255, 0.75)';
+        // ctx.fillRect(150, 100, 175, 50);
+
+        //描边矩形
+        // ctx.lineWidth = 15;
+        // ctx.strokeStyle = 'rgb(255, 255, 255)';
+        // ctx.strokeRect(25, 25, 175, 350);
+        
+
+        //路径绘制
+        ctx.strokeStyle = "black";
+        ctx.moveTo(100, 10);
+        ctx.lineTo(100, 100);
+        ctx.stroke();
+        ctx.lineTo(200, 100);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.stroke();
+
+      
+    </script>
+</body>
+
+</html>

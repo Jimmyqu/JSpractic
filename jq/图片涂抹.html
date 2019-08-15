@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jq.js"></script>
+    <link rel="stylesheet" href="">
+</head>
+
+<body style="margin: 0;">
+
+    <input type="file">
+    <div style="width: 500px;margin: 0 auto;height: 500px;border: 1px solid seagreen">
+        <canvas id='canvas'></canvas>
+    </div>
+    <script>
+
+
+        let canvas = document.getElementById('canvas')
+        canvas.height = canvas.width = 500;
+        let squareEdgeLength = 20
+        let ctx = canvas.getContext('2d')
+        let image = new Image();
+        $("input[type='file']").change((e) => {
+            ctx.fillStyle = 'rgb(255, 255, 255)';
+            ctx.fillRect(0, 0, 500, 500);
+            let file = $("input[type='file']")[0].files[0]
+            let imgURL = URL.createObjectURL(file);
+            let isMasic = true
+            image.src = imgURL;
+            image.onload = draw
+
+        })
+
+        function draw() {
+            let imgW = this.width
+            let imgH = this.height
+            let beginX, beginY, endX, endY
+            ctx.drawImage(image, 0, 0, 500, imgH * 500 / imgW)
+        }
+
+
+    </script>
+</body>
+
+</html>
