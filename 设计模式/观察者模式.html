@@ -17,35 +17,40 @@
     <![endif]-->
     
     <script >
-        let pub={
-            action(){
-                dep.update()
-                console.log(dep)
+       class EventEmitter{
+            constructor(){
+                this.events = {};
             }
-        }
 
-        let sub1={
-            update(){
-                console.log('sub1')
+            on(type,callback){
+                const callbacks =  this.events[type] || []
+                callbacks.push(callback)
+                this.events[type] = callbacks
+                console.log(this.events)
             }
-        }
-        let sub2={
-            update(){
-                console.log('sub2')
-            }
-        }
 
-        function Dep(subs){
-            this.update=()=>{
-                subs.map(item=>{
-                    item.update()
-                })
+            emit(type,...args){
+                this.events[type].map(callback => {
+                    callback.apply(this,args)
+                });
             }
-        }
+       }
 
-        
-        let dep=new Dep([sub1])
-        pub.action()
+       let e1 =new EventEmitter()
+
+
+       e1.on('cry',(arg)=>{
+           console.log('e1 cry '+arg)
+       })
+
+
+       e1.on('sad',(arg)=>{
+           console.log('e1 sad '+arg)
+       })
+
+       e1.emit('cry','emit args')
+
+       e1.emit('sad','emit args')
     </script>
 </body>
 </html>
