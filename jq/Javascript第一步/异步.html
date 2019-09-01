@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        0
+    </p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script>
+        let p =  document.querySelector('p')
+        // TweenLite.to(p,1.5,{innerText:10000,onUpdate:update})
+        // function update(){
+        //     console.log(1)
+        // }
+       
+        // 回调函数执行次数通常是每秒60次，但在大多数遵循W3C建议的浏览器中，回调函数执行次数通常与浏览器屏幕刷新次数相匹配
+        let i  = 1
+        let total =100
+        function drow() {
+            if(i<total){
+                i++
+                p.innerText=i
+                console.log(i)
+                requestAnimationFrame(drow)
+            }
+        }
+
+        drow()
+        //end
+
+        //  function toNum(num,ms) {
+        //      let i = 0
+        //          setInterval(()=>{
+        //             if(i<num){
+        //                 i++
+        //                 p.innerText=i
+        //             }
+        //          },ms/num)
+        //  } 
+        //  toNum(100,10000)
+    </script>
+</body>
+
+</html>

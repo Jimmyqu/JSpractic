@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .home{
+                background-color:greenyellow;
+                height: 100vh;
+                position: relative;
+                overflow: hidden;
+            }
+            .tab{
+                
+                background-color:rgb(51, 152, 192);
+                height: 100vh;
+                width: 100%;
+                position: absolute;
+                top:0;
+                left: 0;
+                transform: rotate(0deg);
+                transform-origin:bottom left;
+                opacity: 1;
+                transition: all .3s
+            }
+            .reg{
+                transform: rotate(90deg);
+                opacity: 0;
+                transition: all .5s;
+                
+            }
+        </style>
+    </head>
+    <body style="margin: 0">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+         <div class="home">
+            <button onclick='enter()'>
+                切入
+            </button>
+            <div class="tab reg">
+               <button onclick="exit()">退出</button>
+            </div>
+         </div>   
+
+        <script>
+            let tab  = document.querySelector('.tab')
+            console.log(tab.classList)
+             function enter(){
+                 tab.classList.remove('reg')
+                console.log(1)
+            }
+            function exit(){
+                tab.classList.add('reg')
+                console.log(2)
+            }
+        </script>
+    </body>
+</html>
