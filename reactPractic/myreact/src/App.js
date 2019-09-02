@@ -1,84 +1,76 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Component } from 'react'
-import './App.css';
+import { Component, Fragment } from 'react'
+import './static/css/App.css';
+import { CSSTransition } from 'react-transition-group'
 
 
-const ThemeContext = React.createContext({
-  background: 'red',
-  color: 'white'
-});
-
-
-function Text(props,context){
-  let handleClick=(context)=>{
-    context.background='red'
-    console.log(context)
-  }
-  return (
-    <div>
-       <ThemeContext.Consumer>
-        {context => (
-         <div>
-          <button onClick={()=>handleClick(context)}>11{context.color}</button>
-          <p>{context.background}</p>
-         </div>
-        )}
-      </ThemeContext.Consumer>
-    </div>
-  )
-}
-
-class App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super()
-    this.state={
-      passVal:{
-        background: 'green', color: 'white'
-      },
-      isLike:false
+    this.state = {
+      isShow:true,
+      inputValue:'' , // input中的值
+      list:[
+        '111',
+        '222'
+      ]    //服务列表
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log(this)
   }
 
-  handleClick(event){
-    console.log(event)
-    console.log(this.state)
-  } 
-  hanldeToggle(event){
-    event.stopPropagation()
-    this.setState({isLike:!this.state.isLike})
+  handleToggle(){
+    this.setState({
+      isShow:!this.state.isShow
+    })
+  }
+
+  handleInputChange(e){
+     console.log(e)
+    this.setState({
+      inputValue:e.target.value
+    })
+    
+  }
+  handleAddList(){
+    this.setState({
+      list:this.state.list.concat(this.state.inputValue),
+      inputValue:''
+    })
+    console.log(this)
+  }
+  handleDelItem(index){
+    console.log(index)
+    let list = this.state.list
+    list.splice(index,1)
+    this.setState({
+      list:list
+    })
   }
   render() {
-    const users = [
-      { username: 'Jerry', age: 21, gender: 'male' },
-      { username: 'Tomy', age: 22, gender: 'male' },
-      { username: 'Lily', age: 19, gender: 'female' },
-      { username: 'Lucy', age: 20, gender: 'female' }
-    ]
-
-   
     return (
-        <div className="App">
-          <header className="App-header" onClick={(e)=>this.handleClick(e,'1')}>
-            <span onClick={(e)=>this.hanldeToggle(e)}>{this.state.isLike?'like':'hate'}</span>
-            <ThemeContext.Provider value={this.state.passVal}>
-             <p>{this.state.passVal.background}</p>
-              <Text/>
-            </ThemeContext.Provider>
-            {/* <img src={logo} className="App-logo" alt="logo" /> */}
-            <div>
-              {
-                users.map((user,i)=>{
-                  return <p key={i}>{user.username}</p>
-                })
-              }
-            </div>
-          </header>
+      <Fragment>
+        <div>
+          <input className="input" value={this.state.inputValue} onChange={(e)=>this.handleInputChange(e)} /> 
+          <button onClick={()=>{this.handleAddList()}}> 增加服务 </button>
         </div>
+        <ul>
+          {this.state.list.map((item,index)=>{
+            return <li onClick={()=>this.handleDelItem(index)} key={index}>{item}</li>
+          })}
+        </ul>
+        <button onClick={()=>{this.handleToggle()}}> show </button>
+         <CSSTransition 
+                in={this.state.isShow}   //用于判断是否出现的状态
+                timeout={2000}           //动画持续时间
+                classNames="boss-text"   //className值，再到CSS文件写效果
+                unmountOnExit //退场时删除Dom
+            >
+                <div>BOSS级人物-孙悟空</div>
+         </CSSTransition>   
+      </Fragment>
     );
   }
 }
