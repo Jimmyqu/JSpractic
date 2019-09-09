@@ -22,7 +22,7 @@ class RouterApp extends Component {
                         <Switch>
                             <Route path="/" exact component={HomeView} />
                             <Route path="/list/" component={ListView} />
-                            <Redirect to='/'></Redirect>  
+                            <Redirect to='/'></Redirect>
                         </Switch>
 
                     </div>
