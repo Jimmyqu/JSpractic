@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Link,Redirect } from 'react-router-dom'
 
-class HomeView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-    render() {
-        return (
-            <div>
-                <h2>HomeView</h2>
-                <ul>
-                    <li><Link to='home1'>home1</Link></li>
-                    <li><Link to='home2'>home2</Link></li>
-                </ul>
-                <Switch>
-                    <Route path='/home1'>1111111111111</Route>
-                    <Route path='/home2'>2222222</Route>
-                </Switch>
-            </div>
-        );
-    }
+function Topic({ match }) {
+    return (
+        <div>
+            home1
+            <p>Param: {match.params.id}</p>
+        </div>
+    )
 }
 
+
+function HomeView({ match }) {
+    return (
+        <div>
+            <h2>HomeView</h2>
+            <ul>
+                <li>
+                    <Link to={`${match.url}/components`}>Components</Link>
+                </li>
+                <li>
+                    <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
+                </li>
+            </ul>
+            <div>
+                <Route path={`${match.path}/:id`} component={Topic} />
+                <Route
+                    exact
+                    path={match.path}
+                    render={() => <h3>Please select a topic.</h3>}
+                />
+               
+            </div>
+
+        </div>
+    );
+}
 export default HomeView;

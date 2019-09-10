@@ -24,10 +24,20 @@ import * as serviceWorker from './serviceWorker';
 //搜索end
 
 //第二个路由start
-import RouterApp from './routerPractic/index'
-ReactDOM.render(<RouterApp />, document.getElementById('root'));
+// import RouterApp from './routerPractic/index'
+// ReactDOM.render(<RouterApp />, document.getElementById('root'));
 //第二个路由end
 
+//redux start
+import store from './reduxPractic/store/index'
+import ReduxApp from './reduxPractic/index'
+ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
+store.subscribe(function(){
+    ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
+})
+
+
+//redux end
 
 
 

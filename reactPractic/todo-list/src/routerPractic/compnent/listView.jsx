@@ -9,7 +9,6 @@ class ListView extends Component {
         return (
             <div>
                 <h2>listView</h2>
-               
             </div> 
         );
     }

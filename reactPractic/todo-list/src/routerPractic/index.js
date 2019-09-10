@@ -14,15 +14,17 @@ class RouterApp extends Component {
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: '1' }}>
                         <ul>
-                            <li> <Link to="/">首页</Link> </li>
+                            <li> <Link to="/home">首页</Link> </li>
                             <li><Link to="/list/">列表</Link> </li>
                         </ul>
                     </div>
                     <div style={{ flex: '4' }}>
                         <Switch>
-                            <Route path="/" exact component={HomeView} />
-                            <Route path="/list/" component={ListView} />
-                            <Redirect to='/'></Redirect>  
+                            {/* <Redirect  to='/home/components' /> */}
+                            {/* <Route path="/" exact /> */}
+                            <Route path="/home"  component={HomeView} />
+                            <Route path="/list" component={ListView} />
+                            <Route render={()=><div>无匹配路由</div>} />
                         </Switch>
 
                     </div>
