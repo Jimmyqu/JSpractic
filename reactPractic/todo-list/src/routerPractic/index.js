@@ -20,11 +20,17 @@ class RouterApp extends Component {
                     </div>
                     <div style={{ flex: '4' }}>
                         <Switch>
+<<<<<<< HEAD
                             {/* <Redirect  to='/home/components' /> */}
                             {/* <Route path="/" exact /> */}
                             <Route path="/home"  component={HomeView} />
                             <Route path="/list" component={ListView} />
                             <Route render={()=><div>无匹配路由</div>} />
+=======
+                            <Route path="/" exact component={HomeView} />
+                            <Route path="/list/" component={ListView} />
+                            <Redirect to='/'></Redirect>
+>>>>>>> fetch_head
                         </Switch>
 
                     </div>

@@ -39,6 +39,24 @@ store.subscribe(function(){
 
 //redux end
 
+//react-redux start
+import store from './react_redux_Practic/store/index'
+import ReactReduxApp from './react_redux_Practic/index'
+import {Provider} from 'react-redux'
+
+
+ReactDOM.render(
+    <Provider store={store} > 
+          <ReactReduxApp />
+    </Provider>,
+document.getElementById('root'));
+
+// ReactDOM.render(<ReactReduxApp store={store} />, document.getElementById('root'));
+// store.subscribe(()=>{
+//     ReactDOM.render(<ReactReduxApp store={store} />, document.getElementById('root'));
+// })
+
+//react-redux end
 
 
 
