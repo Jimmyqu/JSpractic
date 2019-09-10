@@ -29,14 +29,12 @@ import * as serviceWorker from './serviceWorker';
 //第二个路由end
 
 //redux start
-import store from './reduxPractic/store/index'
-import ReduxApp from './reduxPractic/index'
-ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
-store.subscribe(function(){
-    ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
-})
-
-
+// import store from './reduxPractic/store/index'
+// import ReduxApp from './reduxPractic/index'
+// ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
+// store.subscribe(function(){
+//     ReactDOM.render(<ReduxApp store={store} />, document.getElementById('root'));
+// })
 //redux end
 
 //react-redux start
