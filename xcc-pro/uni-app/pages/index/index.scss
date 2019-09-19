@@ -1,0 +1,155 @@
+.container{
+    .user-info{
+        width: 100%;
+        height: 244px;
+        position: relative;
+        .img{
+            width: 100%;
+            height: 100%;
+        }
+        .info-box{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            .info{
+                padding: 60px 16px 0 16px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                .head-portrait{
+                    width:60px;
+                    height:60px;
+                    background:rgba(255,255,255,1);
+                    border-radius: 50%;
+                    margin-right: 17px;
+                }
+                .name{
+                    color: white;
+                    font-size:22px;
+                    font-weight:500;
+                    line-height:30px;
+                    text-shadow:0px 1px 1px rgba(0,0,0,0.29);
+                    letter-spacing:7px;
+                }
+                .company{
+                    color: white;
+                    font-size:17px;
+                    font-weight:400;
+                    line-height:24px;
+                    letter-spacing:3px;
+                }
+            }
+            .user-detail{
+                margin-top: 40px;
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                .item{
+                    width: 33%;
+                    border-right: 1px solid #fff;
+                    p{
+                        color: white;
+                        text-align: center;
+                        font-size:15px;
+                        font-weight:600;
+                        line-height:33px;
+                    }
+                    .num{
+                        font-size: 22px;
+                    }
+                }
+                .item:last-child{
+                    border: none;
+                }
+            }
+        }
+    }
+    .task{
+        margin-top: 16px;
+        width:100%;
+        .task-box{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            .item{
+                text-align: center;
+                .ioc0{
+                    width: 24px;
+                    height: 30px;
+                }
+                .ioc1{
+                    width: 24px;
+                    height: 30px;
+                }
+                .ioc2{
+                    width: 30px;
+                    height: 26px;
+                }
+                .ioc3{
+                    width: 34px;
+                    height: 30px;
+                }
+                .ioc4{
+                    width: 27px;
+                    height: 30px;
+                }
+                p{
+                    font-size:15px;
+                    font-weight:400;
+                    line-height:21px;
+                }
+            }
+        }
+    }
+    .operation{
+        margin-top: 16px;
+        width:100%;
+        overflow: hidden;
+    }
+    .operation-box,.statistics-box{
+        .item{
+            float: left;
+            text-align: center;
+            margin-right: 65px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .ioc{
+                width: 70px;
+                height: 70px;
+            }
+            p{
+                font-size:16px;
+                font-weight:400;
+                color:rgba(0,0,0,1);
+                line-height:22px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+        }
+        .item:nth-child(3n){
+            margin-right: 0;
+        }
+    }
+    .statistics{
+        margin-top: 16px;
+        width:100%;
+        overflow: hidden;
+    }
+    .header{
+        h2{
+            font-size:18px;
+            font-weight:500;
+            color:rgba(0,0,0,1);
+            line-height:44px;
+            border-bottom: 1px solid #E5E5EA;
+        }
+        span{
+            float: right;
+            font-size:15px;
+            font-weight:400;
+            color:rgba(142,142,147,1);
+        }
+    }
+}

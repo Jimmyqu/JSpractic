@@ -1,0 +1,13 @@
+.list li div {
+  margin-bottom: 16px;
+  padding: 16px; }
+
+.list li p span {
+  float: right; }
+
+.list li p:last-child {
+  color: #646464;
+  margin-top: 16px; }
+
+.list .notOptional {
+  background: #F8FBFF; }

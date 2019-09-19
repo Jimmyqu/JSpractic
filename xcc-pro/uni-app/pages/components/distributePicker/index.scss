@@ -1,0 +1,20 @@
+.list{
+    li{
+        div{
+            margin-bottom: 16px;
+            padding: 16px;
+        }
+        p{
+            span{
+                float: right;
+            }
+        }
+        p:last-child{
+            color: #646464;
+            margin-top: 16px;
+        }
+    }
+	.notOptional{
+		background: #F8FBFF;
+	}
+}

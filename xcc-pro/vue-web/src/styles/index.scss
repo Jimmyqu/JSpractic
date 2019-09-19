@@ -1,0 +1,234 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './form.scss';
+
+body {
+    height: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.mt15 {
+    margin-top: 15px !important;
+}
+
+#app {
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+a,
+a:focus,
+a:hover {
+    cursor: pointer;
+    color: inherit;
+    outline: none;
+    text-decoration: none;
+}
+
+div:focus {
+    outline: none;
+}
+
+a:focus,
+a:active {
+    outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.clearfix {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
+ul,li{
+    list-style: none;
+    padding: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background: #fff;
+    border-left: 1px solid #eee;
+}
+
+//main-container全局样式
+.app-main {
+    //background: #f0f0f0;
+    font-size: 14px;
+    color: #676a6c;
+    //height: calc(100vh - 84px);
+    position: relative;
+    padding-top: 90px;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #ecf0f1 url("../../public/static/img/loading.gif") no-repeat center;
+    //background-size: 130px;
+    .page-common {
+        padding: 15px;
+        height: calc(100vh - 95px);
+    }
+}
+.main-container > .el-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: calc(100% - 180px);
+    z-index: 1000;
+    background-image: url("~img/top_bg.jpg");
+    background-size: 100% 100%;
+    transition: width .38s;
+}
+.main-container > .tags-view-container {
+    position: fixed;
+    right: 0;
+    top: 50px;
+    width: calc(100% - 180px);
+    z-index: 999;
+    transition: width .38s;
+}
+.hideSidebar .main-container > .tags-view-container,
+.hideSidebar .main-container > .el-menu {
+    width: calc(100% - 36px);
+    transition: width .38s;
+}
+.mobile .main-container > .tags-view-container,
+.mobile .main-container > .el-menu {
+    width: 100%;
+}
+
+.app-container {
+    background: #fff;
+}
+
+.flex-panel {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.full-big-img {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: self-start;
+    overflow: auto;
+    padding: 50px 0;
+}
+.full-big-img img {
+    max-width: 90%;
+}
+
+.organ_wrap {
+    display: flex;
+
+    .tree-select-panel {
+        width: 100%;
+    }
+
+    .el-checkbox {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 0;
+
+        /deep/ .el-checkbox__label {
+            font-size: 12px;
+        }
+    }
+}
+
+.spot-green,.spot-red,.spot-blue{
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.spot-green{
+    background: #38B7FE;
+}
+.spot-red{
+    background: #FE0302;
+}
+.spot-blue{
+    background: #5582FD;
+}
+
+.anchorBL{display:none;}
+
+.QRcode{
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    left: 20px;
+    div{
+        border-radius: 4px;
+        padding: 2px;
+        margin-right:10px;
+    }
+    p{
+        margin: 0 10px;
+        color: #fff;
+    }
+    span{
+        display: block;
+        text-align: center;
+    }
+    img{
+        width: 90px;
+        height: auto;
+    }
+}
+@import './list.scss';
+
