@@ -1,0 +1,223 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/empty/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#2688f8",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/my/changePassword/index",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/task/index",
+			"style": {
+				"navigationBarTitleText": "任务",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/task/add/index",
+			"style": {
+				"navigationBarTitleText": "添加任务"
+			}
+		},
+		{
+			"path": "pages/task/detail/index",
+			"style": {
+				"navigationBarTitleText": "任务详情"
+			}
+		},
+		{
+			"path": "pages/task/distribute/index",
+			"style": {}
+		},
+		{
+			"path": "pages/driver/index",
+			"style": {
+				"navigationBarTitleText": "司机管理",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/driver/add/index",
+			"style": {
+				"navigationBarTitleText": "添加司机"
+			}
+		},
+		{
+			"path": "pages/driver/detail/index",
+			"style": {
+				"navigationBarTitleText": "司机详情"
+			}
+		},
+		{
+			"path": "pages/vehicle/index",
+			"style": {
+				"navigationBarTitleText": "车辆管理",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/vehicle/add/index",
+			"style": {
+				"navigationBarTitleText": "添加车辆"
+			}
+		},
+		{
+			"path": "pages/vehicle/detail/index",
+			"style": {
+				"navigationBarTitleText": "车辆详情"
+			}
+		},
+		{
+			"path": "pages/vehicleDriverBinding/index",
+			"style": {
+				"navigationBarTitleText": "人车绑定",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/vehicleDriverBinding/detail/index",
+			"style": {
+				"navigationBarTitleText": "绑定详情"
+			}
+		},	
+		{
+			"path": "pages/vehicleDriverBinding/bindingRecords/index",
+			"style": {
+				"navigationBarTitleText": "绑定记录",
+				"enablePullDownRefresh": true
+			}
+		},	
+		{
+			"path": "pages/vehicleDriverBinding/vehicleBinding/index",
+			"style": {
+				"navigationBarTitleText": "绑定车辆"
+			}
+		},
+		{
+			"path": "pages/oil/index",
+			"style": {
+				"navigationBarTitleText": "加油管理",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/components/cityPicker/index",
+			"style": {
+				"navigationBarTitleText": "选择城市"
+			}
+		},
+		{
+			"path": "pages/components/cityIndexPicker/index",
+			"style": {
+				"navigationBarTitleText": "选择城市"
+			}
+		},
+		{
+			"path": "pages/components/distributePicker/index",
+			"style": {
+				"navigationBarTitleText": "选择车辆"
+			}
+		},
+		{
+			"path": "pages/components/organizationsPicker/index",
+			"style": {
+				"navigationBarTitleText": "选择组织"
+			}
+		},
+		{
+			"path": "pages/components/vehicleTypePicker/index",
+			"style": {
+				"navigationBarTitleText": "选择车型",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/components/vehiclePicker/index",
+			"style": {
+				"navigationBarTitleText": "选择车辆",
+				"enablePullDownRefresh": true
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+	// "tabBar": {
+	// 	"borderStyle": "black",
+	// 	"backgroundColor": "#333",
+	// 	"color": "#8F8F94",
+	// 	"selectedColor": "#f33e54",
+	// 	"list": [{
+	// 			"pagePath": "pages/tabbar/tabbar-1/tabbar-1",
+	// 			"iconPath": "static/img/tabbar/home.png",
+	// 			"selectedIconPath": "static/img/tabbar/homeactive.png",
+	// 			"text": "首页"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/tabbar/tabbar-2/tabbar-2",
+	// 			"iconPath": "static/img/tabbar/guanzhu.png",
+	// 			"selectedIconPath": "static/img/tabbar/guanzhuactive.png",
+	// 			"text": "关注"
+	// 		},
+	// 		//#ifdef MP-WEIXIN
+	// 		{
+	// 			"pagePath": "pages/tabbar/tabbar-3/tabbar-3",
+	// 			"iconPath": "static/img/tabbar/add.png",
+	// 			"selectedIconPath": "static/img/tabbar/addactive.png",
+	// 			"text": "发布"
+	// 		},
+	// 		//#endif
+	// 		//#ifndef MP-WEIXIN
+	// 		{
+	// 			"pagePath": "pages/tabbar/tabbar-3/tabbar-3",
+	// 			"iconPath": "static/img/tabbar/add.png",
+	// 			"selectedIconPath": "static/img/tabbar/addactive.png"
+	// 		},
+	// 		//#endif
+	// 		{
+	// 			"pagePath": "pages/tabbar/tabbar-4/tabbar-4",
+	// 			"iconPath": "static/img/tabbar/news.png",
+	// 			"selectedIconPath": "static/img/tabbar/newsactive.png",
+	// 			"text": "消息"
+	// 		},
+	// 		{
+	// 			"pagePath": "pages/tabbar/tabbar-5/tabbar-5",
+	// 			"iconPath": "static/img/tabbar/me.png",
+	// 			"selectedIconPath": "static/img/tabbar/meactive.png",
+	// 			"text": "我"
+	// 		}
+	// 	]
+	// }
+}

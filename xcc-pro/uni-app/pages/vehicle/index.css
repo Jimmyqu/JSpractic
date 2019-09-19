@@ -1,0 +1,16 @@
+.container .data-list {
+  margin-bottom: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .container .data-list p {
+    font-size: 15px;
+    color: black; }
+    .container .data-list p span {
+      float: right;
+      font-size: 15px;
+      font-weight: 400;
+      color: #4dc073; }
+  .container .data-list .modelName {
+    margin-top: 16px; }

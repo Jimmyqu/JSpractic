@@ -1,0 +1,47 @@
+.distribute{
+    margin-bottom: 16px;
+    h1{
+        height: 42px;
+        border-bottom: 2rpx solid #E5E5EA;
+        line-height: 42px;
+        span{
+            float: right;
+        }
+    }
+}
+.body{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .icon{
+        width: 18px;
+        height: 18px;
+        display: block;
+    }
+    .address{
+        display: flex;
+        align-items: center;
+        p{
+            margin-left: 13px;
+            flex: 1;
+        }
+    }
+    .address:last-child{
+        margin-top: 16px;
+    }
+}
+.operation{
+    display: flex;
+    border-top: 1px solid #E5E5EA;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    button{
+        color: #fff;
+        width: 100%;
+        border-radius: 0;
+        background: #2688F8;
+    }
+    
+}

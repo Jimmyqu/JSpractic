@@ -1,0 +1,127 @@
+.container .user-info {
+  width: 100%;
+  height: 244px;
+  position: relative; }
+  .container .user-info .img {
+    width: 100%;
+    height: 100%; }
+  .container .user-info .info-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; }
+    .container .user-info .info-box .info {
+      padding: 60px 16px 0 16px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center; }
+      .container .user-info .info-box .info .head-portrait {
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        margin-right: 17px; }
+      .container .user-info .info-box .info .name {
+        color: white;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 30px;
+        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.29);
+        letter-spacing: 7px; }
+      .container .user-info .info-box .info .company {
+        color: white;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 3px; }
+    .container .user-info .info-box .user-detail {
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-around;
+      width: 100%; }
+      .container .user-info .info-box .user-detail .item {
+        width: 33%;
+        border-right: 1px solid #fff; }
+        .container .user-info .info-box .user-detail .item p {
+          color: white;
+          text-align: center;
+          font-size: 15px;
+          font-weight: 600;
+          line-height: 33px; }
+        .container .user-info .info-box .user-detail .item .num {
+          font-size: 22px; }
+      .container .user-info .info-box .user-detail .item:last-child {
+        border: none; }
+
+.container .task {
+  margin-top: 16px;
+  width: 100%; }
+  .container .task .task-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 85px; }
+    .container .task .task-box .item {
+      text-align: center; }
+      .container .task .task-box .item .ioc0 {
+        width: 24px;
+        height: 30px; }
+      .container .task .task-box .item .ioc1 {
+        width: 24px;
+        height: 30px; }
+      .container .task .task-box .item .ioc2 {
+        width: 30px;
+        height: 26px; }
+      .container .task .task-box .item .ioc3 {
+        width: 34px;
+        height: 30px; }
+      .container .task .task-box .item .ioc4 {
+        width: 27px;
+        height: 30px; }
+      .container .task .task-box .item p {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px; }
+
+.container .operation {
+  margin-top: 16px;
+  width: 100%;
+  overflow: hidden; }
+
+.container .operation-box .item, .container .statistics-box .item {
+  float: left;
+  text-align: center;
+  margin-right: 65px;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .container .operation-box .item .ioc, .container .statistics-box .item .ioc {
+    width: 70px;
+    height: 70px; }
+  .container .operation-box .item p, .container .statistics-box .item p {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    line-height: 22px;
+    margin-top: 5px;
+    margin-bottom: 5px; }
+
+.container .operation-box .item:nth-child(3n), .container .statistics-box .item:nth-child(3n) {
+  margin-right: 0; }
+
+.container .statistics {
+  margin-top: 16px;
+  width: 100%;
+  overflow: hidden; }
+
+.container .header h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
+  line-height: 44px;
+  border-bottom: 1px solid #E5E5EA; }
+
+.container .header span {
+  float: right;
+  font-size: 15px;
+  font-weight: 400;
+  color: #8e8e93; }

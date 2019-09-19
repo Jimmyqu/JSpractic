@@ -1,0 +1,72 @@
+.selectCity{
+    height: 100%;
+    padding-top: 35px;
+    .data-list{
+        margin-bottom: 65px;
+        li{
+            display: flex;
+            height: 40px;
+            align-items: center;
+            background: #fff;
+            border-bottom: 1px solid #E5E5EA;
+            radio{
+                width: 50px;
+                text-align: center;
+            }
+            p{
+                flex: 1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-sizing: border-box;
+                padding-right: 16px;
+                height: 100%;
+            }
+        }
+        li:last-child{
+            border: 0;
+        }
+    }
+    .navBar{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background: #F8FBFF;
+        z-index: 99;
+        height: 35px;
+        white-space: nowrap;
+        box-sizing: border-box;
+        .li{
+            line-height: 35px;
+            display: inline-block;
+            margin-right: 5px;
+            color: #333;
+            .more{
+                width: 7px;
+                height: 12px;
+                margin-left: 5px;
+            }
+        }
+        .ungray{
+            color: #8e8e93;
+        }
+    }
+    .operation{
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+        background: #fff;
+        border-top: 1px solid #E5E5EA;
+        height: 60px;
+        bottom: 0;
+        align-items: center;
+        button{
+            width: 45%;
+        }
+        .cancel{
+            border: 1px solid #E5E5EA;
+        }
+    }
+}

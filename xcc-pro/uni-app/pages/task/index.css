@@ -1,0 +1,64 @@
+.container {
+  padding-top: 45px; }
+  .container .header {
+    display: flex;
+    justify-content: space-between;
+    height: 45PX;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%; }
+    .container .header li {
+      font-size: 15px;
+      color: #646464;
+      line-height: 21px; }
+    .container .header li.active {
+      color: black; }
+    .container .header .slider {
+      position: absolute;
+      width: 50px;
+      height: 12px;
+      bottom: -7rpx;
+      transition: left 0.38s; }
+  .container .add {
+    width: 100%;
+    margin-top: 10px;
+    color: #2688f8;
+    text-align: center; }
+  .container .data-list {
+    margin-top: 16px; }
+    .container .data-list .head {
+      display: flex;
+      justify-content: space-between;
+      height: 42px;
+      align-items: center;
+      border-bottom: 1px solid #E5E5EA; }
+      .container .data-list .head h2, .container .data-list .head p {
+        font-size: 17px;
+        font-weight: 500;
+        color: black; }
+      .container .data-list .head span {
+        font-size: 17px;
+        color: #2688f8; }
+    .container .data-list .body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+      .container .data-list .body .icon {
+        width: 18px;
+        height: 18px;
+        display: block; }
+      .container .data-list .body .address {
+        display: flex;
+        align-items: center; }
+        .container .data-list .body .address p {
+          margin-left: 13px;
+          flex: 1; }
+      .container .data-list .body .address:last-child {
+        margin-top: 16px; }
+    .container .data-list .footer {
+      border-top: 1px solid #E5E5EA;
+      height: 42px; }
+      .container .data-list .footer p {
+        line-height: 42px; }
