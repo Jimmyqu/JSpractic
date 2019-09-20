@@ -37,8 +37,6 @@ class ReactReduxApp extends Component {
                     <button onClick={this.handleDe}>-</button>
                     <button onClick={this.handleAsyncGet}>异步获取数据</button>
                 </div>
-
-
             </div>
         );
     }
