@@ -2,3 +2,4 @@
 
 base 变基 pull origin master提交
 变基测试2
+home git rebase -i  head~ 后提交
