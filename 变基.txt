@@ -7,3 +7,4 @@ master 修改主干给home-lap拉取 合并后git rebase -i 删除掉合并记�
 home rebase -i 失败 尝试推送到分支 查看commit记录
 home 修改后推送 合并 看new-bas merge 记录
 new-base 推送 等home merge后 有没有 merge记录
+home fetch merge后 推送
