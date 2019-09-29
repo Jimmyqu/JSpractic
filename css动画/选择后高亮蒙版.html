@@ -100,10 +100,14 @@
                     <div class="active" @click='handleModalShow' :class="{'modal-active':isModalShow}">
                         <h2>this is header </h2>
                         <input type="text">
+                        <div v-if='isModalShow'>
+                            <p v-for="i in 4">{{i}}</p>
+                        </div>
                         <p>1111111111</p>
                         <p>222222222222</p>
                         <p>1111111111</p>
                         <p>222222222222</p>
+
                     </div>
                     <P>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt deserunt
@@ -159,6 +163,7 @@
             </div>
             <div style="flex:3">3</div>
         </div>
+       
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
