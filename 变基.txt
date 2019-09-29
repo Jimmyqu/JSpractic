@@ -3,3 +3,4 @@
 base 变基 pull origin master提交
 变基测试2
 home git rebase -i  head~ 后提交
+master 修改主干给home-lap拉取 合并后git rebase -i 删除掉合并记录
