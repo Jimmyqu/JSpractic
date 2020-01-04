@@ -16,32 +16,23 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
+        <script src="$fetch.js"></script>
         <script>
-            class StateTracker{
-                constructor(){
-                    this.InitState = {a:'1'} 
-                    this.observers = []
+            console.log($http)
+            $http('http://39.108.15.194/yd-hub-api/v1/activity/pager',{
+                method:'post',
+                data:{
+                    "pageNum":1,
+                    "pageSize": 10,
+                    "paramData": {
+                        "consumerId": 20,
+                    }
                 }
-
-                registerObserver(ObserverFn){
-                    this.observers.push(ObserverFn)
-                }
-
-                change(val){
-                    this.InitState=val
-                    this.observers.forEach(fn=>fn(val))
-                }
-
-            }
-
-            let s1 =new StateTracker()
-            let s2 =new StateTracker()
-            s1.registerObserver(()=>console.log('s1'))
-            s2.registerObserver(()=>console.log('s2'))
-            s2.registerObserver(()=>console.log('s22'))
-            s1.change(2)
-            s2.change(33333)
-            console.log(s1)
+            }).then(res=>{
+               return res.json()
+            }).then(res=>{
+                console.log(res)
+            })
         </script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-
+import 'antd/dist/antd.css';
 // redux练习start
 // import App from './App';
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -24,8 +24,8 @@ import * as serviceWorker from './serviceWorker';
 //搜索end
 
 //第二个路由start
-// import RouterApp from './routerPractic/index'
-// ReactDOM.render(<RouterApp />, document.getElementById('root'));
+import RouterApp from './routerPractic/index'
+ReactDOM.render(<RouterApp />, document.getElementById('root'));
 //第二个路由end
 
 //redux start
@@ -38,16 +38,15 @@ import * as serviceWorker from './serviceWorker';
 //redux end
 
 //react-redux start
-import store from './react_redux_Practic/store/index'
-import ReactReduxApp from './react_redux_Practic/index'
-import {Provider} from 'react-redux'
-
-
-ReactDOM.render(
-    <Provider store={store} > 
-          <ReactReduxApp />
-    </Provider>,
-document.getElementById('root'));
+// import store from './react_redux_Practic/store/index'
+// import ReactReduxApp from './react_redux_Practic/index'
+// import {Provider} from 'react-redux'
+// ReactDOM.render(
+//     <Provider store={store} > 
+//           <ReactReduxApp />
+//     </Provider>,
+// document.getElementById('root'));
+//react-redux end
 
 // ReactDOM.render(<ReactReduxApp store={store} />, document.getElementById('root'));
 // store.subscribe(()=>{
