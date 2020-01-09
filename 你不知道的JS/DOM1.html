@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>for fun</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .red{
+                color: red;
+            }
+            .green{
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h1>1.Node 类型</h1>
+        <p id='p' style="color: rebeccapurple;">nodeType用<span id='span'>12</span>个常量表示</p>
+        <h1>2.Node 关系</h1>   
+        <p>所有节点都存在关系，并且有个childrenNodes属性 访问所有内部节点</p>
+        <p>每个节点都一个parentNode属性指向文档书中的父节点</p>
+        <p>此外他们具有previousSibling和nextSibiling属性访问父节点下的同级属性</p>
+        <p>节点有hasChildNode方法判断是否有子节点</p>
+        <pre>
+            p.parentNode // body
+            p.previousSibling // 空字符
+            p.nextSibling // 空字符
+        </pre>
+        <h1>3操作节点</h1>
+        <p>appendChild()用于向childNodes裂变末尾添加一个节点</p>
+        <pre>
+            要用docemnt.createElement创建节点 
+            p.appendChild([dom节点]) 
+            p.insertBefore([dom节点])
+            p.replaceChild([dom节点]) 
+            p.removeChild([dom节点]) 
+        </pre>
+        <h1>4。DOM属性</h1>
+        <p>
+            <span id='dom4' >classList属性动态修改DOM类名</span class='red'>    
+            <button id='dom4BTN'>切换</button>
+        </p>
+        <pre>
+            dom4.classList.add('green') //添加
+            dom4.classList.remove('green') //删除
+            dom4.classList.contains('green') //检查是否包含既定类名
+            dom4BTN.addEventListener('click',()=>{
+                dom4.classList.toggle('green') //动态切换
+            })
+        </pre>
+        <div id='box' style="padding: 10px;border:1px solid red;width:400px;height: 200px;">
+            <div style="display: inline-block;width: 45%;height: 180px;border:1px solid red;padding: 5px">
+                <div style="display: inline-block;width: 45%;height: 170px;border:1px solid red;padding: 5px">
+                    <div style="display: inline-block;width: 45%;height: 160px;border:1px solid red;">
+                    </div>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 45%;height: 180px;border:1px solid red;padding: 5px">
+                <div style="display: inline-block;width: 45%;height: 170px;border:1px solid red;">
+                </div>
+            </div>
+        </div>
+        <script>
+            let p = document.querySelector('#p')
+
+            console.log(p.nodeType)
+            console.log(p.nodeName)
+            console.log(p.nodeValue) //元素节点的nodeValue总是null
+            console.log(p.childNodes)
+            console.log([...p.childNodes]) //可以将节点转为数组方便操作
+            console.log(p.parentNode)
+            console.log(p.previousSibling)
+            console.log(p.nextSibling) 
+
+            let dom4= document.querySelector('#dom4')
+            let dom4BTN= document.querySelector('#dom4BTN')
+            dom4BTN.addEventListener('click',()=>{
+                dom4.classList.toggle('green')
+            })
+            console.log(dom4.classList)
+
+            window.onload=()=>{
+                let box = document.querySelector('#box')
+                function an(el){
+                  if(el.nodeType==1){
+                      let color = el.style.borderColor
+                        el.style.borderColor='#000'
+                        setTimeout(()=>{
+                            el.style.borderColor=color
+                        },1000)
+                  }
+                }
+                // an(box)
+
+                console.log([...box.childNodes])
+                let arr = [...box.childNodes]
+
+                function foo(el){
+                   
+                   if([...el.childNodes].length==0){
+                       console.log('no child')
+                   }else{
+                    [...el.childNodes].map(item=>{
+                        setTimeout(()=>{
+                            an(item)
+                            foo(item)
+                        },1000)
+                    })
+                   }
+                }
+                an(box)
+                foo(box)
+            }
+        </script>
+    </body>
+</html>
