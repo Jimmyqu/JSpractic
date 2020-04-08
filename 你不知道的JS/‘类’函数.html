@@ -6,29 +6,20 @@
 </head>
 <body>
 <script>
-    function Foo() {
+//1. __proto__是每个对象都有的一个属性(是个对象)，而prototype是函数才会有的属性(是个对象)。
 
-    }
+function Person(name){
+    this.name=name
+}
 
-    console.log(Foo.prototype)
 
-    let a = new Foo(); //new Foo() 只是创建了一个关联到其他对象的新对象。
-    console.log(a)
-    console.log(Object.getPrototypeOf(a) === Foo.prototype)
-    //浏览器支持非标准的方法来访问内部 [[Prototype]] 属性
-    console.log(a.__proto__ === Foo.prototype)
+let p1 = new Person('j')
+console.log(p1.__proto__) 
 
-    //new foo() 创建的对象实际是向上查找 而不是复制他的foo.prototype对象
+//__proto__来自你构造函数的prototype
+console.log(Person.prototype===p1.__proto__)
 
-    function Boo() { /* .. */ }
-    Foo.prototype = { /* .. */ }; // 创建一个新原型对象
-    var a1 = new Boo();
-    a1.constructor === Boo; // false!
-    a1.constructor === Object; // true!
 
-    //Foo.prototype 的 .constructor 属性只是 Foo 函数在声明时的默认属性。如果
-    //你创建了一个新对象并替换了函数默认的 .prototype 对象引用，那么新对象并不会自动获
-    //得 .constructor 属性。
 </script>
 </body>
 </html>

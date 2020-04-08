@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            div{
+                width: 100px;
+                height: 100px;
+                background-color: rebeccapurple;
+                border:1px solid gold;
+            }
+            .b1{
+                position: absolute;
+                left: 100px;
+                top: 100px;
+            }
+            .b2{
+                position: relative;
+                left: 100px;
+                top: 200px;
+            }
+            .b3{
+                position: relative;
+            }
+            .b3 div{
+                position: absolute;
+                top: 10px;
+            }
+
+        </style>
+    </head>
+    <body style="margin: 0;">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="b1">b1</div>
+        <div class="b2">b2</div>
+        <div class="b3">
+            <div>11</div>
+        </div>
+        <pre>
+            position ：absolute 脱离文档流对根元素或 有position属性的父元素定位 
+            position ：relative 保留原来位置进行定位 相对自己原来位置定位
+        </pre>
+        <script src="" async defer></script>
+    </body>
+</html>

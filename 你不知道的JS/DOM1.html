@@ -57,6 +57,15 @@
                 dom4.classList.toggle('green') //动态切换
             })
         </pre>
+        <h1>5。DOM拓展</h1>
+        <p id='dom5'>含有一个子元素的dom5 <span style="color: greenyellow;">子元素</span></p>
+        <pre>
+            dom5.firstElementChild   //获取第一个子元素
+            dom5.lastElementChild   //获取最后一个子元素
+            dom5.previosElementChild //前一个同辈元素
+            dom5.nextRlementChild //后一个同辈元素
+            dom5.childElementCount  //获取子html元素个数
+        </pre>
         <div id='box' style="padding: 10px;border:1px solid red;width:400px;height: 200px;">
             <div style="display: inline-block;width: 45%;height: 180px;border:1px solid red;padding: 5px">
                 <div style="display: inline-block;width: 45%;height: 170px;border:1px solid red;padding: 5px">
@@ -88,6 +97,8 @@
             })
             console.log(dom4.classList)
 
+            let dom5= document.querySelector('#dom5')
+
             window.onload=()=>{
                 let box = document.querySelector('#box')
                 function an(el){
@@ -105,8 +116,7 @@
                 let arr = [...box.childNodes]
 
                 function foo(el){
-                   
-                   if([...el.childNodes].length==0){
+                    if([...el.childNodes].length==0){
                        console.log('no child')
                    }else{
                     [...el.childNodes].map(item=>{
