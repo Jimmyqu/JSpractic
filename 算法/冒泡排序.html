@@ -16,16 +16,20 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <script >
-            let arr=[2,1,0,-6,3,5,87]
-
-            let sam=arr[0]
-            for(let i of arr){
-                if(sam>i){
-                    sam=i
+        <script>
+            let arr1=[2,3,45,67,8,9,0,11]
+       
+           
+            for(let i =0;i< arr1.length;i++){
+                // console.log(arr1[i])
+                for(let j =0;j< arr1.length-1;j++){
+                    if(arr1[i]<arr1[j]){
+                        [arr1[j],arr1[i]] = [arr1[i],arr1[j]]
+                        console.log(arr1[j],arr1[i],arr1)
+                    }
                 }
             }
-            console.log(sam)
+            console.log(arr1)
         </script>
     </body>
 </html>

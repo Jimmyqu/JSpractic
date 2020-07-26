@@ -16,16 +16,38 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <script >
-            let arr=[2,1,0,-6,3,5,87]
+        <script>
+            class Bus{
+                constructor(){
+                    this.pool={
 
-            let sam=arr[0]
-            for(let i of arr){
-                if(sam>i){
-                    sam=i
+                    }
+                }
+
+                on(name,fn){
+                    this.pool[name]=[]|| this.pool[name]
+                    this.pool[name].push(fn)
+                }
+
+                emit(name,args){
+                    if(this.pool[name].length){
+                        this.pool[name].map(fn=>{
+                            fn(args)
+                        })
+                    }
                 }
             }
-            console.log(sam)
+
+            let b1 =new Bus()
+
+            b1.on('event',(msg)=>{
+                console.log('b1 event is'+msg)
+            })
+
+            b1.emit('event','gogogog')
+            b1.emit('event','fffff')
+
+
         </script>
     </body>
 </html>

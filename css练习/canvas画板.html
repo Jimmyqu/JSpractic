@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        canvas {
+            border: 1px solid saddlebrown;
+            margin: 0 auto;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        
+        ul::after {
+            content: '';
+            display: inline-block;
+            clear: both;
+        }
+        
+        ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div style="text-align: center;">
+        <canvas width="800" height="500" id='cavs'></canvas>
+        <ul id='control'>
+            <li><input type="color" id='color' value="color"></li>
+            <li><input type="button" id='clear' value="清屏"></li>
+            <li><input type="button" id='reaser' value="橡皮"></li>
+            <li><input type="button" id='undo' value="撤销"></li>
+            <li><input type="button" id='save' value="保存"></li>
+            <li><input type="range" id='lineWidth' value="线条" min='1' max='30'></li>
+        </ul>
+    </div>
+
+    <script>
+        // let cavs = document.getElementById('walls'),
+        // ctx = cavs.getContext('2d'); 
+        // ctx.moveTo(100,100) //起点
+        // ctx.lineTo(200,100) // 落点
+        // ctx.lineTo(200,200) // 落点
+        // ctx.strokeStyle = '#f12' //描绘色
+        // ctx.lineWidth = '20'
+        // ctx.fill() //填充闭合路径
+        // ctx.fillStyle='#fff'
+        // ctx.beginPath() //新的子路径
+        // ctx.closePath() //闭合路径
+        // ctx.stroke() //描绘
+        // console.log(ctx)
+    </script>
+    <script>
+        class Draw {
+            constructor(elements) {
+                const {
+                    canvas,
+                    color,
+                    lineWidth,
+                    control
+                } = elements; // 控制画布的元素
+                this.canvas = canvas; // canvas元素
+                this.context = canvas.getContext('2d'); // 获取canvas的2d上下文对象
+                this.control = control
+                this.canvasWidth = canvas.width; // 画布的宽度
+                this.canvasHeight = canvas.height; // 画布的高度
+                this.lineWidth = lineWidth;
+                this.drawHistory = []; //绘画记录
+                this.undoImg = new Image();
+                this.drawHistoryIndex = null;
+                this.controlType = null;
+                this.color = color;
+                this.isDrawing = false
+                console.log(this)
+            }
+
+            init() {
+                let originX = null,
+                    originY = null; // 同于存放每次鼠标点击（mousedown）时的坐标
+                const {
+                    offsetLeft,
+                    offsetTop
+                } = this.canvas;
+
+                this.control.addEventListener('click', (e) => {
+                    console.log(e.target.id)
+                    this.controlType = e.target.id
+                    let controlType = this.handleContorl()
+
+                    if (this.controlType && controlType[this.controlType]) {
+
+                        controlType[this.controlType]()
+                    }
+                })
+
+                this.canvas.addEventListener('mouseup', () => {
+                    if (this.isDrawing) {
+                        this.context.closePath();
+                        this.isDrawing = false;
+                        this.addHistory();
+                    }
+                }, false);
+
+                this.canvas.addEventListener('mouseleave', () => {
+                    if (this.isDrawing) {
+                        this.context.closePath();
+                        this.isDrawing = false;
+                        this.addHistory();
+                    }
+                }, false);
+
+                this.canvas.addEventListener('mousedown', (event) => {
+                    this.isDrawing = true;
+
+                    const {
+                        clientX,
+                        clientY
+                    } = event;
+                    originX = clientX - offsetLeft;
+                    originY = clientY - offsetTop;
+                    // 初始化context
+                    this.context.moveTo(originX, originY);
+                    this.context.lineWidth = this.lineWidth.value;
+                    this.context.strokeStyle = this.color.value;
+                    this.context.fillStyle = this.color.value;
+                    this.context.beginPath();
+                }, false);
+
+                this.canvas.addEventListener('mousemove', (event) => {
+                    if (this.isDrawing) {
+                        const {
+                            clientX,
+                            clientY
+                        } = event;
+                        const x = clientX - offsetLeft;
+                        const y = clientY - offsetTop;
+                        let newOriginX = originX,
+                            newOriginY = originY;
+                        let distanceX = Math.abs(x - originX);
+                        let distanceY = Math.abs(y - originY);
+
+                        // 让形状左上角的坐标永远大于右下角坐标，保证图形能正常绘制
+                        if (x < originX) newOriginX = x;
+                        if (y < originY) newOriginY = y;
+
+                        // (x, y)为鼠标移动的过程中在画布上的坐标，(originX, originY)为鼠标点击时在画布上的坐标，
+                        //（newOriginX, newOriginY）为绘制形状（比如矩形）时形状左上角的坐标
+                        const mousePosition = {
+                            x,
+                            y,
+                            originX,
+                            originY,
+                            newOriginX,
+                            newOriginY,
+                            distanceX,
+                            distanceY
+                        };
+
+                        this.draw(mousePosition)
+                    }
+                }, false);
+            }
+
+            //绘图
+            draw(mousePosition) {
+                const {
+                    x,
+                    y
+                } = mousePosition;
+                this.context.lineTo(x, y);
+                this.context.stroke();
+            }
+
+            //保存
+            addHistory() {
+                let dataUrl = this.canvas.toDataURL('image/png')
+                this.drawHistory.push(dataUrl)
+                this.drawHistoryIndex = this.drawHistory.length - 1
+
+            }
+
+            //操作事件
+            handleContorl() {
+                return {
+                    save: () => { // 保存按钮绑定的事件
+                        console.log('save')
+                        this.downloadLink.href = this.canvas.toDataURL('image/png');
+                        this.downloadLink.download = 'drawing.png';
+                        // this.downloadLink.click();
+                        console.log(this.downloadLink)
+                    },
+                    undo: () => {
+                        if (this.drawHistory.length) {
+                            this.drawHistory.pop()
+                                // this.undoImg.src = this.drawHistory[this.drawHistory.length - 1]
+                            this.undoImg.src = 'https://upload.jianshu.io/users/upload_avatars/2348171/e88a4b38-83c8-40b3-aa9c-469e9a806b6d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/90/h/90/format/webp'
+                            this.undoImg.onload = () => {
+                                this.context.drawImage(this.undoImg, 0, 0);
+                            }
+                            console.log(this.undoImg)
+                            console.log(this.drawHistory)
+                        }
+
+
+
+                        // this.context.drawImage(this.historyImage, 0, 0);
+                        // this.context.drawImage( 0, 0);
+                    }
+                }
+            }
+        }
+
+        window.onload = () => {
+            // 获取页面中的元素
+            const canvas = document.getElementById('cavs');
+            const color = document.getElementById('color');
+            const lineWidth = document.getElementById('lineWidth');
+            const control = document.getElementById('control');
+
+            const elements = {
+                canvas,
+                color,
+                lineWidth,
+                control
+            };
+            const draw = new Draw(elements);
+            draw.init();
+        };
+    </script>
+</body>
+
+</html>

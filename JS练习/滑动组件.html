@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            #box{
+                width: 50vw;
+                height: 400px;
+                margin: 0 auto;
+                position: relative;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            #box li{
+                list-style: none;
+                float: left;
+            }
+            #wrapper{
+                width: 205vw;
+                transition: transform 1s;
+            }
+            img{
+                width: 50vw;
+                height: 400px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <ul id='box'>
+            <div id='wrapper'>
+                <li><img src="https://i0.hdslb.com/bfs/archive/0cf2261fec1c03603e425f446fe48e3242e09233.jpg@336w_190h.webp" alt=""></li>
+                <li><img src="https://i0.hdslb.com/bfs/archive/7c0a8568274652d703b82cf90a6668e4d57aa8ab.jpg@336w_190h.webp" alt=""></li>
+                <li><img src="https://i1.hdslb.com/bfs/archive/3cdf22872657b5d2459dde68d8ed5139f8829ae0.jpg@336w_190h.webp" alt=""></li>
+                <li><img src="https://i0.hdslb.com/bfs/archive/b389714a3591f577b613fe2ef3daeecd55c72f47.jpg@336w_190h.webp" alt=""></li>
+            </div>
+        </ul>
+
+        <script>
+            class Silder{
+                constructor(el,opt={auto: false,duration:3000}){
+                    this.el = document.querySelector(el);
+                    this.opt = opt;
+                    this.size = this.el.getBoundingClientRect();
+                    this.children = [...this.el.children]
+                    this.currentIndex = 0
+                }
+
+                move(){
+                    
+                }
+
+                init(){
+                    
+                    // this.children.map((el,index)=>{
+                    //     el.style.webkitTransform = `translateX(${this.size.width*index}px)`
+                    // })
+                }
+
+                play(){
+                 
+                    // setInterval(()=>{
+                    //     if(this.currentIndex<2){
+                    //          this.currentIndex ++
+                    //          this.children[0].style.webkitTransition = `transform 1s`
+                    //     }else{
+                    //         this.currentIndex =0
+                    //         this.children[0].style.webkitTransition = `none`
+                    //     }
+                    //     this.children[0].style.webkitTransform = `translateX(-${this.size.width*this.currentIndex}px)`
+                    // },this.opt.duration)
+                }
+            }
+
+            let s1 = new Silder('#box')
+            s1.play()
+
+
+        </script>
+    </body>
+</html>

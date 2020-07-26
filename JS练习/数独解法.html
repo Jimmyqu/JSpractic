@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            #container{
+                width: 50vw;
+                height: 50vw;
+                margin: 0 auto;
+            }
+            .item{
+                width: 11%;
+                height: 11%;
+                float: left;
+                box-sizing: border-box;
+                border:1px solid rebeccapurple;
+                text-align: center;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id='container'>
+
+        </div>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        <script>
+            (function(w){
+                $(function(){
+                   let Rarr= ['c1','c2','c3','c4','c5','c6','c7','c8','c9']
+                   let Carr= ['r1','r2','r3','r4','r5','r6','r7','r8','r9']
+                   let nodeBox =' ' 
+                    for(let i of Carr){
+                        for (let j of Rarr){
+                            nodeBox+=`<div class='item ${i} ${j}'></div>`
+                        }
+                    }
+                    let arr= [1,2,3,4,5,6,7,8,9]
+                    $('#container').html(nodeBox)
+                   
+                    function initNum(){
+                        for(let item=1;item<=9;item++){
+                            arr.sort(i=>0.5-Math.random()).map((j,index)=>$($(`.r${item}`)[index]).text(j)) 
+                        }
+                    }
+                    initNum()
+
+                    function checkNum(){
+                        for(let item=1;item<=9;item++){
+                            // while(Array.from(new Set([...$(`.c${item}`).text()])).length!==9){
+                            //     initNum()
+                            // }
+                                console.log(Array.from(new Set([...$(`.c${item}`).text()])).length!==9)
+                            // console.log(new Set([...$(`.c${item}`).text()]))
+                        }
+                    } 
+                    checkNum()
+
+                    let cards = Array(62).fill().map((_,i)=>i+1); //初始化一个 1~62 的数组
+                    
+                    function draw(n=10){
+                        let res = []
+                        for(let i =0;i<n;i++){
+                            let id=Math.floor(Math.random()*cards.length)
+                            res.push(cards.splice(id,1))
+                        }
+                        console.log(res)
+                    }
+
+                    draw()
+                })
+            })(window)
+        </script>
+    </body>
+</html>
