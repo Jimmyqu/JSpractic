@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+      <style>
+          #box + a{
+            background-color: rebeccapurple;
+          }
+      </style>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div id='box'>
+
+    </div>
+    <a
+      href="alipayqr://platformapi/startapp?appId=20000067&url=http%3A%2F%2Ftest-portal.ydmap.cn%2Fpay%2F4scan%3FpayCode%3D122007242384681980%26time%3D1595577562368"
+      >111</a
+    >
+
+    <script>
+
+      function URLencode(sStr){
+
+           return escape(sStr).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+
+      }
+
+    //   encodeURIComponent()
+      let res= encodeURIComponent('http://test-portal.ydmap.cn/pay/4scan?payCode=122007242384681980&time=1595577562368')
+      console.log(res)
+
+          let obj = {
+              name:1,
+              data:{
+                  state:0
+              }
+          }
+
+          let {name, data:{state:state1}} =obj
+
+          console.log(state1)
+    </script>
+  </body>
+</html>
