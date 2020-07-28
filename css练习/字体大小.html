@@ -6,26 +6,34 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>
+
+        </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <style>
+            html{
+                 font-size: 62.5%;
+            }
+            /* body{
+               
+            } */
+            h1{
+                font-size: 1em;
+            }
+            p  {
+                font-size: 1rem;
+            }
+        </style>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        <script >
-            let arr=[2,1,0,-6,3,5,87]
-
-            let sam=arr[0]
-            for(let i of arr){
-                if(sam>i){
-                    sam=i
-                }
-            }
-            console.log(sam)
-        </script>
+        <div style="font-size: 50px;">
+            <h1>1em大小 em就是一个相对值，而且是一个相对于父元素的值</h1> 
+        </div>
+        <p>1rem大小 rem是根据html根元素大小比例</p>
     </body>
 </html>

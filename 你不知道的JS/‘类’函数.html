@@ -11,10 +11,12 @@
 function Person(name){
     this.name=name
 }
-
+console.log(Person.__proto__=== Function.prototype)
 
 let p1 = new Person('j')
 console.log(p1.__proto__) 
+let p2 = new Person('kk')
+console.log(p1.__proto__)
 
 //__proto__来自你构造函数的prototype
 console.log(Person.prototype===p1.__proto__)

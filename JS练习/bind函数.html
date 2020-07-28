@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+        .warpper{
+            width: 50vw;
+            margin: 0 auto;
+        }
+        .carousel{
+            width:100%;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+        }
+        .carousel-inner{
+            position: absolute;
+            width: 205vw;
+            animation: move 5s infinite;
+        }
+        .carousel-inner img{
+            width: 50vw;
+        }
+
+        @keyframes move {
+            0%{
+                left: 0;
+            }
+            33% {
+                left:-50vw
+            }
+            66%{
+                left:-100vw
+            }
+            99%{
+                left:-150vw
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div id='box'>
+1
+        </div>
+        <script>
+            let box = document.querySelector('#box')
+            box.addEventListener('click',function(){
+                console.log(this)
+                setTimeout(function(){
+                    console.log(this)
+                },0)
+            })
+            let o1={
+                name:'jobs',
+                sayName(){
+                    console.log(this.name)
+                }
+            }
+
+            let o2={
+                name:'jony'
+            }
+            // o1.sayName()
+            // o1.sayName.bind(o2)()
+            // o1.sayName.call(o2)
+        
+            Function.prototype.myCall = function(context,args){
+                context['fuc']=this
+                return (()=>context['fuc'](args))()
+            }
+
+            
+            Function.prototype.myBind = function(context){
+               return (...args)=>{
+                this.apply(context,args)
+               }
+            }
+
+
+            o1.sayName.myBind(o2)()
+
+        </script>
+    </body>
+</html>
