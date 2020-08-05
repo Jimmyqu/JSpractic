@@ -16,7 +16,6 @@ function App(props) {
         <button onClick={()=>props.dispatch({type:'modifyTitle',payload:'11111111111111'})}>modify title</button>
       </div>
       <button onClick={()=>props.dispatch({type:'add'})}>to 1</button>
-
     </>
    
   );

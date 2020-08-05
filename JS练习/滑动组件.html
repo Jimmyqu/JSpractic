@@ -11,10 +11,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <style>
+            body{
+                margin: 0;
+            }
             #box{
-                width: 50vw;
-                height: 400px;
-                margin: 0 auto;
+                margin: 0;
+                width: 100vw;
+                height: 200px;
                 position: relative;
                 padding: 0;
                 overflow: hidden;
@@ -25,12 +28,12 @@
                 float: left;
             }
             #wrapper{
-                width: 205vw;
+                width: 400vw;
                 transition: transform 1s;
             }
             img{
-                width: 50vw;
-                height: 400px;
+                width: 100vw;
+                height: 200px;
             }
 
         </style>
@@ -41,10 +44,10 @@
         <![endif]-->
         <ul id='box'>
             <div id='wrapper'>
-                <li><img src="https://i0.hdslb.com/bfs/archive/0cf2261fec1c03603e425f446fe48e3242e09233.jpg@336w_190h.webp" alt=""></li>
-                <li><img src="https://i0.hdslb.com/bfs/archive/7c0a8568274652d703b82cf90a6668e4d57aa8ab.jpg@336w_190h.webp" alt=""></li>
-                <li><img src="https://i1.hdslb.com/bfs/archive/3cdf22872657b5d2459dde68d8ed5139f8829ae0.jpg@336w_190h.webp" alt=""></li>
-                <li><img src="https://i0.hdslb.com/bfs/archive/b389714a3591f577b613fe2ef3daeecd55c72f47.jpg@336w_190h.webp" alt=""></li>
+                <li><img src="https://via.placeholder.com/150/444" alt=""></li>
+                <li><img src="https://via.placeholder.com/150/ggg" alt=""></li>
+                <li><img src="https://via.placeholder.com/150/345670" alt=""></li>
+                <li><img src="https://via.placeholder.com/150/rrr" alt=""></li>
             </div>
         </ul>
 
@@ -58,15 +61,41 @@
                     this.currentIndex = 0
                 }
 
-                move(){
-                    
+                move(distanc,s=0){
+                    this.children[0].style.transform= `translate3d(${distanc}px , 0 , 0)`
+                    this.children[0].style.transition= `transform ${s}s`
                 }
-
                 init(){
-                    
-                    // this.children.map((el,index)=>{
-                    //     el.style.webkitTransform = `translateX(${this.size.width*index}px)`
-                    // })
+                    let startX,moveX ,endX ;
+                    this.children.map((el,index)=>{
+                        el.addEventListener('touchstart',(e)=>{
+                            startX = e.changedTouches[0].clientX
+                        })
+                        el.addEventListener('touchmove',(e)=>{
+                            moveX = e.changedTouches[0].clientX - startX
+                            this.move(-(this.currentIndex*375)+moveX)
+                        })
+                        el.addEventListener('touchend',(e)=>{
+                            endX = e.changedTouches[0].clientX
+                            console.log(this.currentIndex)
+                            if(Math.abs(moveX)<200){
+                                this.move(-(this.currentIndex*375),.2)
+                            }else{
+                                if(moveX > 0){ //左到右 上一张
+                                    if(this.currentIndex !== 0){
+                                      this.currentIndex --
+                                      this.move(`-${this.currentIndex*375}`,0.2)
+                                    }else{
+                                      this.move(`-${this.currentIndex*375}`,0.2)
+                                    }
+                                }else{
+                                     //右到左 下一张
+                                    this.currentIndex ++
+                                    this.move(`-${this.currentIndex*375}`,0.2)
+                                }
+                            }
+                        })
+                    })
                 }
 
                 play(){
@@ -85,7 +114,7 @@
             }
 
             let s1 = new Silder('#box')
-            s1.play()
+            s1.init()
 
 
         </script>

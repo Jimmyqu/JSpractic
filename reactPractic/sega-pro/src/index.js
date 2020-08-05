@@ -6,12 +6,23 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './store/index'
 
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>
+//   </Provider>
+//  ,
+//   document.getElementById('root')
+// );
+
+
+import RouterApp from './RouterApp';
+//路由联系
 ReactDOM.render(
-  <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <RouterApp />
     </React.StrictMode>
-  </Provider>
  ,
   document.getElementById('root')
 );
