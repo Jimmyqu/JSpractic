@@ -7,12 +7,7 @@ const homeReducer = (state=homeState,action)=>{
     switch(action.type){
         
         case 'modifyTitle':
-            console.log(action.payload)
-            setTimeout(()=>{
-                return {...homeState,title:action.payload};
-            },1000)
-            // console.log(action.payload)
-            // return {...homeState,title:action.payload};
+            return {...homeState,title:action.payload};
         default :
             return  homeState
     }
