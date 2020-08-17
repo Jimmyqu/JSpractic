@@ -45,10 +45,12 @@ const imageInlineSizeLimit = parseInt(
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
 // style files regexes
-const cssRegex = /\.css$/;
+const cssRegex = /\.(css)$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.less$/;  // 新增less配置
+const lessModuleRegex = /\.module\.less$/; // 新增less配置
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -76,7 +78,7 @@ module.exports = function(webpackEnv) {
   const env = getClientEnvironment(publicUrl);
 
   // common function to get style loaders
-  const getStyleLoaders = (cssOptions, preProcessor) => {
+  const getStyleLoaders = (cssOptions,lessOptions, preProcessor) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -435,9 +437,62 @@ module.exports = function(webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               }),
+            },
+            {
+              test: lessRegex,
+              include: /node_modules|antd\.less/,
+              use: getStyleLoaders(
+                {
+                  sourceMap: isEnvProduction,
+                },
+                'less-loader',
+                {
+                  lessOptions: {
+                    javascriptEnabled: true,
+                  },
+                }
+              ),
+              sideEffects: true,
+            },
+            {
+              test: lessRegex,
+              exclude: /node_modules|antd\.less/,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction,
+                  modules: {
+                    getLocalIdent: (context, localIdentName, localName, options) => {
+                      // Use the filename or folder name, based on some uses the index.js / index.module.(css|scss|sass) project style
+                      const fileNameOrFolder = context.resourcePath.match(/index\.less$/) ? '[folder]' : '[name]';
+                      // Create a hash based on a the file location and class name. Will be unique across a project, and close to globally unique.
+                      const hash = loaderUtils.getHashDigest(
+                        path.posix.relative(context.rootContext, context.resourcePath) + localName,
+                        'md5',
+                        'base64',
+                        5
+                      );
+                      // Use loaderUtils to find the file or folder name
+                      const className = loaderUtils.interpolateName(
+                        context,
+                        `${fileNameOrFolder}_${localName}__${hash}`,
+                        options
+                      );
+                      // remove the .module that appears in every classname when based on the file.
+                      return className.replace('.module_', '_');
+                    },
+                  },
+                },
+                'less-loader',
+                {
+                  lessOptions: {
+                    javascriptEnabled: true,
+                  },
+                }
+              ),
+              sideEffects: true,
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
