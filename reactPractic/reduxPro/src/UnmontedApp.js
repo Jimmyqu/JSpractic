@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 class App extends React.Component{
     state={
-        isChi1:false
+        isChi1:false,
+        text:'btn'
     }
 
     handleToggle(type){
@@ -13,16 +14,16 @@ class App extends React.Component{
 
     render(){
         const { isChi1 } = this.state
+        
         return <div>
             {
-                isChi1? <Chi1 toggle={()=>this.handleToggle(false)}></Chi1>:<Chi2 toggle={()=>this.handleToggle(true)}></Chi2>
+                isChi1? <Chi1 toggle={()=>this.handleToggle(false)}></Chi1>:<Chi2  toggle={()=>this.handleToggle(true)}></Chi2>
             }        
         </div>
     }
     
 }
 const Chi1 =(props)=>{ 
-
     return <div>
         <p>Chi1</p>
         <button onClick={()=>props.toggle()}>toggle</button>
