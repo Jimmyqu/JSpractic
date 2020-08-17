@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 // import App from './App';
 // import App from './ContextApp';
 // import App from './MemoApp';
-import App from './NumApp';
+// import App from './UnmontedApp';
+import App from './Hocapp';
 
 import * as serviceWorker from './serviceWorker';
-
 
 ReactDOM.render(<App />,document.getElementById('root'));
 
