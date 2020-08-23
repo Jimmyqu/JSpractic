@@ -25,5 +25,10 @@ export default new Router({
       name: 'casino',
       component: Casino
     },
+    {
+      path: '/more',
+      name: 'more',
+      component: ()=>import('./views/more.vue')
+    },
   ]
 })
