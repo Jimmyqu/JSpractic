@@ -45,9 +45,7 @@ export default {
       touchmove: "touchmove",
       touchend: "touchend",
       startPageY: 0,
-      startPageX: 0,
       offsetTop: 0,
-      offsetLeft: 0,
       isBottom: false,
       isTop: false,
       ispullOrdarg: false,
@@ -88,13 +86,16 @@ export default {
 
     },
     touchStart(e) {
+      this.isBottom= Math.round(this.contentDom.scrollTop) + this.contentDom.offsetHeight === this.contentDom.scrollHeight
+      if(!this.isBottom) return
       const target = this.$refs.content;
-      if (this.isBottom) {
+
         this.startPageY = e.changedTouches[0].pageY; //从手指触到屏幕时的Y坐标的赋值
         this.ispullOrdarg = true;
-      }
+      
     },
     touchMove(e) {
+      if(!this.isBottom || this.isfinished) return
       this.offsetTop = e.changedTouches[0].pageY - this.startPageY;
       if (this.isBottom && Math.abs(this.offsetTop) < this.distance) {
         this.deviationElement(this.offsetTop, false);
@@ -103,6 +104,7 @@ export default {
       }
     },
     touchEnd(e) {
+      if(!this.isBottom) return
       //是否大于下拉的距离的触发点
       const target = this.$refs.content;
       if (
@@ -122,23 +124,11 @@ export default {
       this.ispullOrdarg = false;
       this.deviationElement(0, true);
     },
-    scrollHandler() {
-      if (
-        // 微信浏览器scrollTop有小数
-        Math.round(this.contentDom.scrollTop) + this.contentDom.offsetHeight ===
-        this.contentDom.scrollHeight
-      ) {
-        this.isBottom = true;
-      } else {
-        this.isBottom = false;
-        this.ispullOrdarg = false;
-      }
-    },
+
   },
   mounted() {
     //获取容器
     this.contentDom = this.$refs.content;
-    this.contentDom.addEventListener("scroll", this.scrollHandler);
     setTimeout(() => {
       for (let i = 0; i < 20; i++) {
         this.reslist = [...this.reslist, i];
@@ -147,7 +137,6 @@ export default {
     }, 1000);
   },
   destroyed() {
-    this.contentDom.removeEventListener("scroll", this.scrollHandler);
   },
 };
 </script>
