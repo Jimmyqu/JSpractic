@@ -2,51 +2,54 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div style="height: 100vh">
+    <div style="height: 100vh">
 
+    </div>
+    <div>
+        <div>
+            <img class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
         </div>
         <div>
-            <div>
-                <img  class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt=""> 
-            </div>
-            <div>
-                 <img  class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
-            </div>
-            <div>
-                <img  class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
-            </div>
-            
+            <img class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
         </div>
-        <script>
-           (function(w){
-                let bodyScrollHeight =  document.body.scrollTop;// body滚动高度
-                let windowHeight = w.innerHeight;// 视窗高度
-                let imgs = document.getElementsByClassName('img-container')
-                console.log(bodyScrollHeight)
-                for (let i=0 ;i<imgs.length;i++){
-                    // console.log(imgs[i].offsetTop)
-                    let imgHeight = imgs[i].offsetTop
-                    if (imgHeight  < windowHeight  + bodyScrollHeight) {
-                        imgs[i].src = imgs[i].getAttribute('data-src');
-                        img[i].className = img[i].className.replace('lazyloadimg','')
-                    }
+        <div>
+            <img class="img-container" src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
+        </div>
+
+    </div>
+    <script>
+        (function(w) {
+            let bodyScrollHeight = document.body.scrollTop; // body滚动高度
+            let windowHeight = w.innerHeight; // 视窗高度
+            let imgs = document.getElementsByClassName('img-container')
+            console.log(bodyScrollHeight)
+            for (let i = 0; i < imgs.length; i++) {
+                // console.log(imgs[i].offsetTop)
+                let imgHeight = imgs[i].offsetTop
+                if (imgHeight < windowHeight + bodyScrollHeight) {
+                    imgs[i].src = imgs[i].getAttribute('data-src');
+                    img[i].className = img[i].className.replace('lazyloadimg', '')
                 }
-                
-              
-           })(window)
-        </script>
-    </body>
+            }
+        })(window)
+    </script>
+</body>
+
 </html>

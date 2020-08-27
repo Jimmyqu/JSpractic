@@ -1,38 +1,60 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch,Redirect } from 'react-router-dom'
-import HomeView from './compnent/homeView'
-import ListView from './compnent/listView'
+import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom'
+
+import MyMenu from './compnent/Menu'
+// import ListView from './compnent/listView'
+import { Layout,Button } from 'antd';
+
+
+import Home from './pages/home'
+import RichText from './pages/richText';
+import ErrorPage from './pages/errorPage';
+import Login from './pages/login/login';
+const { Header, Footer, Sider, Content } = Layout;
+
 
 class RouterApp extends Component {
     constructor(props) {
+
         super(props);
-        this.state = {}
+        this.state = {
+            collapsed:false
+        }
     }
+
     render() {
         return (
-            <BrowserRouter>
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: '1' }}>
-                        <ul>
-                            <li> <Link to="/home">首页</Link> </li>
-                            <li><Link to="/list/">列表</Link> </li>
-                        </ul>
-                    </div>
-                    <div style={{ flex: '4' }}>
-                        <Switch>
-                            {/* <Redirect  to='/home/components' /> */}
-                            {/* <Route path="/" exact /> */}
-                            <Route path="/home"  component={HomeView} />
-                            <Route path="/list" component={ListView} />
-                            <Route render={()=><div>无匹配路由</div>} />
-                        </Switch>
-
-                    </div>
-
-                </div>
-
-            </BrowserRouter>
-        );
+            JSON.parse(window.localStorage.getItem('isLogin')) ?
+                <Layout>
+                    <BrowserRouter>
+                        <Sider style={{ height: '100vh' }} collapsed={this.state.collapsed} >
+                            <MyMenu />
+                        </Sider>
+                        <Layout>
+                            <Header>
+                            <Button onClick={()=>{ 
+                                window.localStorage.setItem('isLogin', 'false')
+                                window.location.href = '/';
+                             }}>退出登陆</Button>
+                             <Button onClick={()=>{ 
+                                 this.setState({
+                                    collapsed:!this.state.collapsed
+                                 })
+                             }}>切换</Button>
+                            </Header>
+                            <Content>
+                                <Switch>
+                                    <Route path="/home" component={Home}></Route>
+                                    <Route path="/richText" component={RichText}></Route>
+                                    <Route component={ErrorPage}></Route>
+                                </Switch>
+                            </Content>
+                            <Footer>Footer</Footer>
+                        </Layout>
+                    </BrowserRouter>
+                </Layout> :
+                <Login/>
+        )
     }
 }
 

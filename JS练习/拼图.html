@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            #container{
+                width: 800px;
+                height: 800px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .inner{
+                position: relative;
+                width:612px;
+                height: 612px;
+
+            }
+            .inner >div{
+                position: absolute;
+                width: 153px;
+                height: 153px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="container">
+            <div class="inner">
+            </div>
+        </div>
+        <button id='btn'>打乱</button>
+        <script src='https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js'></script>
+        <script>
+          
+
+            $(function(){
+                class Pulzz{
+                    constructor(el,imgSrc){
+                        this.el=document.querySelector(el)
+                        this.src= imgSrc
+                        this.pos=[]
+                    }
+
+
+                    rebuild(){
+                        this.render(this.pos.sort(item=>Math.random()-0.5))
+                    }
+
+                    render(arr){
+                        $('.inner').empty()
+                        arr.map((item,index)=>{
+                            let k = $(item.div).animate({
+                                top:`${Math.floor((index/4))*153}px`,
+                                left:`${(index%4)*153}px`
+                            })
+                           $('.inner').append( k)
+                        })
+                        $(this.el).append($('.inner'))
+                    }
+
+                    init(){
+                        this.pos=[]
+                        for(let i of [0,1,2,3]){
+                            for(let j of [0,1,2,3]){
+                               this.pos.push({
+                                   div:`<div class="row${i} col${j}" style="background:url('./img/bg.jpg');background-position:-${j*153}px -${i*153}px"></div>`
+                               })
+                            }
+                        }
+                        this.render(this.pos)
+                    }
+
+                }
+                let p =new Pulzz('.inner','./img/bg.jpg')
+                p.init()
+               
+
+                $('#btn').click(function(){
+                    if($(this).text()==='打乱'){
+                        p.rebuild()
+                         $(this).text('回复')
+                    }else{
+                        p.init()
+                        $(this).text('打乱')
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>

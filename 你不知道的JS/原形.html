@@ -27,6 +27,16 @@
     //浏览器支持非标准的方法来访问内部 [[Prototype]] 属性
     console.log(anotherObj.__proto__)
 
+    let arr=[1,21,3,444,5,6666666666,7,8,9999]
+    function findMax(arr){
+        let f = arr[0]
+        arr.forEach(item => {
+            item>f?f=item:null
+        });
+        console.log(f)
+    }
+
+    findMax(arr)
 </script>
 
 </body>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+        body{
+            margin:0;
+            height: 100vh;
+            background: linear-gradient(#fb3 30px,#58a 30px);
+            /* background-size设置背景图片大小 :长 宽*/
+            background-size: 100% 60px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            /* background: url('https://imgs.gamersky.com/upimg/2020/202004032028028729.jpg'); */
+            background-repeat: repeat-y;
+        }
+        div{
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border:50px solid rgba(0,0,0,.2);
+            padding:10px; 
+            /* 半透明白色边框处会透出了这个容器自己的纯白实色背景  background-clip会用内边距的外沿来把背 景裁切掉*/
+            background-clip: padding-box; 
+        }
+        </style>
+    </head>
+    <body>
+       <div>
+        box
+       </div>
+    </body>
+</html>

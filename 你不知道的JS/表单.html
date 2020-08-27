@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <form action="#" id='form1'>
+        <ul>
+            <li>
+                <input name='form1Text' type="text">
+            </li>
+            <li>
+                <textarea name="" id="" cols="10" rows="5"></textarea>
+            </li>
+            <li></li>
+        </ul>
+
+    </form>
+    <form action="#">
+        <input type="text">
+    </form>
+    <input type="submit" id='submit'>
+    <input type="submit" id='reset' value="reset">
+    <script>
+        let form1 = document.getElementById('form1')
+        let submit = document.getElementById('submit')
+        let reset = document.getElementById('reset')
+        submit.addEventListener('click', (e) => {
+            console.log(form1.elements) //获取表单内控件
+            console.log(form1.elements[0].value) //获取控件值
+            console.log(form1.elements[1].value)
+        })
+
+        reset.addEventListener('click', (e) => {
+            form1.reset() //重置表单
+        })
+    </script>
+</body>
+
+</html>

@@ -2,72 +2,77 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-      
-      
-        <script>
-          var Widget = {
-	init: function(width,height){
-		this.width = width || 50;
-		this.height = height || 50;
-		this.$elem = null;
-	},
-	insert: function($where){
-		if (this.$elem) {
-			this.$elem.css( {
-				width: this.width + "px",
-				height: this.height + "px"
-			} ).appendTo( $where );
-		}
-	}
-};
 
-var Button = Object.create( Widget );
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script>
+		var Widget = {
+			init: function (width, height) {
+				this.width = width || 50;
+				this.height = height || 50;
+				this.$elem = null;
+			},
+			insert: function ($where) {
+				if (this.$elem) {
+					this.$elem.css({
+						width: this.width + "px",
+						height: this.height + "px"
+					}).appendTo($where);
+				}
+			}
+		};
 
-Button.setup = function(width,height,label){
-	// delegated call
-	this.init( width, height );
-	this.label = label || "Default";
-	this.$elem = $( "<button>" ).text( this.label );
-};
+		var Button = Object.create(Widget);
 
-Button.build = function($where) {
-	// delegated call
-	this.insert( $where );
-	this.$elem.click( this.onClick.bind( this ) );
-};
+		Button.setup = function (width, height, label) {
+			// delegated call
+			this.init(width, height);
+			this.label = label || "Default";
+			this.$elem = $("<button>").text(this.label);
+		};
 
-Button.onClick = function(evt) {
-	console.log( "Button '" + this.label + "' clicked!" );
-};
+		Button.build = function ($where) {
+			// delegated call
+			this.insert($where);
+			this.$elem.click(this.onClick.bind(this));
+		};
 
-$( document ).ready( function(){
-	var $body = $( document.body );
+		Button.onClick = function (evt) {
+			console.log("Button '" + this.label + "' clicked!");
+		};
 
-	var btn1 = Object.create( Button );
-	btn1.setup( 125, 30, "Hello" );
+		$(document).ready(function () {
+			var $body = $(document.body);
 
-	var btn2 = Object.create( Button );
-	btn2.setup( 150, 40, "World" );
+			var btn1 = Object.create(Button);
+			btn1.setup(125, 30, "Hello");
 
-	btn1.build( $body );
-    btn2.build( $body );
-    
-} );
-           
+			var btn2 = Object.create(Button);
+			btn2.setup(150, 40, "World");
 
-        </script>
-    </body>
+			btn1.build($body);
+			btn2.build($body);
+
+		});
+
+
+	</script>
+</body>
+
 </html>
