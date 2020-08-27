@@ -1,19 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
 // import App from './App';
 // import App from './ContextApp';
 // import App from './MemoApp';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import App from './NumApp';
-=======
-// import App from './UnmontedApp';
-import App from './Hocapp';
->>>>>>> react hoc
-=======
-// import App from './UnmontedApp';
-import App from './Hocapp';
->>>>>>> b7e9d4c72cf159792ff92c716993a77eabec4da5
 
 import * as serviceWorker from './serviceWorker';
 

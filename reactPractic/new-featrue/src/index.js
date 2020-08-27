@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 // import App from './UnmontedApp';
 // import App from './Hocapp';
 // import App from './hooksApp';
-import App from './FormApp';
+// import App from './FormApp';
+import App from './Apps/TestHooksRelyApp';
 
 import * as serviceWorker from './serviceWorker';
 
