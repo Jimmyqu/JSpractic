@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id='el' style="width: 100%;" onclick="click1()">
+        1
+    </div>
+<script>
+
+        function click1(){
+            console.log('click')
+        }
+
+        function triggerEvent(el, type) {
+            const e = document.createEvent('HTMLEvents');
+            e.initEvent(type, false, true);
+            el.dispatchEvent(e);
+
+        }
+
+        const el =document.querySelector('#el')
+        triggerEvent(el,'click') // 能主动触发浏览器事件
+
+
+</script>
+</body>
+</html>

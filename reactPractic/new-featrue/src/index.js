@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 // import App from './App';
 // import App from './ContextApp';
 // import App from './MemoApp';
-import App from './NumApp';
+// import App from './UnmontedApp';
+// import App from './Hocapp';
+// import App from './hooksApp';
+// import App from './FormApp';
+import App from './Apps/TestHooksRelyApp';
 
 import * as serviceWorker from './serviceWorker';
 

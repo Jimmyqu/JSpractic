@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+ const arr=[
+     {id:1,name:'湖北',pid:0},
+     {id:2,name:'武汉',pid:1},
+     {id:3,name:'汉口区',pid:2},
+     {id:4,name:'湖南',pid:0},
+     {id:5,name:'长沙',pid:4},
+     {id:6,name:'芙蓉区',pid:5}
+ ]
+
+let all={}
+let tree={}
+arr.forEach(item=>{
+     all[item.id]=item
+})
+Object.keys(all).map(key=>{
+    let currentItem = all[key]
+    let currentItemP = all[key].pid
+    if(currentItemP){
+       if(!all[currentItemP].child){
+        all[currentItemP].child=[]
+        all[currentItemP].child.push(currentItem)
+       }
+    }else{
+        tree[currentItem.id]=currentItem
+    } 
+})
+console.log(Object.keys(tree).map(key=>tree[key]))
+</script>
+</body>
+</html>

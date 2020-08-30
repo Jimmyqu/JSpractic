@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #wrapper{
+            height: 500px;
+            margin-top: 20px;
+            overflow-y: scroll;
+        }
+        .el{
+            box-sizing: border-box;
+            border: 1px solid red;
+            width: 200px;
+            height: 200px;
+            background-color: rebeccapurple;
+        }
+        .tooHeight{
+            height: 2000px;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body style="margin:0;padding: 0;">
+    <div id='wrapper'>
+        <div class='el'>
+        </div> 
+        <div class='el'>
+        </div> 
+        <div class='el'>
+        </div> 
+        <div class='el'>
+        </div>  
+    </div>
+   
+   <script>
+       const el1= document.querySelector('.el')
+       console.log(el1)
+       const wrapper= document.querySelector('#wrapper')
+       console.log(el1.offsetTop) //相对视窗
+       console.log(el1.offsetHeight) //自身 所有高度
+       console.log(el1.clientHeight) //自身 不含border
+       console.log(el1.getBoundingClientRect()) //DOMReat对象
+       console.log(wrapper.scrollHeight) // 是包装dom应有的被撑开高度 不是被包装的
+       console.log(wrapper.scrollTop) // 是包装dom顶部不可见高度  唯一可设置的
+       wrapper.addEventListener('scroll',()=>{
+        console.log('wrapper scrollTop',wrapper.scrollTop) 
+       })
+    // <div class="tooHeight">
+    // </div>
+    // window.addEventListener('scroll',()=>{
+    //     //要获取当前页面的滚动条纵坐标位置 不是从body获取
+    //     console.log(document.documentElement.clientHeight) 
+    //     console.log(document.documentElement.scrollTop) 
+    //     console.log(document.documentElement.scrollHeight) 
+    //     let clientHeight = document.documentElement.clientHeight
+    //     let scrollTop = document.documentElement.scrollTop
+    //     let scrollHeight= document.documentElement.scrollHeight
+    //     if((clientHeight+scrollTop)===scrollHeight){
+    //         console.log('到底')
+    //     }
+    // })
+
+   </script>
+</body>
+</html>

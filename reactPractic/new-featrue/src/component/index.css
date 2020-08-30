@@ -1,0 +1,39 @@
+.warraper {
+  position: relative;
+  display: flex;
+}
+.warraper :hover {
+  border-color: #40a9ff;
+}
+.ant-input-number-handler-wrap {
+  display: none;
+}
+.ant-input-number-input {
+  text-align: center;
+  padding: 0 38px;
+}
+.ant-btn {
+  position: absolute;
+  border: 0;
+  background: #f5f7fa;
+  height: calc(98%);
+  padding: 0 15px;
+  width: 38px;
+  margin: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.warraper .inputNumber {
+  flex: 1;
+}
+.warraper .minusBtn {
+  left: 0;
+  border-radius: 4px 0 0 4px;
+  border-right: 1px solid #dcdfe6;
+}
+.warraper .addBtn {
+  right: 0;
+  border-radius: 0 4px 4px 0;
+  border-left: 1px solid #dcdfe6;
+}

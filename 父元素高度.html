@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #line{
+            margin: 0 auto;
+            background-color: aqua;
+            transition: width 1s;
+        }
+    </style>
+</head>
+<body>
+
+<div style='height:500px'>
+   <div >111</div>
+   <div>
+   222
+    <div id='el' style='display:inline-block'>333</div>
+   </div>
+</div>
+
+<script>
+    let el= document.querySelector('#el')
+    console.log(el)
+    const baseH = Number.parseInt(getComputedStyle(el).height);
+    const getFatherHeight = node => {
+        if(node && Number.parseInt(getComputedStyle(node).height) > baseH){
+            console.log(node)
+        }else{
+            getFatherHeight(node.parentNode);
+        }
+    };
+    getFatherHeight(el)
+</script>
+</body>
+</html>
