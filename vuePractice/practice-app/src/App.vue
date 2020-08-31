@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
       <router-link to="/casino">casino</router-link>|
-      <router-link to="/more">loadmore</router-link>
+      <router-link to="/more">loadmore</router-link>|
+      <router-link to="/csmodel">csmodel</router-link>
     </div>
     <router-view/>
   </div>

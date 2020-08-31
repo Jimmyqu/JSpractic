@@ -30,5 +30,10 @@ export default new Router({
       name: 'more',
       component: ()=>import('./views/more.vue')
     },
+    {
+      path: '/csmodel',
+      name: 'csmodel',
+      component: ()=>import('./views/CsModel.vue')
+    },
   ]
 })
