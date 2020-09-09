@@ -8,7 +8,7 @@ const SearchForm = (props) =>{
     const { getFieldDecorator } = props.form; 
     useEffect(()=>{
         props.setArr(props.form.getFieldsValue())
-    },[props.form.getFieldsValue()[1],props.form.getFieldsValue()[2],props.form.getFieldsValue()[3]])
+    },[...props.form.getFieldsValue()])
 
     return (
       <div >

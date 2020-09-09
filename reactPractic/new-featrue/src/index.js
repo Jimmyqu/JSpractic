@@ -7,7 +7,12 @@ import ReactDOM from 'react-dom';
 // import App from './Hocapp';
 // import App from './hooksApp';
 // import App from './FormApp';
-import App from './Apps/TestHooksRelyApp';
+// import App from './Apps/TestHooksRelyApp';
+// import App from './Apps/MemoUsage';
+// import App from './Apps/MemoUsage1';
+import App from './Apps/ReducerApp';
+
+
 
 import * as serviceWorker from './serviceWorker';
 
