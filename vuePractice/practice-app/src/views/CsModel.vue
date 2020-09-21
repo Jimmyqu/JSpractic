@@ -1,7 +1,9 @@
 <template>
   <div>
-    <child v-model="msg" :other="other"></child>
-    <button @click="handleChang">father chang props</button>
+    <template v-show='isShow'>
+      <child v-model="msg" :other="other"></child>
+      <button @click="handleChang">father chang props</button>
+    </template>
   </div>
 </template>
 
@@ -15,6 +17,7 @@ export default {
     return {
       msg: 123,
       other: "otherProps",
+      isShow:false,
     };
   },
   methods: {
