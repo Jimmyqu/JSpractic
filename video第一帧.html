@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <video ref="video" :src="url" crossorigin='anonymous'></video>
+      <img :src="imgsrc" alt="" />
+    </div>
+
+    <script>
+      let url = "https://www.w3school.com.cn/example/html5/mov_bbb.mp4";
+      new Vue({
+        el: "#app",
+        data: {
+          url: "https://www.w3school.com.cn/example/html5/mov_bbb.mp4",
+          msg: "11",
+          imgsrc: "",
+        },
+        mounted() {
+          this.$refs.video.addEventListener("loadeddata", (e) => {
+            var canvas = document.createElement("canvas");
+            canvas.width = "320";
+            canvas.height = "320";
+
+            var img = document.createElement("img");
+            img.src = "https://img.d1xz.net/d/2019/10/5da6917d6a71a.jpg";
+            img.setAttribute("crossOrigin", "Anonymous");
+            img.onload = function () {
+              console.log(1);
+              setTimeout(() => {
+                canvas
+                  .getContext("2d")
+                  .drawImage(e.target, 0, 0, canvas.width, canvas.width);
+                this.imgsrc = canvas.toDataURL("image/png");
+                console.log(this.imgsrc);
+              }, 1000);
+            };
+          });
+        },
+      });
+    </script>
+  </body>
+</html>

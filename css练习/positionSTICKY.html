@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body{
+                margin: 0;
+            }
+            .wrapper{
+                height: 800px;
+                background-color: skyblue;
+            }
+            .wrapper1{
+                /* position: relative; */
+            }
+            .nav1{
+                position: sticky; 
+                top: 0px;
+                background-color: rebeccapurple;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div>top</div>
+        <div>top</div>
+        <div>top</div>
+        <div class="wrapper wrapper1">
+            <div>1111</div>
+            <div>2222</div>
+            <!-- 只相对在父元素内 不是相对整个body -->
+            <div class="nav1">nav1</div>
+        </div>
+        <div class="wrapper">
+2
+<div class="nav1">nav2</div>
+        </div>
+        <div class="wrapper">
+3
+<div class="nav1">nav3</div>
+        </div>
+        
+        <script>
+
+        </script>
+    </body>
+</html>
