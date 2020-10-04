@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        
+        <pre>
+            let arr =[7,1,5,3,6,4]
+            function foo(arr1){
+              let min = arr1[0] 
+              let money =0
+              arr1.forEach(i=>{
+                  if(i<min){      // 动态获取最小值
+                      min = i    
+                  }
+                  let res = i-min    // 动态获取差值 
+                  console.log(res)
+                  if(res>money){ 
+                      money = res   // 修改最大插值
+                  }
+              })
+              console.log(money)
+            }
+        </pre>
+        <script>
+          let arr =[7,1,5,3,6,4]
+          function foo(arr1){
+            let min = arr1[0] 
+            let money =0
+            arr1.forEach(i=>{
+                if(i<min){
+                    min = i   // 动态获取最小值
+                }
+                let res = i-min  // 动态获取差值 
+                console.log(res)
+                if(res>money){ 
+                    money = res   // 修改最大插值
+                }
+            })
+            console.log(money)
+          }  
+        </script>
+    </body>
+</html>
