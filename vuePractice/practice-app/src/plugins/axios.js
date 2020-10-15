@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import axios from "axios";
-
+import Toast from "./loading"
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -16,13 +16,23 @@ let config = {
 
 const _axios = axios.create(config);
 
+let loadingCounter = 0
+let instance = null
 _axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
+    loadingCounter++
+    instance = Toast({
+      duration:0,
+      type:'loading',
+      message: '加载中...',
+    })
     return config;
   },
   function(error) {
     // Do something with request error
+    loadingCounter--
+    instance.close()
     return Promise.reject(error);
   }
 );
@@ -31,10 +41,14 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
+    loadingCounter--
+    instance.close()
     return response;
   },
   function(error) {
     // Do something with response error
+    loadingCounter--
+    instance.close()
     return Promise.reject(error);
   }
 );

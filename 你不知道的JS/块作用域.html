@@ -22,6 +22,14 @@
 
     <script>
 
+        for (let i=0; i<10; i++) {
+            console.log('trun i', i)
+            setTimeout(() => {
+                console.log(i)
+            }, i*1000);
+        } 
+        // console.log('end', i)
+ 
         function foo(cb){
             setTimeout(() => {
                 cb&&cb(1)

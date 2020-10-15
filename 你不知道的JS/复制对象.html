@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <script>
+            let obj1={
+                a:1,
+                c:[1,2,3],
+                
+            }
+            // obj1.b()
+            // let obj2=obj1
+            // obj1.a=2
+            // console.log('obj2', obj2) // 赋值 改变基础类型会变 改变复杂类型会变
+
+            let obj3= Object.assign({},obj1) 
+            obj1.a=3
+            obj1.c.push(0)
+            console.log('obj3',obj3) // 浅复制 改变基础类型不会变 改变复杂类型会变
+        
+            let obj4=JSON.parse(JSON.stringify(obj1))
+            obj1.a=4
+            obj1.c.push(4)
+            console.log('obj4',obj4) // 深复制 改变基础类型不会变 改变复杂类型不会变
+            
+        
+        </script>
+    </body>
+</html>
