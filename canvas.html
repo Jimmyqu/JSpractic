@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Title</title>
+    <style>
+      #box {
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <div id="box">
+      <img
+        style="display: none"
+        id="img"
+        src="https://p1.meituan.net/movie/77717de09967c29cd5b3d1f76309ac841254.png"
+        alt=""
+      />
+      <img
+        style="display: none"
+        id="newImage"
+        src="./asset/img.png"
+        alt=""
+      />
+
+      <canvas width="375" height="550" id="canvas"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js"></script>
+    <script>
+      let isScale = false;
+      let box = document.getElementById("box");
+      let canvas = document.getElementById("canvas");
+      const imgElement = document.getElementById("img");
+      const ctx = canvas.getContext("2d");
+      const hammerTest = new Hammer(box);
+
+      var fcanvas = new fabric.Canvas("canvas");
+      fcanvas.selection = false;
+      for (let i = 1; i < 375; i += 25) {
+        for (let j = 1; j < 500; j += 25) {
+          let imgInstance = new fabric.Image(imgElement, {
+            left: i, // 图片相对画布的左侧距离
+            top: j, // 图片相对画布的顶部距离
+            angle: 0, // 图片旋转角度
+            opacity: 0.85, // 图片透明度
+            // 这里可以通过scaleX和scaleY来设置图片绘制后的大小，这里为原来大小的一半
+            scaleX: 0.5,
+            scaleY: 0.5,
+            selectable: false,
+          });
+          fcanvas.add(imgInstance);
+        }
+      }
+
+      let isPinch = false  
+      hammerTest.get("pinch").set({ enable: true });
+      hammerTest.on("pinch", (e) => {
+        let isPinch = true
+        if (e.scale > 1 && e.scale < 2) {
+          fcanvas.setZoom(e.scale);
+          let isPinch = false  
+        }
+      });
+      hammerTest.on("panstart", (e) => {
+        console.log(fcanvas)  
+        let x0 = e.deltaX
+        let y0 = e.deltaY
+        hammerTest.on("panmove",(e) => {
+            let x = e.deltaX
+            let y = e.deltaY
+            fcanvas.relativePan({
+                x:x -x0,
+                y:y -y0
+            });
+            x0 = x;
+            y0 = y;
+        })
+        // delta = new fabric.Point(-e.deltaX, -e.deltaY );
+            // fcanvas.relativePan({ x: -e.deltaX - delta.x, y: -e.deltaY - delta.y });
+//         fcanvas.absolutePan(delta);
+      });
+     
+    fcanvas.on("mouse:down", function (options) {
+        console.log("down");
+        console.log(options.target);
+        if (isPinch) return
+        if (!options.target) return;
+        if (!options.target.isSelect) {
+        options.target.setElement(document.getElementById("newImage"));
+        options.target.isSelect = true;
+        } else {
+        options.target.isSelect = false;
+        options.target.setElement(document.getElementById("img"));
+        }
+    });
+    </script>
+  </body>
+</html>
