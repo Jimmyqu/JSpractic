@@ -29,6 +29,10 @@
       />
 
       <canvas width="375" height="550" id="canvas"></canvas>
+      <div class="btn">
+          <button id="add">+</button>
+          <button id="der">-</button>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
@@ -36,15 +40,41 @@
     <script>
       let isScale = false;
       let box = document.getElementById("box");
+      let add = document.getElementById("add");
+      let der = document.getElementById("der");
       let canvas = document.getElementById("canvas");
       const imgElement = document.getElementById("img");
       const ctx = canvas.getContext("2d");
       const hammerTest = new Hammer(box);
 
       var fcanvas = new fabric.Canvas("canvas");
+
+      var rect = new fabric.Rect({
+            top : 0, //距离画布上边的距离
+            left : 0, //距离画布左侧的距离，单位是像素
+            width : 20, //矩形的宽度
+            height : 500, //矩形的高度
+            fill : '#000', //填充的颜色
+            stroke: '#000', // 边框原色
+            opacity: 0.5, // 图片透明度
+            rx: 10, //圆角半径
+            ry: 10 //圆角半径
+        });
+
+        fcanvas.add(rect)
+
       fcanvas.selection = false;
-      for (let i = 1; i < 375; i += 25) {
+      for (let i = 50; i < 375; i += 25) { 
         for (let j = 1; j < 500; j += 25) {
+            let textInstance = new fabric.Text('2', {
+                left: 5, // 图片相对画布的左侧距离
+                top: j, // 图片相对画布的顶部距离
+                fontFamily: 'helvetica',
+                scaleX: 0.4,
+                scaleY: 0.4,
+                fill: '#fff'
+            });
+          fcanvas.add(textInstance);
           let imgInstance = new fabric.Image(imgElement, {
             left: i, // 图片相对画布的左侧距离
             top: j, // 图片相对画布的顶部距离
@@ -68,27 +98,46 @@
           let isPinch = false  
         }
       });
-      hammerTest.on("panstart", (e) => {
-        console.log(fcanvas)  
-        let x0 = e.deltaX
-        let y0 = e.deltaY
-        hammerTest.on("panmove",(e) => {
-            let x = e.deltaX
-            let y = e.deltaY
-            fcanvas.relativePan({
-                x:x -x0,
-                y:y -y0
-            });
-            x0 = x;
-            y0 = y;
-        })
-        // delta = new fabric.Point(-e.deltaX, -e.deltaY );
-            // fcanvas.relativePan({ x: -e.deltaX - delta.x, y: -e.deltaY - delta.y });
-//         fcanvas.absolutePan(delta);
-      });
+
+      var isPanning = false;
+      let sx,sy
+        fcanvas.on('mouse:up', function (e) {
+            panning = false;
+        });
+
+        fcanvas.on('mouse:down', function (e) {
+            isPanning = true;
+            sx= e.pointer.x
+            sy= e.pointer.y
+        });
+        fcanvas.on('mouse:move', function (e) {
+            if(fcanvas.viewportTransform[4]>(fcanvas.width- 50)){
+                fcanvas.viewportTransform[4] = fcanvas.width- 50
+            }
+            if(fcanvas.viewportTransform[4]<0 && Math.abs(fcanvas.viewportTransform[4])>(fcanvas.width- 50)){
+                fcanvas.viewportTransform[4] = -(fcanvas.width/2)
+            }
+
+
+            if(fcanvas.viewportTransform[5]>fcanvas.height -50){
+                fcanvas.viewportTransform[5] = fcanvas.height -50
+            }
+            if(fcanvas.viewportTransform[5]<0 && Math.abs(fcanvas.viewportTransform[5])>(fcanvas.height- 50)){
+                fcanvas.viewportTransform[5] = -(fcanvas.height/2)
+            }
+
+            if (isPanning && e) {
+                let mx = e.pointer.x - sx
+                let my = e.pointer.y - sy
+                var delta = new fabric.Point(mx, my);
+                fcanvas.relativePan(delta);
+                sx = e.pointer.x
+                sy = e.pointer.y
+            }
+        });
      
     fcanvas.on("mouse:down", function (options) {
-        console.log("down");
+        console.log(fcanvas);
         console.log(options.target);
         if (isPinch) return
         if (!options.target) return;
@@ -100,6 +149,18 @@
         options.target.setElement(document.getElementById("img"));
         }
     });
+
+    add.addEventListener('click', ()=>{
+        console.log(fcanvas.getZoom())
+        if(fcanvas.getZoom()<2){
+            fcanvas.setZoom(fcanvas.getZoom() * 1.1);
+        }
+    })
+    der.addEventListener('click', ()=>{
+        if(fcanvas.getZoom()>0.8){
+            fcanvas.setZoom(fcanvas.getZoom()/1.1);
+        }
+    })
     </script>
   </body>
 </html>
