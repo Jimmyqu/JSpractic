@@ -11,6 +11,29 @@
       #box {
         overflow: scroll;
       }
+      #test {
+          height: 100%;
+          position: absolute;
+          left: 50%;
+          margin-left: -34px;
+      }
+      #float{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 100px;
+        background-color: #000;
+        opacity: 0.5;
+        overflow: hidden;
+      }
+      #border {
+        position: absolute;
+        top: -60px;  
+        width:150px;
+        height: 219px;
+        border: 1px solid red;
+      }
     </style>
   </head>
   <body style="margin: 0">
@@ -18,62 +41,63 @@
       <img
         style="display: none"
         id="img"
-        src="https://p1.meituan.net/movie/77717de09967c29cd5b3d1f76309ac841254.png"
+        src="./asset/null.png"
         alt=""
       />
-      <img
-        style="display: none"
-        id="newImage"
-        src="./asset/img.png"
-        alt=""
-      />
+      <img style="display: none" id="newImage" src="./asset/has.png" alt="" />
 
       <canvas width="375" height="550" id="canvas"></canvas>
       <div class="btn">
-          <button id="add">+</button>
-          <button id="der">-</button>
+        <button id="add">+</button>
+        <button id="der">-</button>
       </div>
+      <div id="float">
+        <img id='test' src="" alt="" crossorigin="anonymous">
+        <div id="border" style="top:-60px;right:0"></div>
+      </div>
+      
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js"></script>
     <script>
       let isScale = false;
-      let box = document.getElementById("box");
+      //   let box = document.getElementById("box");
       let add = document.getElementById("add");
+      let test = document.getElementById("test");
       let der = document.getElementById("der");
       let canvas = document.getElementById("canvas");
       const imgElement = document.getElementById("img");
       const ctx = canvas.getContext("2d");
-      const hammerTest = new Hammer(box);
+      //   const hammerTest = new Hammer(box);
 
       var fcanvas = new fabric.Canvas("canvas");
 
       var rect = new fabric.Rect({
-            top : 0, //距离画布上边的距离
-            left : 0, //距离画布左侧的距离，单位是像素
-            width : 20, //矩形的宽度
-            height : 500, //矩形的高度
-            fill : '#000', //填充的颜色
-            stroke: '#000', // 边框原色
-            opacity: 0.5, // 图片透明度
-            rx: 10, //圆角半径
-            ry: 10 //圆角半径
-        });
+        top: 150, //距离画布上边的距离
+        left: 0, //距离画布左侧的距离，单位是像素
+        width: 20, //矩形的宽度
+        height: 225, //矩形的高度
+        fill: "#000", //填充的颜色
+        stroke: "#000", // 边框原色
+        opacity: 0.5, // 图片透明度
+        rx: 10, //圆角半径
+        ry: 10, //圆角半径
+      });
 
-        fcanvas.add(rect)
+      fcanvas.add(rect);
 
       fcanvas.selection = false;
-      for (let i = 50; i < 375; i += 25) { 
-        for (let j = 1; j < 500; j += 25) {
-            let textInstance = new fabric.Text('2', {
-                left: 5, // 图片相对画布的左侧距离
-                top: j, // 图片相对画布的顶部距离
-                fontFamily: 'helvetica',
-                scaleX: 0.4,
-                scaleY: 0.4,
-                fill: '#fff'
-            });
+      for (let i = 50; i < 325; i += 25) {
+        for (let j = 150; j < 360; j += 25) {
+          let textInstance = new fabric.Text("2", {
+            left: 5, // 图片相对画布的左侧距离
+            top: j, // 图片相对画布的顶部距离
+            fontFamily: "helvetica",
+            scaleX: 0.4,
+            scaleY: 0.4,
+            fill: "#fff",
+          });
           fcanvas.add(textInstance);
           let imgInstance = new fabric.Image(imgElement, {
             left: i, // 图片相对画布的左侧距离
@@ -81,86 +105,181 @@
             angle: 0, // 图片旋转角度
             opacity: 0.85, // 图片透明度
             // 这里可以通过scaleX和scaleY来设置图片绘制后的大小，这里为原来大小的一半
-            scaleX: 0.5,
-            scaleY: 0.5,
+            scaleX: 0.4,
+            scaleY: 0.4,
             selectable: false,
           });
-          fcanvas.add(imgInstance);
+          fcanvas.add(imgInstance)
         }
       }
 
-      let isPinch = false  
-      hammerTest.get("pinch").set({ enable: true });
-      hammerTest.on("pinch", (e) => {
-        let isPinch = true
-        if (e.scale > 1 && e.scale < 2) {
-          fcanvas.setZoom(e.scale);
-          let isPinch = false  
+      setTimeout(()=>{
+        test.src = fcanvas.toDataURL('image/png')
+      }, 0)
+
+      var isPanning = false;
+      let sx, sy;
+      fcanvas.on("mouse:up", function (e) {
+        panning = false;
+      });
+
+      console.log(border.getClientRects())
+      fcanvas.on("mouse:down", function (e) {
+          console.log(e)
+        isPanning = true;
+        sx = e.pointer.x;
+        sy = e.pointer.y;
+        bx = parseInt(border.style.right)
+        by = parseInt(border.style.top)
+        ax = e.pointer.x;
+        ay = e.pointer.y;
+      });
+      fcanvas.on("mouse:move", function (e) {
+        if (isPanning && e && store.scale>1) {
+          let mx = e.pointer.x - sx;
+          let my = e.pointer.y - sy;
+          var delta = new fabric.Point(mx, my);
+          let dis = 1/(store.scale) 
+          border.style.top = `-${(e.pointer.y-ay)*dis+by}px`
+          border.style.right = `${(e.pointer.x-ax)*dis+bx}px`
+          fcanvas.relativePan(delta);
+          sx = e.pointer.x;
+          sy = e.pointer.y;
         }
       });
 
-      var isPanning = false;
-      let sx,sy
-        fcanvas.on('mouse:up', function (e) {
-            panning = false;
-        });
-
-        fcanvas.on('mouse:down', function (e) {
-            isPanning = true;
-            sx= e.pointer.x
-            sy= e.pointer.y
-        });
-        fcanvas.on('mouse:move', function (e) {
-            if(fcanvas.viewportTransform[4]>(fcanvas.width- 50)){
-                fcanvas.viewportTransform[4] = fcanvas.width- 50
-            }
-            if(fcanvas.viewportTransform[4]<0 && Math.abs(fcanvas.viewportTransform[4])>(fcanvas.width- 50)){
-                fcanvas.viewportTransform[4] = -(fcanvas.width/2)
-            }
-
-
-            if(fcanvas.viewportTransform[5]>fcanvas.height -50){
-                fcanvas.viewportTransform[5] = fcanvas.height -50
-            }
-            if(fcanvas.viewportTransform[5]<0 && Math.abs(fcanvas.viewportTransform[5])>(fcanvas.height- 50)){
-                fcanvas.viewportTransform[5] = -(fcanvas.height/2)
-            }
-
-            if (isPanning && e) {
-                let mx = e.pointer.x - sx
-                let my = e.pointer.y - sy
-                var delta = new fabric.Point(mx, my);
-                fcanvas.relativePan(delta);
-                sx = e.pointer.x
-                sy = e.pointer.y
-            }
-        });
-     
-    fcanvas.on("mouse:down", function (options) {
-        console.log(fcanvas);
-        console.log(options.target);
-        if (isPinch) return
+      fcanvas.on("mouse:down", function (options) {
+        if (store.moveable) return;
         if (!options.target) return;
         if (!options.target.isSelect) {
-        options.target.setElement(document.getElementById("newImage"));
-        options.target.isSelect = true;
+          options.target.setElement(document.getElementById("newImage"));
+          options.target.isSelect = true;
         } else {
-        options.target.isSelect = false;
-        options.target.setElement(document.getElementById("img"));
+          options.target.isSelect = false;
+          options.target.setElement(document.getElementById("img"));
         }
-    });
+      });
 
-    add.addEventListener('click', ()=>{
-        console.log(fcanvas.getZoom())
-        if(fcanvas.getZoom()<2){
-            fcanvas.setZoom(fcanvas.getZoom() * 1.1);
+      add.addEventListener("click", () => {
+        if (fcanvas.getZoom() < 2) {
+          fcanvas.zoomToPoint({x:187,y:275},fcanvas.getZoom() * 1.1);
+          test.style.transform =  'scale('+ fcanvas.getZoom() * 1.1 +')';
+          store.scale = fcanvas.getZoom() * 1.1
+          console.log(store.scale)
+          border.style.transform =  `scale(${1/store.scale})`;
         }
-    })
-    der.addEventListener('click', ()=>{
-        if(fcanvas.getZoom()>0.8){
-            fcanvas.setZoom(fcanvas.getZoom()/1.1);
+      });
+      der.addEventListener("click", () => {
+        if (fcanvas.getZoom() > 1) {
+          fcanvas.zoomToPoint({x:187,y:275},fcanvas.getZoom() / 1.1);
+          test.style.transform =  'scale('+ fcanvas.getZoom() / 1.1 +')';
+          store.scale = fcanvas.getZoom() / 1.1
+          console.log(store.scale)
+          border.style.transform =  `scale(${1/store.scale})`;
         }
-    })
+      });
+
+      var eleImg = document.querySelector("#box");
+      var store = {
+        scale: 1,
+      };
+      // 缩放事件的处理
+    //   eleImg.addEventListener("touchstart", function (event) {
+    //     var touches = event.touches;
+    //     var events = touches[0];
+    //     var events2 = touches[1];
+
+    //     event.preventDefault();
+
+    //     // 第一个触摸点的坐标
+    //     store.pageX = events.pageX;
+    //     store.pageY = events.pageY;
+
+    //     store.moveable = true;
+
+    //     if (events2) {
+    //       store.pageX2 = events2.pageX;
+    //       store.pageY2 = events2.pageY;
+    //     }
+
+    //     store.originScale = store.scale || 1;
+    //   });
+    //   document.addEventListener("touchmove", function (event) {
+    //     if (!store.moveable) {
+    //       return;
+    //     }
+
+    //     event.preventDefault();
+
+    //     var touches = event.touches;
+    //     var events = touches[0];
+    //     var events2 = touches[1];
+    //     // 双指移动
+    //     if (events2) {
+    //       // 第2个指头坐标在touchmove时候获取
+    //       if (!store.pageX2) {
+    //         store.pageX2 = events2.pageX;
+    //       }
+    //       if (!store.pageY2) {
+    //         store.pageY2 = events2.pageY;
+    //       }
+
+    //       // 获取坐标之间的距离
+    //       var getDistance = function (start, stop) {
+    //         return Math.hypot(stop.x - start.x, stop.y - start.y);
+    //       };
+    //       // 双指缩放比例计算
+    //       var zoom =
+    //         getDistance(
+    //           {
+    //             x: events.pageX,
+    //             y: events.pageY,
+    //           },
+    //           {
+    //             x: events2.pageX,
+    //             y: events2.pageY,
+    //           }
+    //         ) /
+    //         getDistance(
+    //           {
+    //             x: store.pageX,
+    //             y: store.pageY,
+    //           },
+    //           {
+    //             x: store.pageX2,
+    //             y: store.pageY2,
+    //           }
+    //         );
+    //       // 应用在元素上的缩放比例
+    //       var newScale = store.originScale * zoom;
+    //       // 最大缩放比例限制
+    //       if (newScale > 2) {
+    //         newScale = 2;
+    //       }
+    //       if (newScale < 0.5) {
+    //         newScale = 0.5;
+    //       }
+    //       // 记住使用的缩放值
+    //       store.scale = newScale;
+    //       // 图像应用缩放效果
+    //       fcanvas.zoomToPoint({x:187,y:275},newScale);
+    //       test.style.transform =  'scale('+ newScale +')';
+    //     }
+    //   });
+
+    //   document.addEventListener("touchend", function () {
+    //     store.moveable = false;
+
+    //     delete store.pageX2;
+    //     delete store.pageY2;
+    //   });
+    //   document.addEventListener("touchcancel", function () {
+    //     store.moveable = false;
+
+    //     delete store.pageX2;
+    //     delete store.pageY2;
+    //   });
+      
     </script>
   </body>
 </html>

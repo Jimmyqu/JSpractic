@@ -35,5 +35,10 @@ export default new Router({
       name: 'csmodel',
       component: ()=>import('./views/CsModel.vue')
     },
+    {
+      path: '/seat',
+      name: 'seat',
+      component: ()=>import('./views/Seat.vue')
+    },
   ]
 })

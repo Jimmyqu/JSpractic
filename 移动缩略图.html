@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Title</title>
+    <style>
+      .wrapper{
+        width: 100vw;
+        height: 70vh;
+        position: relative;
+        overflow: hidden;
+      }
+      #container {
+        position: absolute;
+        top:50%
+      }
+      .boxs {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 5vw;
+        height: 5vw;
+        border: 1px solid rebeccapurple;
+        background-color: red;
+      }
+      .btns{
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <div class="wrapper">
+      <div id="container" style="transform:scale(1)">
+
+      </div>
+    </div>
+
+    <div class="btns">
+          <button id="add">+</button>
+    <button id="der">-</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+    <script>
+      $(function(){
+        for(let i=0;i<200;i++){
+          $('#container').append(`<div class="boxs">*</div>`)
+        }
+
+        let store = {
+          scale:1
+        }
+        
+        console.log($('#container').height())
+        // $('#container').position().top = $('#container').position().top - $('#container').height()/2
+        $('#container').css({
+          top:$('#container').position().top - $('#container').height()/2
+        })
+
+        $('#add').click(()=>{
+          if(store.scale >2) return
+          $('#container').css({
+            transform:`scale(${store.scale*1.1})`
+          })
+          let transform = $('#container').css('transform')
+          store.scale =  transform.slice(7,transform.length-1).split(', ')[3]
+          console.log(store.scale )
+        })
+        $('#der').click(()=>{
+          if(store.scale <0.8) return
+          $('#container').css({
+            transform:`scale(${store.scale/1.1})`
+          })
+          let transform = $('#container').css('transform')
+          store.scale =  transform.slice(7,transform.length-1).split(', ')[3]
+          console.log(store.scale )
+        })
+      })
+    </script>
+    <!-- <script>
+      let oDiv = document.querySelector('#box')
+      let sx,sy;
+      box.onmousedown = (e)=>{
+        sx = e.pageX
+        sy = e.pageY
+        bx = parseInt(box.style.left);
+        by = parseInt(box.style.top);
+        document.onmousemove =  (e)=>{
+          let mx = e.pageX-sx
+          let my = e.pageY-sy
+          box.style.top = my+by>0 ?`${my+by}px`:0
+          box.style.left = mx+bx>0?`${mx+bx}px`:0
+        }
+        document.onmouseup = (e)=>{
+          document.onmousemove = null
+          document.onmouseup = null
+        }
+      }
+    </script> -->
+  </body>
+</html>
