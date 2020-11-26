@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Title</title>
+    <style>
+      .wrapper{
+        width: 600px;
+        height: 600px;
+        border: 1px solid springgreen;
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <div class="wrapper">
+      <div id="box" style="transform:translate(0px,0px);">
+      </div>
+    </div>
+
+    <script>
+      function trans(el,dis,isAnimate=false){
+        if(isAnimate){
+          el.style.transition = 'transform 0.3s'
+          el.style.transform = `translate(${dis.x}px,${dis.y}px)`
+        }else {
+          el.style.transform = `translate(${dis.x}px,${dis.y}px)`
+          el.style.transition = 'transform 0s'
+        }
+      }
+
+      function getXY(el){
+        let tran = document.defaultView.getComputedStyle(el, null).transform
+        tran.slice(7,tran.length-1).split(',')  // [matrix数组]
+        return {
+          x:tran.slice(7,tran.length-1).split(',')[4],
+          y:tran.slice(7,tran.length-1).split(',')[5]
+        }
+      }
+      let box = document.querySelector('#box')
+      let wrapper = document.querySelector('.wrapper')
+      getXY(box)
+      box.onmousedown = (e)=>{
+        let startX = e.pageX
+        let startY = e.pageY
+        let boxX =  +getXY(box).x
+        let boxY =  +getXY(box).y
+        document.onmousemove = (e)=>{
+          let moveX = e.pageX - startX
+          let moveY = e.pageY - startY
+          trans(box,{x:boxX+moveX,y:boxY+moveY})
+        }
+        document.onmouseup = (e)=>{
+          if(getXY(box).x < 0) {
+            console.log('left')
+            trans(box,{x:0,y:getXY(box).y},true)
+          }
+          if(getXY(box).y < 0) {
+            console.log('top')
+            trans(box,{x:getXY(box).x,y:0},true)
+          }
+          if(getXY(box).y < 0 && getXY(box).x < 0) {
+            trans(box,{x:0,y:0},true)
+          }
+          if(getXY(box).x>wrapper.clientWidth - box.clientWidth){
+            trans(box,{x:500,y:getXY(box).y},true)
+          }
+          if(getXY(box).y>500){
+            trans(box,{x:getXY(box).x,y:500},true)
+          }
+          if(getXY(box).y>500 && getXY(box).x>500){
+            trans(box,{x:500,y:500},true)
+          }
+          document.onmousemove = null
+          document.onmouseup = null
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function getInfo() {
+        return Promise.resolve()
+  }
+  let foo = (x)=>Promise.resolve(x)
+  foo(10).then(res=>console.log(res))
+
+  function delay(){
+    return new Promise((resolve,reject)=>{
+      setTimeout (()=>{
+        resolve('res data')
+      },Math.random()*1000)
+    })
+  }
+
+  function del500ms(func, timer) {
+    let timeOut = new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        reject('times out')
+      },timer)
+    })
+    return Promise.race([timeOut, func()])
+  }
+
+del500ms(delay, 500).then(res=>{
+  console.log(res)
+},e=>{
+  console.log(e)
+})
+</script>
+</body>
+</html>

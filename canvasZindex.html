@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Title</title>
+    <style>
+      #box{
+        position: relative;
+      }
+      #box1{
+        position: absolute;
+        top: 0;
+        width: 980px;
+        height: 886px;
+        background-color: lightblue;
+        opacity: 0.5;
+     }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <div id="box">
+      <img id='img' src="http://image-test.ydmap.cn/image/2bece5b2-ed10-4c54-b5a8-8fe5ed586e16.png@!default" alt="">
+      <div id='box1'>
+      </div>
+     
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+    <script>
+        function foo(obj){
+          obj.arr = obj.arr.map(i=>1)
+          console.log(obj)
+        }
+        foo({
+          arr:[3,4]
+        })
+
+        let dots = [{"x": 386.5, "y": 381.5}, {"x": 613.5, "y": 381.5}, {"x": 617.5, "y": 531.5}, {"x": 376.5, "y": 536.5}, {"x": 386.5, "y": 381.5}]
+        let arr=[]
+        
+        dots.map(item=>{
+          arr.push(`${item.x}px ${item.y}px`)
+        })
+        console.log(arr.join(','))
+        $('#box1').css({
+          clipPath: `polygon(${arr.join(',')})`
+        })
+
+        $('#box1').click(()=>{
+          console.log('click')
+        })
+        console.log(arr)
+      //  let canvas = document.getElementById("canvas");
+      //  console.log(parseInt($('#img').css('width')))
+      //  console.log(parseInt($('#img').css('height')))
+      //  $('#canvas')[0].setAttribute('width', parseInt($('#img').css('width')))
+      //  $('#canvas')[0].setAttribute('height', parseInt($('#img').css('height')))
+      
+      //  console.log($('#canvas'))
+      //  var fcanvas = new fabric.Canvas("canvas", {
+      //   selection : false
+      //  });
+
+    </script>
+  </body>
+</html>

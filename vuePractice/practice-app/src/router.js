@@ -40,5 +40,10 @@ export default new Router({
       name: 'seat',
       component: ()=>import('./views/Seat.vue')
     },
+    {
+      path: '/scale',
+      name: 'scale',
+      component: ()=>import('./views/Scale.vue')
+    },
   ]
 })

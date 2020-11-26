@@ -25,7 +25,6 @@
         transform: 'scale(' + seatScale + ')',
         height: seatBoxHeight + 'vw',
         width: seatBoxWidth + 'vw',
-        marginLeft: seatBoxCenterMargin + 'vw',
       }"
     >
       <!-- 数字条 -->
@@ -79,6 +78,7 @@
 </template>
 
 <script>
+import date from './mock.js'
 export default {
   data() {
     return {
@@ -93,6 +93,10 @@ export default {
     };
   },
   computed: {
+    // 最大放大比例
+    maxScale: function () {
+      return 1 + 1 / this.seatScale
+    },  
      // 缩略图宽
     thumbnailBoxWidth() {
       return ((this.maxX + 2) * this.thumbnailPositionDistin + this.thumbnailWidth)
@@ -159,6 +163,12 @@ export default {
   },
   methods: {
     clickSeat(index) {
+      if (this.selectedSeatList.length === 0) {
+        if (this.maxScale === 1) {
+            return
+        }
+        this.seatWidth = (1/this.maxScale)*this.seatWidth
+      }
       if (this.seatList[index].canClick) {
         if (
           this.seatList[index].nowIcon === this.seatList[index].selectedIcon
@@ -261,7 +271,6 @@ export default {
 }
 .seatBox {
   position: absolute;
-  left: 50%;
   transform-origin: 0 0 0;
   margin-top: 30vw;
   .num-bar {

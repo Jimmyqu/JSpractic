@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <p>循环的每一轮称为一个 tick。
+        对每个 tick 而言，如果在队列中有等待事件，那么就会从队列中摘下一个事件并执行。这
+        些事件就是你的回调函数。</p>
+    <p>setTimeout(..) 并没有把你的回调函数挂在事件循环队列中。它所做的是设
+        定一个定时器。当定时器到时后，环境会把你的回调函数放在事件循环中，这样，在未来
+        某个时刻的 tick 会摘下并执行这个回调</p>    
+<script>
+var a = {
+ index: 1
+};
+// 然后
+console.log( a ); // index 2 
+// 些浏览器的 console.log(..) 并不会把传入的内容立即输出。控制台 I/O 的异步化/ 
+
+// 再然后
+a.index++;
+</script>
+
+</body>
+</html>

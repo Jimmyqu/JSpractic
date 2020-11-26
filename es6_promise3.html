@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      var p1 = Promise.resolve(42);
+      var p2 = Promise.resolve(p1);
+
+      console.log(p1 === p2);
+
+      function delay(time) {
+        return new Promise((resolve, reject)=>{
+          setTimeout(()=>{
+            resolve()
+          }, time);
+        });
+      }
+      delay(5000)
+        .then(()=> {
+          console.log("step 2 (after 100ms)");
+          return delay(1000);
+        })
+        .then(()=>{
+          console.log("step 3 (after another 1000ms)");
+        })
+        .then(()=>{
+          console.log("step 4 (next Job)");
+          return delay(2000);
+        })
+        .then(()=>{
+          console.log("step 5 (after another 2000ms)");
+        });
+
+
+        delay(100)
+        .then(()=>{
+          return 2
+        })
+        .then((val)=>{
+          console.log(x) // 强行让出错 让下一个then的处理错误回调来捕获
+          console.log(val)
+        })
+        .then(
+          ()=>{
+            console.log('3 then') // 
+          },
+          e=>{
+            console.log(e) // 捕获到之前的错误
+            return e  //交给catch处理  ！！交不到catch
+        })
+        // .catch(e=>console.log(e))
+    </script>
+  </body>
+</html>
