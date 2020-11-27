@@ -45,5 +45,10 @@ export default new Router({
       name: 'scale',
       component: ()=>import('./views/Scale.vue')
     },
+    {
+      path: '/init',
+      name: 'init',
+      component: ()=>import('./views/InitScale.vue')
+    },
   ]
 })
