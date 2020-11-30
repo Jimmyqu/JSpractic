@@ -25,8 +25,6 @@
         ></div>
       </div>
     </div>
-    <div @click="handleScale(0.05)">+</div>
-    <div @click="handleScale(-0.05)">-</div>
   </div>
 </template>
 
@@ -62,6 +60,8 @@ export default {
   data() {
     return {
       nowScale: null,
+      minScale: null,
+      constScale: null,
       seatWidth: 40,
       seatHeight: null,
       originWidth: null,
@@ -83,32 +83,42 @@ export default {
     this.originHeight = mapData.height * mapData.seatWidth;
     this.minScale =
       this.$refs.container.getBoundingClientRect().width / this.originWidth;
-    this.nowScale = this.minScale
+    this.constScale = this.nowScale = this.minScale
   },
   methods: {
-    handlePinchEnd(scale) {
-      this.minScale = this.minScale * scale
+    handlePinchEnd(scale) {  
+      if(this.nowScale >= 1) {
+        this.minScale = 1
+      }else if (this.nowScale <= this.constScale) {
+        this.minScale = this.nowScale
+      }else {
+        this.minScale = this.minScale * scale
+      } 
     },
     handlePinch(scale, center) { 
       var rectX = this.$refs.box.getBoundingClientRect().left;
       var rectY = this.$refs.box.getBoundingClientRect().top;
-      console.log('rectX', rectX,rectY)
-      console.log(this.$refs.container.scrollTop,this.$refs.container.scrollLeft)
-      console.log(center.x,center.y)
-      this.nowScale = this.minScale * scale
+      let x = (-rectX + center.x)/this.$refs.box.getBoundingClientRect().height*200  // 中心点 在200份中等比点
+      let y = (-rectY + center.y)/this.$refs.box.getBoundingClientRect().width*200
       this.$nextTick(() => {
-        this.$refs.container.scrollTop =
-          (center.y - rectY) * this.nowScale * 40 -
+        this.nowScale = this.minScale * scale 
+        if(this.nowScale >= 1) {
+          this.nowScale = 1
+        }else if (this.nowScale <= this.constScale) {
+          this.nowScale = this.constScale
+        }
+        console.log('before', this.$refs.container.scrollTop,this.$refs.container.scrollLeft)
+        this.$refs.container.scrollTop = x*this.nowScale*40-
           this.$refs.container.getBoundingClientRect().height / 2;
-        this.$refs.container.scrollLeft =
-          (center.x - rectX) * this.nowScale * 40 -
-          this.$refs.container.getBoundingClientRect().width / 2;
+        this.$refs.container.scrollLeft =y*this.nowScale*40 - 
+          this.$refs.container.getBoundingClientRect().height / 2;
+        console.log('after', this.$refs.container.scrollTop,this.$refs.container.scrollLeft)  
+        
       });
-    },
+    },          
     handleSrollTo( top, left) {
       this.nowScale = this.minScale = 1;
       this.$nextTick(() => {
-        console.log(top * this.nowScale * 40);
         this.$refs.container.scrollTop =
           top * this.nowScale * 40 -
           this.$refs.container.getBoundingClientRect().height / 2;
@@ -136,5 +146,6 @@ export default {
       background-color: rebeccapurple;
     }
   }
-}</style
->>
+}
+
+</style>
