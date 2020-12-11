@@ -16,7 +16,8 @@ function getDistance(p1, p2) {
   const y = p2.pageY - p1.pageY
   return Math.sqrt(x * x + y * y)
 }
-let isPinch = false
+function foo(){
+  let isPinch = false
 let start, nowScale
 Vue.directive('pinch', {
   bind(el, binding) {
@@ -64,8 +65,10 @@ Vue.directive('pinchend', {
       false
     )
   },
-}) 
-
+})
+}
+ 
+foo()
 new Vue({
   router,
   store,

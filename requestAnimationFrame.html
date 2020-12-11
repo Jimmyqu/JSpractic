@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+   <style>
+       .loading{
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+       }
+   </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loading"></div>
+    </div>
+    <p id='text'></p>
+    <button id='btn'>click</button>
+    <button id='reset'>reset</button>
+    <script>
+        let isGameing = false
+        let raf = null
+        let rotate = 0
+        let loading = document.querySelector('.loading')
+        let btn = document.querySelector('#btn')
+        let reset = document.querySelector('#reset')
+        let text = document.querySelector('#text')
+
+
+        function darw() {
+            rotate ++
+            if(rotate > 360) {
+                rotate = rotate % 360
+            }
+            loading.style.transform = `rotate(${rotate}deg)`
+            raf = requestAnimationFrame(darw)
+        }
+
+        function randomSec(start, end) {
+            return Math.max(start, Math.min(Math.floor(Math.random()*10), end)) 
+        }
+
+        btn.addEventListener('click', ()=>{
+            darw()
+            setTimeout(()=> {
+                cancelAnimationFrame(raf)
+                loading.innerHTML = 'ok'
+                isGameing = true
+            }, randomSec(1,5)*1000)
+        })
+
+        reset.addEventListener('click', ()=>{
+            loading.style.transform = `rotate(0deg)`
+            loading.innerHTML = ''
+            text.innerHTML = ''
+            isGameing = false
+        })
+
+        document.addEventListener('keydown', (e)=>{
+            console.log(e)
+            if(!isGameing) return
+            if(e.key === 's') {
+                text.innerHTML = 'Player 1 won!!';
+            } else if(e.key === 'k') {
+                text.innerHTML = 'Player 2 won!!';
+            }
+            isGameing = false
+        });
+
+    </script>
+</body>
+</html>
