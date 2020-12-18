@@ -1,6 +1,34 @@
 <template>
   <div>
-    <div class="seatContainer" ref="container">
+    <div class="thumb-box">
+      <div class="thumb-border" :style="{
+          width: `${thumbW*borderScale}px`,
+          height: `${thumbH*borderScale}px`,
+          top: `${borderY*borderScale*0.3}px`,
+          left: `${borderX*borderScale*0.3}px`,
+        }"></div>
+       <div class="thumb" :style="{
+          width: `${thumbW}px`,
+          height: `${thumbH}px`,
+        }">
+        <div
+          v-for="seat in seatList"
+            :key="seat.seatDataId"
+            class="seatItem"
+            :style="{
+              top: `${seatWidth * constScale * (seat.seatTop)*0.3}px`,
+              left: `${seatWidth * constScale * (seat.seatLeft)*0.3}px`,
+              width: `${seatWidth * constScale*0.3}px`,
+              height: `${seatWidth * constScale*0.3}px`,
+            }"
+        >
+        </div>
+      </div>
+    </div>
+   
+    <div class="seatContainer" :style="{
+              height: `${initH}px`,
+            }" ref="container" @scroll="handleScroll" @touchmove="handleScroll">
       <div
         class="seatBox"
         v-pinch="handlePinch"
@@ -16,8 +44,8 @@
           :key="seat.seatDataId"
           class="seatItem"
           :style="{
-            top: `${seatWidth * nowScale * seat.seatTop}px`,
-            left: `${seatWidth * nowScale * seat.seatLeft}px`,
+            top: `${seatWidth * nowScale * (seat.seatTop)}px`,
+            left: `${seatWidth * nowScale * (seat.seatLeft)}px`,
             width: `${seatWidth * nowScale}px`,
             height: `${seatWidth * nowScale}px`,
           }"
@@ -40,6 +68,11 @@ const mapData = {
       seatDataId: 1,
     },
     {
+      seatTop: 30,
+      seatLeft: 4,
+      seatDataId: 5,
+    },
+    {
       seatTop: 50,
       seatLeft: 3,
       seatDataId: 2,
@@ -54,6 +87,16 @@ const mapData = {
       seatLeft: 150,
       seatDataId: 4,
     },
+    {
+      seatTop: 80,
+      seatLeft: 4,
+      seatDataId: 6,
+    },
+    {
+      seatTop: 120,
+      seatLeft: 4,
+      seatDataId: 7,
+    },
   ],
 };
 export default {
@@ -67,25 +110,51 @@ export default {
       originWidth: null,
       originHeight: null,
       seatList: [],
+      thumbW:0,
+      thumbH:0,
+      borderX:0,
+      borderY:0,
+      initH:0,
     };
   },
   computed: {
+    borderScale(){
+      return this.constScale/this.nowScale
+    },
     boxComputedWidth() {
       return this.originWidth * this.nowScale;
     },
     boxComputedtHeight() {
       return this.originHeight * this.nowScale;
     },
+    
+  },
+  watch:{
+
   },
   mounted() {
     this.seatList = mapData.seatList;
-    this.originWidth = mapData.width * mapData.seatWidth;
-    this.originHeight = mapData.height * mapData.seatWidth;
+    this.originWidth = 200 * mapData.seatWidth; 
+    this.originHeight =200 * mapData.seatWidth; // 原始座位图 模板不能减
+    // this.originWidth = (151-3) * mapData.seatWidth;  // 最大left 和最小left 之差
+    // this.originHeight =(151-10) * mapData.seatWidth; // 最大Top 和最小top 之差  之后在模板减去最小top 画出没有余量的座位图
     this.minScale =
       this.$refs.container.getBoundingClientRect().width / this.originWidth;
     this.constScale = this.nowScale = this.minScale
+    setTimeout(() => {
+      this.thumbW = this.$refs.box.getBoundingClientRect().width*0.3
+      this.thumbH = this.$refs.box.getBoundingClientRect().height*0.3
+      this.initH = this.$refs.box.getBoundingClientRect().width
+    }, 0);
+   
   },
   methods: {
+    handleScroll(){
+      this.$nextTick(()=>{
+        this.borderY = this.$refs.container.scrollTop
+        this.borderX = this.$refs.container.scrollLeft
+      })
+    },
     handlePinchEnd(scale) {  
       if(this.nowScale >= 1) {
         this.minScale = 1
@@ -113,16 +182,15 @@ export default {
         this.$refs.container.scrollLeft =y*this.nowScale*40 - 
           this.$refs.container.getBoundingClientRect().height / 2;
         console.log('after', this.$refs.container.scrollTop,this.$refs.container.scrollLeft)  
-        
       });
     },          
     handleSrollTo( top, left) {
       this.nowScale = this.minScale = 1;
       this.$nextTick(() => {
-        this.$refs.container.scrollTop =
+        this.borderY = this.$refs.container.scrollTop =
           top * this.nowScale * 40 -
           this.$refs.container.getBoundingClientRect().height / 2;
-        this.$refs.container.scrollLeft =
+        this.borderX = this.$refs.container.scrollLeft =
           left * this.nowScale * 40 -
           this.$refs.container.getBoundingClientRect().width / 2;
       });
@@ -132,11 +200,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.thumb-box {
+  position: relative;
+}
+.thumb-border{
+  border: 1px solid red;
+  position: absolute;
+}
+.thumb {
+  position: relative;
+  background-color: rgba(0,0,0,0.6);
+  div{
+    position: absolute;
+    background-color: #fff;
+  }
+}
 .seatContainer::-webkit-scrollbar {
   display: none;
 }
 .seatContainer {
-  height: 80vh;
   overflow: auto;
   .seatBox {
     position: relative;

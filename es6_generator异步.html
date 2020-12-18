@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
 <script>
     function* gen(x) {
         let y = yield x+1
@@ -18,23 +19,28 @@
     console.log(g.next())
 
 
+
+
+
     function* myFetch() {
         let url = 'https://api.github.com/users/github';
         let res = yield fetch(url)
-        console.log(res.bio)
+        console.log(res)
         return res.bio
-        //return 1111
     }
 
-    let goo = myFetch()
-    console.log(goo.next().value.then(res=>{
-        console.log(res)
-        return res.json()
-    }).then(data=>{
-        console.log(goo.next(data))
-        //goo.next(data)
-    }))
+    // let goo = myFetch()
+    // console.log(goo.next().value.then(res=>{
+    //     console.log(res)
+    //     return res.json()
+    // }).then(data=>{
+    //     console.log(goo.next(data))
+    //     //goo.next(data)
+    // }))
 
+        $.ajax('https://api.github.com/users/github',{
+            method:'get'
+        }).then(res=>console.log(res))
 </script>
 </body>
 </html>
