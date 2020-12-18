@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      .loading {
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        background-color: rebeccapurple;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cvs" width="600px" height="300px">
+      <p>请升级浏览器</p>
+    </canvas>
+    <div class="img"></div>
+    <script>
+      let img = new Image();
+      let box = document.querySelector(".img");
+      let ctx = document.querySelector("#cvs").getContext("2d");
+      let start = 0 
+      let imgx = 104
+
+      function daw() {
+        console.log('daw')
+            if(start % 13 < 6) {
+                console.log(start)
+                if(start === 5) {
+                    start = 0
+                }else {
+                    start++ 
+                }
+            }
+            
+             // 图片 画框起始X 画框起始y ,画框宽，画框高 ，图片在画框中的X，图片在画框中的Y，图片在画框中的宽，图片在画框中的高
+            ctx.drawImage(img, start*imgx, 0, 104, 173, 0, 0, 104, 173);
+            requestAnimationFrame(daw)
+        }
+
+      img.src = "asset/walk.png";
+      img.onload = () => {
+        daw()
+      };
+    </script>
+  </body>
+</html>
