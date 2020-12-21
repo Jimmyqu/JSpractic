@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  
+  <style>
+    html {
+      /* background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50); */
+      background-size:cover;
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border:20px solid white;
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .clock-face:after {
+      position: absolute;
+      content: '';
+      top: 50%;
+      left: 50%;
+      transform: translateX(-6px) translateY(-6px);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      z-index: 4;
+      background-color: aqua;  
+    }
+
+    .hand {
+      width:50%;
+      height:6px;
+      position: absolute;
+      top:50%;
+    }
+
+    .hour-hand {
+      transform: translateX(66%) rotate(80deg);
+      transform-origin: 100% 0;
+      width:30%;
+      background:gold;
+      transform-origin: 100% 3px;
+      z-index: 3;
+    }
+    .min-hand {
+      width:40%;
+      background:rebeccapurple;
+      transform: translateX(25%) rotate(160deg);
+      transform-origin: 100% 3px;
+      z-index: 2;
+    }
+
+    .second-hand {
+      width:50%;
+      background:red;
+      transform-origin: 100% 3px;
+      z-index: 1;
+    }
+
+  </style>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+  <script>
+    // 甚至可以使用svg做出环形文字效果 https://www.w3cplus.com/css3/css-secrets/circular-text.html
+    window.onload = () => {
+        let hour = document.querySelector('.hour-hand')
+        let min = document.querySelector('.min-hand')
+        let second = document.querySelector('.second-hand')
+
+        setInterval(()=>{
+            let date = new Date()
+            let [h,m,s] = date.toTimeString().substring(0,8).split(':')
+            second.style.transform = `rotate(${s*6}deg)`
+            min.style.transform = `translateX(25%) rotate(${m*6}deg)`
+            hour.style.transform = `translateX(66%) rotate(${h*6}deg)`
+        },1000)
+    }
+  </script>
+</body>
+</html>
