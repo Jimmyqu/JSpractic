@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            *{margin: 0; padding: 0;}
+            body {
+                height: 100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <canvas id='cvs'></canvas>
+        <script>
+            let isDrawing = false
+            let startX = startY = null
+            const cvs = document.querySelector('#cvs')
+            const ctx = cvs.getContext('2d')
+            cvs.width = window.innerWidth;  // canvas 最好用精确像素值 用百分比值默认会拉伸
+	        cvs.height = window.innerHeight;
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = "red";
+            ctx.fillStyle = "red";
+
+            function draw(ctx,lineStyle='round') {
+                ctx.lineCap=ctx.lineJoin=lineStyle
+
+            }
+
+            cvs.addEventListener('mousedown', (e)=>{
+                isDrawing= true
+                startX = e.offsetX
+                startY = e.offsetY
+            })
+            cvs.addEventListener('mousemove', (e)=>{
+                if(isDrawing){
+                    console.log('isDrawing')
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(e.pageX, e.pageY);
+                    ctx.stroke();
+                    startX = e.pageX
+                    startY = e.pageY
+                }
+            })
+            cvs.addEventListener('mouseup', (e)=>{
+                isDrawing =false
+                console.log(3)
+            })
+        </script>
+    </body>
+</html>
