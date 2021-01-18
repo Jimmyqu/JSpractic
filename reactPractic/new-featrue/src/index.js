@@ -10,7 +10,8 @@ import ReactDOM from 'react-dom';
 // import App from './Apps/TestHooksRelyApp';
 // import App from './Apps/MemoUsage';
 // import App from './Apps/MemoUsage1';
-import App from './Apps/ReducerApp';
+// import App from './Apps/ReducerApp';
+import App from './Apps/rich';
 
 
 
