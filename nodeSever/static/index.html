@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h3>Fetch提交</h3>
+        <form action="#">
+          用户：<input type="text" name="username" id="username"><br />
+          密码：<input type="text" name="password" id="password"><br />
+        </form>
+
+        <input type="button" value="POST登录" id="login">
+
+        <hr>
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="text" name='uploadname'>  
+          <input type="text" name='uploadpass'>  
+          <input type="file" name='file'>
+          <input type="submit" value="上传1" id="upload">
+        </form>
+        <hr>
+        
+        <form action="#">
+          <input type="file" name='file2' id='file2'>
+        </form>
+        <input  type="button" value="上传" id="upload2">
+        <h3>Fetch提交</h3>
+        <script>
+            // 表单登录
+            console.log(document.querySelector('#login'))
+            document.querySelector('#login').addEventListener('click', async function () {
+                const response = await fetch(`/login`, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: JSON.stringify({
+                        username: document.querySelector('#username').value,
+                        password: document.querySelector('#password').value
+                    })
+                })
+                const result = await response.json()
+                console.log(result)
+                alert(result.msg)
+                })
+
+
+                document.querySelector('#upload2').addEventListener('click', async () =>{
+                    var formData = new FormData();
+                        let files = document.querySelector('#file2').files
+
+                        formData.append("username", "Groucho");
+                        formData.append("accountnum", 123456); 
+                        formData.append("selectFile", files); 
+                        var request = new XMLHttpRequest();
+                        request.open("POST", "http://localhost:9999/upload2");
+                        request.send(formData);
+                })
+
+        </script>
+    </body>
+</html>

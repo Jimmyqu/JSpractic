@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    window.onload=()=>{
+        function to2(num){
+            const arr = []
+            while(num > 0) {
+                arr.push(num % 2)
+                num = ~~(num/2)
+            }
+            console.log(arr.reverse().join(''))
+        }
+        to2(99999)
+
+    var num = 1
+    function fun1() {
+        console.log(this.num)
+    }
+
+    var obj = {
+        num: 2,
+        fun1: fun1,
+        fun2() {
+            fun1()
+         },
+        fun3: () => {
+            fun1()
+            }
+        }
+
+        fun1()
+        console.log(undefined);
+        obj.fun1()
+        console.log(2);
+        obj.fun2()
+        console.log(undefined);
+        obj.fun3()
+        console.log(undefined);
+    }
+</script>
+</body>
+</html>

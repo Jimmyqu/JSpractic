@@ -1,0 +1,10 @@
+http://localhost:8000/v3/deal/saveAndCheckout.do
+
+code: 300
+data: ""
+msg: "支付信息不能为空"
+success: false
+
+{"queryStringMD5":"eyJzYWxlc0lkIjoxMDEyMjQsIml0ZW1JZCI6MjAwMDAyLCJwbGF0Zm9ybUdyb3VwSWQiOiIiLCJjdXJEYXRlIjoxNjEyMzY4MDAwMDAwfQ==","dealPlatformList":[{"platformId":102397,"isFightDeal":0,"orderDate":1612368000000,"startTime":1357016400000,"endTime":1357020000000,"mustFight":false,"selectPubStudy":false,"validFace":false,"price":6000}],"dealSportPlatformTicketList":null,"commonPay":{"payMode":101}}
+
+
