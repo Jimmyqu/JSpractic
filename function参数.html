@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    </style>
+</head>
+<body style="margin: 0;">
+    <div id="el">
+        <div id="box">
+            <p>1</p>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/2.3.0/big.min.js" integrity="sha512-FRFtxO3b4HKkMcWJ/Yv7tQp+WwWMSPLDlAO5hn1TbNgswaE+RAFESuBbulWR/PNeTq9d4DS/hyEZbcZRAqlYwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+function exec1(method, ...args) {
+  return args
+    .reduce((acc, cur, idx) => {
+      console.log(cur);
+      if (Number.isFinite(+cur)) {
+        return idx ? new Big(+acc)[method](new Big(+cur)) : args[0];
+      }
+      throw new Error('must be a Number');
+    }, args[0])
+    .toString();
+}
+    function foo(...args){
+       return exec1('div', ...args);
+    }
+
+    const res = foo(10, 100)
+    console.log(res.toString());
+</script>
+</body>
+</html>
