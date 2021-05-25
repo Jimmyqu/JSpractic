@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style></style>
+  </head>
+  <body style="margin: 0">
+    <div>child</div>
+    <script>
+    //监听message事件
+    window.addEventListener("message", (e)=>{
+      console.log('child get msg', e)
+    }, false);
+
+    parent.postMessage( {msg: 'child info'}, '*');
+    </script>
+  </body>
+</html>
