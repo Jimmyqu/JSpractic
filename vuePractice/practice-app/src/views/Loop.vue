@@ -1,6 +1,8 @@
 
 <template>
   <div class="about">
+    <a @click="handleClick">11111111111111</a>
+    <div ref="btn">22222222222222</div>
     <div class="container">
       <div class="loop">
         <path d="M150 150 L120 120 A130 130 0 0 0 120 120 Z"
@@ -35,8 +37,15 @@ export default {
       return acc
     },'')
     console.log(a)
+    this.$refs.btn.addEventListener('click', () => {
+      console.log('click');
+    });
   },
-  methods: {}
+  methods: {
+    handleClick() {
+      console.log(11111)
+    }
+  }
 };
 </script>
 
