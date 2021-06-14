@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #el {
+            height: 30vh;
+            overflow: scroll;
+        }
+        #box{
+            background-color: rebeccapurple;
+        }
+        p{
+            margin: 0;
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+    <div id="el">
+        <div id="box">
+            <p>1</p>
+        </div>
+    </div>
+<script>
+    const box = document.querySelector('#box')
+    let html =''
+    for(let i =0;i<55;i++){
+        html+=`<p>${i}</p>`
+    }
+    box.innerHTML = html
+
+    // el.scrollTo(0, 881) // 有滚动条的是父元素
+    console.log('自身高度', el.clientHeight);
+    console.log('滚动条距离顶部', el.scrollTop);
+    console.log('可滚动高度', el.scrollHeight);
+    // el.clientHeight + el.scrollTop ===  el.scrollHeight 这时为最底部
+    const foo = ()=>{
+        if(el.clientHeight + el.scrollTop === el.scrollHeight){
+            console.log('done')
+            return
+        }
+        setTimeout(()=>{
+            el.scrollTop++
+            console.log('el.scrollTop', el.scrollTop)
+            foo()
+        },17)
+    }
+    foo()
+
+</script>
+</body>
+</html>

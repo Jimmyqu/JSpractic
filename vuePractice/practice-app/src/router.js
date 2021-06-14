@@ -50,5 +50,10 @@ export default new Router({
       name: 'init',
       component: ()=>import('./views/InitScale.vue')
     },
+    {
+      path: '/loop',
+      name: 'loop',
+      component: ()=>import('./views/Loop.vue')
+    },
   ]
 })

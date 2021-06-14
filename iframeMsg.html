@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style></style>
+  </head>
+  <body style="margin: 0">
+    <iframe name="child" src="./iframeChild.html"> </iframe>
+    <script>
+      // const child  = document.querySelector('#child')
+      console.log(child);
+      child.onload = function(){
+        // 给child iframe 发送消息
+        child.postMessage('i am your fater','*');
+      }
+
+
+    //监听其他窗口postMessage的时间
+    window.addEventListener("message", (e)=>{
+      console.log('father get msg', e)
+    }, false);
+    </script>
+  </body>
+</html>
