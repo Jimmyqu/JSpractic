@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+      .book {
+        width: 30vw;
+        height: 40vw;
+        background: #fff;
+        margin: 40vw auto;
+        perspective: 1000px;
+        position: relative;
+      }
+      .paper {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 30vw;
+        height: 40vw;
+        transform-style: preserve-3d;
+        transform-origin: left center;
+        transition: all 0.5s ease-in;
+      }
+      .paper {
+        z-index: 2;
+      }
+      .paper.current + .paper {
+        z-index: 20;
+      }
+      .paper.current {
+        z-index: 40;
+      }
+      .page {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-size: 6vw;
+        color: #fff;
+        backface-visibility: hidden;
+      }
+      .page.front {
+        background: rgb(0, 177, 150);
+      }
+      .page.back {
+        background: rgb(154, 155, 154);
+        transform: rotateY(180deg);
+      }
+      .paper.flip {
+        transform: rotateY(-180deg);
+      }
+      .paper.flip-back {
+        transform: rotateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="paper current">
+        <div class="page front"><label>front</label></div>
+        <div class="page back"><label>back</label></div>
+      </div>
+      <div class="paper">
+        <div class="page front"><label>1</label></div>
+        <div class="page back"><label>2</label></div>
+      </div>
+      <div class="paper">
+        <div class="page front"><label>3</label></div>
+        <div class="page back"><label>4</label></div>
+      </div>
+      <div class="paper">
+        <div class="page front"><label>5</label></div>
+        <div class="page back"><label>6</label></div>
+      </div>
+    </div>
+    <script>
+      window.onload = function () {
+        var current = 0;
+        var papers = document.querySelectorAll(".paper");
+        document.querySelector(".book").addEventListener("click", function (e) {
+          var element = this;
+          var curentPapper = papers[current];
+
+          console.log(e.target)
+          if(e.target.classList.contains('back')) {
+            // 倒页
+            current -= 1;
+            var curentPapper = papers[current];
+            console.log('倒页')
+            curentPapper.classList.add("current");
+            curentPapper.classList.add("flip-back");
+            return
+          }
+
+          curentPapper.classList.add("current");
+          curentPapper.classList.add("flip");
+
+          Array.from(papers).forEach(function (paper, index) {
+            if (index !== current) {
+              paper.classList.remove("current");
+            }
+          });
+
+          current += 1;
+        });
+      };
+    </script>
+  </body>
+</html>
