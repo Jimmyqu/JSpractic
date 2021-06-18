@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <button id='btn'>111</button>
+<script>
+
+window.onload = () => {
+    let btn = document.querySelector('#btn')
+    let timer
+    let i = 0;
+    function foo(){
+        if(i<10) {
+            i++
+            console.log(i)
+            timer = setTimeout(foo, 1000)
+        }
+    }
+
+    setTimeout(foo, 1000)
+
+    btn.addEventListener('click', (e)=>{
+        clearTimeout(timer)
+        console.log(timer)
+    })
+}
+</script>
+</body>
+</html>

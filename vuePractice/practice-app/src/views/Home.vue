@@ -5,6 +5,7 @@
     <p>bus msg from HelloWorld Component is : {{msg}} </p>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <p>{{this.$myStore.state.count}}</p>
+    <p>{{form.id}}</p>
     <button @click="handlClick">+++</button>
   </div>
 </template>
@@ -22,7 +23,10 @@ export default {
   },
   data(){
     return {
-      msg:''
+      msg:'',
+      form : {
+        id:1
+      }
     }
   },
   created(){
@@ -33,10 +37,10 @@ export default {
       // console.log(this.$myStore.commit('increment'))
   },
   mounted() {
-    this.$axios.get('http://t.yushu.im/v2/movie/in_theaters?city=上海&start=0&count=10').then(res=>console.log(res))
-    this.$axios.get('http://t.yushu.im/v2/movie/in_theaters').then(res=>console.log(res))
-    this.$axios.get('http://t.yushu.im/v2/movie/in_theaters?city=武汉&start=0&count=20').then(res=>console.log(res))
-    console.log(this)
+    Object.assign(this.form, {
+      id:0
+    })
+    console.log(this.form)
   },
   methods:{
     handlClick(){
