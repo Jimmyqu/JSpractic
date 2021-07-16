@@ -33,7 +33,8 @@ export default {
     }
   },
   mounted(){
-    
+     console.log(this.$route.query)
+     this.$router.replace(this.$route.query.url)
   }
 }
 </script>

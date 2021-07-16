@@ -99,11 +99,13 @@
             var curentPapper = papers[current];
             console.log('倒页')
             curentPapper.classList.add("current");
+            curentPapper.classList.remove("flip");
             curentPapper.classList.add("flip-back");
             return
           }
 
           curentPapper.classList.add("current");
+          curentPapper.classList.remove("flip-back");
           curentPapper.classList.add("flip");
 
           Array.from(papers).forEach(function (paper, index) {

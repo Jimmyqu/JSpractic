@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+    </style>
+  </head>
+  <body>
+    <h4>test</h4>
+    <div class="flex container">
+      <button class='border' onclick="toUser()">/user</button>
+    </div>
+    <div class="flex container">
+      <button class='border'>/index</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      function toUser() {
+        window.history.pushState({'id':1},'title',`histroy.html?url=${encodeURIComponent('/pay?id=111')}`)
+        console.log('user')
+      }
+    </script>
+  </body>
+</html>

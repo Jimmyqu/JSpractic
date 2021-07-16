@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      let arr=[1,2,3,4,]
+      function asyncLoad(index) {
+        return new Promise((resolve,reject)=>{
+          setTimeout(()=>{
+            resolve(index*2)
+          },1000 * index)
+        })
+      }
+
+      const res = arr.map(itme => {
+        return asyncLoad(itme)
+      })
+      
+      Promise.all(res).then(r=>{
+        console.log(r)
+      })
+
+    </script>
+  </body>
+</html>

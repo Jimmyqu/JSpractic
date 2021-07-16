@@ -36,6 +36,9 @@ export default {
       timer: null
     };
   },
+  mounted() {
+    console.log(this.$router.query)
+  },
   methods: {
     handleStart() {
       if (this.isRunning) {

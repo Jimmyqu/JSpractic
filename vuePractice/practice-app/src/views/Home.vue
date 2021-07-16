@@ -7,6 +7,8 @@
     <p>{{this.$myStore.state.count}}</p>
     <p>{{form.id}}</p>
     <button @click="handlClick">+++</button>
+
+    <button @click="hanldeToNewPage">to new Page</button>
   </div>
 </template>
 
@@ -43,6 +45,9 @@ export default {
     console.log(this.form)
   },
   methods:{
+    hanldeToNewPage() {
+      this.$router.push(`/about?url=${`/casino?id=3`}`)
+    },
     handlClick(){
       this.$myStore.commit('increment',10)
       console.log(this.$myStore.state.count)

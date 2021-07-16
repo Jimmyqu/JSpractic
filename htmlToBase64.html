@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="capture" class="export" style="padding: 10px; background: #f5da55">
+        <h4 style="color: #000; ">Hello world1!</h4>
+    </div>
+    <div id="capture1" class="export" style="padding: 10px; background: #f5da55">
+        <h4 style="color: #000; ">Hello world2!</h4>
+    </div>
+    
+    <button id='btn'>下载</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script>
+
+const btn = document.querySelector('#btn')
+const els = document.getElementsByClassName('export')
+var zip = new JSZip();
+var img = zip.folder("images");
+
+btn.addEventListener('click', ()=>{
+    [...els].forEach(el => {
+        html2canvas(el, {
+        onrendered: function(canvas) {
+            var url = canvas.toDataURL();//图片地址
+            img.file(`${el.id}.png`, url.split('base64,')[1], {base64: true});
+            }
+        })
+    })
+    setTimeout(()=> {
+        zip.generateAsync({type:"blob"})
+        .then(function(content) {
+            // see FileSaver.js
+            saveAs(content, "test.zip");
+        });
+    }, 1000)
+})
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      var canvas = document.createElement('canvas');
+      canvas.width = 1000; //
+      canvas.height = 500;
+      canvas.style.backgroundColor = '#FF0000';
+      document.body.appendChild(canvas)
+      const ctx = canvas.getContext("2d") 
+      ctx.font = "48px Microsoft YaHei";
+      ctx.fillText("Hello world", 200, 148);
+      var img = new Image;
+      img.src = 'https://avatars.githubusercontent.com/u/21124327?s=60&v=4';
+      img.crossOrigin="anonymous"
+      img.onload = function(){
+        ctx.drawImage(img,100,100); // Or at whatever offset you like
+        var imgURL = canvas.toDataURL("image/png");
+        var dlLink = document.createElement('a');
+        dlLink.download = 111;
+        dlLink.href = imgURL;
+        dlLink.dataset.downloadurl = ["image/png", dlLink.download, dlLink.href].join(':');
+
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+      };
+      
+
+      // console.log(ctx)
+    </script>
+  </body>
+</html>

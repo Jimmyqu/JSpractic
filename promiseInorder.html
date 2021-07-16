@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      function asyncFoo(item, timer) {
+        return new Promise((resolve,rejeat) => {
+          console.log(item, timer)
+          setTimeout(() => {
+            resolve(item)
+          }, timer);
+        })
+      }
+
+      asyncFoo(1, 1000).then(console.log)
+      asyncFoo(2, 500).then(console.log)
+      asyncFoo(3, 100).then(console.log)
+
+      const arr = [()=>asyncFoo(1, 1000), ()=>asyncFoo(2, 500), ()=>asyncFoo(3, 100)]
+      
+      const arr1= []
+      async function run() {
+          for(let p of arr) {
+              let val = await p();
+              arr1.push(val);
+          }
+          return arr1;
+      }
+      // console.log('run()', run())
+
+      run().then(res=>console.log(res))
+
+
+    </script>
+  </body>
+</html>
