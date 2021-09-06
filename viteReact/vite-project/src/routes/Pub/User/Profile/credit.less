@@ -1,0 +1,28 @@
+@import '~antd/lib/style/themes/default.less';
+.toptip {
+  text-align: center;
+}
+
+.topbox {
+  [class*='ant-col'] + [class*='ant-col'] {
+    .toptip {
+      border-left: 1px solid #e8e8e8;
+    }
+  }
+}
+
+.bottom {
+  font-size: 24px;
+}
+
+@media screen and(max-width: @screen-sm-max) {
+  .topbox {
+    [class*='ant-col'] + [class*='ant-col'] {
+      .toptip {
+        border-left: none;
+        border-top: 1px solid #e8e8e8;
+        padding-top: 8px;
+      }
+    }
+  }
+}

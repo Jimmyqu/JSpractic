@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id='el' style="width: 100%;" >
+        1
+    </div>
+<script>
+        function triggerEvent(el, type) {
+            const e = document.createEvent('HTMLEvents');
+            console.log(e)
+            e.initEvent(type, false, true);
+            el.dispatchEvent(e);
+
+        }
+
+        const el =document.querySelector('#el')
+        el.addEventListener('cusClick',()=>{
+            console.log('trigger cusClick')
+        })
+        triggerEvent(el,'cusClick') // 能主动触发浏览器事件
+
+</script>
+</body>
+</html>

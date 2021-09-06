@@ -1,0 +1,40 @@
+@import '../../variable.less';
+
+.login {
+  width: 368px;
+  margin: 0 auto;
+  @media screen and (max-width: @screen-sm) {
+    width: 95%;
+  }
+  :global {
+    .ant-btn {
+      width: 100%;
+      margin-top: 24px;
+    }
+  }
+  .smsSender {
+    margin: 0;
+  }
+}
+
+.tabs {
+  :global {
+    .ant-tabs-bar {
+      border-bottom: 0;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .ant-tabs-tab {
+      font-size: @font-size-lg;
+      letter-spacing: 2px;
+    }
+  }
+  :global(.ant-form-item-with-help) + .forgotLink,
+  :global(.ant-form-item-with-help + .ant-form-item.hidden) + .forgotLink {
+    margin-top: 0;
+  }
+}
+
+.forgotLink {
+  margin-top: -20px;
+}

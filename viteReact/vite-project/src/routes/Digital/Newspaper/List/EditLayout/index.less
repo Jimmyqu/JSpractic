@@ -1,0 +1,58 @@
+@import '../../../../../variable.less';
+
+.modaLLayout {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.layout {
+  border: 1px solid @header-color;
+  padding: 10px;
+}
+
+.layoutImage {
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.ckEditorWrap {
+  :global {
+    // 设置富文本默认高度
+    .ck-editor__main .ck-content {
+      min-height: 480px;
+    }
+
+    // fix 图片标题区高度过长
+    .ck-editor__editable {
+      min-height: 0;
+    }
+  }
+}
+
+.formWrap {
+  border: 1px @header-color solid;
+  padding: 20px 15px;
+}
+
+.areaWrap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.areaWrap div:hover {
+  cursor: pointer;
+  background: rgba(245, 34, 45, 0.2);
+}
+
+.buttonWrap {
+  display: none;
+  position: absolute;
+  top: 0;
+  background-color: @header-background;
+  border-radius: @border-radius-base;
+}

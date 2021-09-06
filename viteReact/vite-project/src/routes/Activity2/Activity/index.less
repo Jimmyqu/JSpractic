@@ -1,0 +1,75 @@
+@import '../../../variable.less';
+.stepWrapper {
+  overflow-x: auto;
+}
+
+// :global(.ant-steps-horizontal) {
+.stepDone {
+  // 沿用默认step样式
+  cursor: pointer;
+}
+
+.stepResolve {
+  :global {
+    .ant-steps-item-container {
+      .ant-steps-item-tail {
+        &::after {
+          background-color: @success-color;
+        }
+      }
+      .ant-steps-item-icon {
+        background-color: @success-color;
+        border-color: @success-color;
+        .ant-steps-icon {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.stepReject {
+  :global {
+    .ant-steps-item-container {
+      .ant-steps-item-tail {
+        &::after {
+          background-color: @error-color;
+        }
+      }
+      .ant-steps-item-icon {
+        background-color: @error-color;
+        border-color: @error-color;
+        .ant-steps-icon {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.stepActive {
+  :global {
+    .ant-steps-item-container {
+      .ant-steps-item-content {
+        border-bottom: 2px solid @primary-color;
+        .ant-steps-item-title {
+          color: @primary-color;
+        }
+      }
+    }
+  }
+}
+
+.tabFileLimit {
+  span + span {
+    margin-left: 8px;
+  }
+  span span {
+    color: @alipay-color;
+    padding: 0 2px;
+  }
+}
+
+.descr {
+  color: #f80;
+}

@@ -1,0 +1,54 @@
+@import '~antd/lib/style/themes/default.less';
+// .header {
+//   display: flex;
+//   align-content: center;
+//   justify-content: center;
+// }
+// .left {
+//   width: calc(~'100% - 180px');
+// }
+.tip,
+.title {
+  font-size: @font-size-lg;
+}
+
+.title {
+  padding: 8px 0;
+  font-weight: 700;
+}
+
+.right {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  span {
+    font-size: 34px;
+    font-weight: 400;
+  }
+}
+
+.content {
+  text-align: center;
+  :global {
+    .ant-alert {
+      text-align: left;
+    }
+  }
+}
+
+.logicTitle {
+  font-size: 18px;
+  padding: 16px 0;
+}
+
+.qrcodeImg {
+  width: 300px;
+}
+
+// @media screen and(max-width:@screen-xs) {
+//   .left,
+//   .right {
+//     width: 100%;
+//   }
+// }

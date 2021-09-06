@@ -1,0 +1,10 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+# 最开始添加这个配置文件的原因是web这边会检查lf，但是以防有些同事，忘记设置core.autocrlf。
+# 就把这个作为配置文件添加到项目中，就不用去设置这个东西了。
+# 但是呢，跟服务器的git版本差别比较大的处理方式有些不一样。
+# git并不主动探测文件是不是文本的还是二进制的，当只配置了* text  eol=lf时，是需要配置的排除的，否则会产生文件修改，可能导致文件在服务器不可用。
+* text  eol=lf
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary

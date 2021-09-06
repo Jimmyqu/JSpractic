@@ -1,0 +1,24 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../variable.less';
+.counter {
+  :global(.ant-row) {
+    padding: 8px 0;
+  }
+  :global(.ant-input-number) {
+    max-width: 100%;
+  }
+}
+
+.number {
+  text-align: center;
+}
+
+.dis {
+  line-height: 40px;
+}
+
+@media screen and (max-width: @screen-xs) {
+  .dis {
+    text-align: right;
+  }
+}

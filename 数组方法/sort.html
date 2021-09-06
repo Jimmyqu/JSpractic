@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      const arr = [2, 54, 123,3,89,1,765];
+
+      // 如果 compareFunction(next, pre) 小于 0 ，那么 next 会被排列到 pre 之前；
+      // 如果 compareFunction(next, pre) 等于 0 ， a 和 b 的相对位置不变。备注： ECMAScript 标准并不保证这一行为，而且也不是所有浏览器都会遵守（例如 Mozilla 在 2003 年之前的版本）；
+      // 如果 compareFunction(next, pre) 大于 0 ， pre 会被排列到 next 之前。
+      arr.sort((next, pre)=>{
+        // 这里用的是排序算法，不停比较
+        console.log(next, pre)
+        if(next<pre) {
+          return -1
+        }else {
+          return 1
+        }
+        return 0
+      })
+      console.log(arr)
+      //   console.log(Math.min(...arr.map(i => i.startTime - t)))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+@import '~antd/lib/style/themes/default.less';
+.paymodeImg {
+  width: 32px;
+  margin-right: 8px;
+}
+
+.radioGroup {
+  width: 100%;
+}
+
+.payName {
+  width: calc(~'100% - 64px');
+  display: inline-block;
+  vertical-align: middle;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.inputLeft {
+  position: relative;
+  padding-right: 8px;
+  :global(.ant-radio-wrapper) {
+    width: 100%;
+  }
+  i {
+    font-size: 32px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+}
+
+.inputLeftTips {
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+}
+
+@media screen and (max-width: @screen-xs) {
+  .input {
+    width: 100%;
+  }
+  .inputLeftTips {
+    position: static;
+    left: unset;
+    bottom: unset;
+  }
+}

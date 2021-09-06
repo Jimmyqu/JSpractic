@@ -1,0 +1,14 @@
+@import '~antd/lib/style/themes/default.less';
+.tagContainer {
+  :global {
+    .ant-form-item-control {
+      line-height: normal;
+    }
+    .ant-tag-checkable {
+      border: 1px solid @border-color-base;
+      &.ant-tag-checkable-checked {
+        border-color: transparent;
+      }
+    }
+  }
+}

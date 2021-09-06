@@ -1,0 +1,60 @@
+@import '../../../../variable.less';
+
+.areaMapCard {
+  :global {
+    .ant-card-body {
+      padding: 0;
+    }
+    .ant-upload-list {
+      display: none;
+    }
+  }
+}
+
+.areaMap {
+  background: #f5f5f5;
+  border: 1px solid gray;
+  overflow: hidden;
+  min-height: 300px;
+  max-width: 100%;
+  position: relative;
+
+  img {
+    opacity: 0;
+    // 不够大，强制拉大
+    min-width: 100%;
+  }
+
+  canvas,
+  .areaBg {
+    position: absolute;
+    cursor: move;
+    left: 0;
+    top: 0;
+    will-change: left, top;
+  }
+}
+
+.mobileDevice {
+  overflow: auto;
+}
+
+.noImg {
+  border-color: #f5f5f5;
+  min-height: 480px;
+}
+
+.editing {
+  .areaBg {
+    cursor: url('@{CDN_STATIC_HOST}/images/cloud/seat-pick/pen.cur') 0 0, default;
+  }
+  .cursorForSelect {
+    cursor: url('@{CDN_STATIC_HOST}/images/cloud/seat-pick/cursor.cur') 0 0, pointer;
+  }
+}
+
+.btnTips {
+  margin: 10px 0;
+  color: red;
+  font-size: @font-size-sm;
+}

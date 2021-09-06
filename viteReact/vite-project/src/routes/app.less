@@ -1,0 +1,296 @@
+@import '../variable.less';
+html,
+body,
+:global(#root) {
+  height: 100%;
+}
+
+:global(.ant-layout) {
+  min-height: 100%;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen {
+  body {
+    min-width: 320px;
+  }
+}
+
+.overflow-line(@line) {
+  display: -webkit-box;
+  // display: -moz-box;
+  -webkit-line-clamp: @line;
+  // -moz-line-clamp: @line;
+  // https://github.com/postcss/autoprefixer/issues/776
+
+  /*! autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+
+  /*! autoprefixer: ignore next */
+  -moz-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// temp fix for https://github.com/ant-design/ant-design/commit/a1fafb5b727b62cb0be29ce6e9eca8f579d4f8b7
+:global {
+  .upgrade-tip-modal {
+    .ant-modal-confirm-btns {
+      margin: 0;
+    }
+  }
+  .red {
+    color: red;
+  }
+  .primary-color {
+    color: @primary-color;
+  }
+  .ant-spin-container {
+    overflow: visible !important;
+  }
+  .ant-modal .hidden {
+    display: none;
+  }
+  .ant-modal-wrap {
+    .ant-modal {
+      padding-bottom: 0;
+    }
+  } // https://github.com/ant-design/ant-design/issues/11359
+  .ant-modal-body {
+    max-height: calc(~'100vh - 55px - 61px');
+    max-width: calc(~'100vw - 20px');
+    overflow-y: auto;
+  }
+  .ant-table-tbody {
+    > tr:not(.ant-table-expanded-row):not(.ant-table-row-selected) {
+      // &:nth-child(odd) {
+      //   background:
+      // }
+      &:nth-child(even) {
+        background: #fdfdfe;
+      }
+      &.single-row:hover > td {
+        background-color: transparent;
+      }
+    }
+  }
+  // https://github.com/ant-design/ant-design/pull/18311/
+  // .ant-breadcrumb > span:last-child a {
+  //   color: #000;
+  // }
+  @media (max-width: @screen-sm-max) {
+    .ant-modal-body {
+      max-height: calc(~'100vh - 55px - 61px - 20px');
+    }
+  }
+  .ant-drawer-content-wrapper {
+    max-width: 95vw;
+  }
+  .global-spin {
+    width: 100%;
+    margin: 40px 0 !important;
+  }
+  .text-pre-wrap {
+    white-space: pre-wrap;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+  }
+
+  .text-overflow-line1 {
+    .overflow-line(1);
+  }
+
+  .text-overflow-line2 {
+    .overflow-line(2);
+  }
+  .text-overflow-line3 {
+    .overflow-line(3);
+  }
+
+  // 一组用，Form.Item套Form.Item套label在上层，如开始时间+结束时间
+  .ant-form-item {
+    &.form-item-pair {
+      margin-bottom: 0;
+      .ant-form-item {
+        display: inline-block;
+        width: calc(~'50% - 12px');
+        & + span {
+          display: inline-block;
+          width: 24px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .link {
+    color: @link-color;
+    cursor: pointer;
+  }
+  div,
+  span,
+  audio,
+  video,
+  canvas,
+  form {
+    &.hidden {
+      display: none;
+    }
+    &.full-width {
+      width: 100%;
+    }
+  }
+  .img-max {
+    max-width: 100%;
+  }
+  .iconfont {
+    &.anticon::before {
+      font-family: 'iconfont' !important;
+    }
+  }
+
+  .clip-section {
+    position: relative;
+    background-color: #fff;
+  }
+  .clip-line {
+    line-height: 11px;
+    height: 11px;
+  }
+  .clip-line + .clip-line {
+    border-top: 1px dashed transparent;
+  }
+  .clip-gap {
+    position: absolute;
+    top: 0;
+    width: 11px;
+    height: 22px;
+    background-color: #fff;
+    display: inline-block;
+    border: 1px solid transparent;
+    z-index: 1;
+  }
+  .clip-gap-left {
+    left: -1px;
+    border-radius: 0 11px 11px 0;
+    border-left: 0;
+  }
+  .clip-gap-right {
+    right: -1px;
+    border-radius: 11px 0 0 11px;
+    border-right: 0;
+  }
+  // react-resizable 相关样式
+  .react-resizable {
+    position: relative;
+    background-clip: padding-box;
+  }
+  .react-resizable-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    box-sizing: border-box;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+');
+    background-position: bottom right;
+    padding: 0 3px 3px 0;
+  }
+  .react-resizable-handle-sw {
+    bottom: 0;
+    left: 0;
+    cursor: sw-resize;
+    transform: rotate(90deg);
+  }
+  .react-resizable-handle-se {
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
+  }
+  .react-resizable-handle-nw {
+    top: 0;
+    left: 0;
+    cursor: nw-resize;
+    transform: rotate(180deg);
+  }
+  .react-resizable-handle-ne {
+    top: 0;
+    right: 0;
+    cursor: ne-resize;
+    transform: rotate(270deg);
+  }
+  .react-resizable-handle-w,
+  .react-resizable-handle-e {
+    top: 50%;
+    margin-top: -10px;
+    cursor: ew-resize;
+  }
+  .react-resizable-handle-w {
+    left: 0;
+    transform: rotate(135deg);
+  }
+  .react-resizable-handle-e {
+    right: 0;
+    transform: rotate(315deg);
+  }
+  .react-resizable-handle-n,
+  .react-resizable-handle-s {
+    left: 50%;
+    margin-left: -10px;
+    cursor: ns-resize;
+  }
+  .react-resizable-handle-n {
+    top: 0;
+    transform: rotate(225deg);
+  }
+  .react-resizable-handle-s {
+    bottom: 0;
+    transform: rotate(45deg);
+  }
+
+  .help-content {
+    width: 280px;
+    :global {
+      .ant-badge-status-dot {
+        border: 1px solid #f0f0f0;
+        width: 16px;
+        height: 16px;
+      }
+    }
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+  }
+}
+
+@media print {
+  :global {
+    .no-print {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../variable.less';
+
+.topWrapper {
+  background: @card-background;
+  padding: @card-padding-base;
+}
+
+.subBreadcrumb {
+  display: inline-block;
+  padding: 0 @card-padding-base;
+}
+
+@media print {
+  .topWrapper {
+    display: none;
+  }
+}

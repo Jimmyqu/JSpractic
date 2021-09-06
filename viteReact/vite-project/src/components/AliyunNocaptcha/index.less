@@ -1,0 +1,26 @@
+@size: 40px;
+
+:global {
+  // 滑块的js延迟加载，导致其css也比组件的样式靠后，优先级不够，加层选择器提权
+  body {
+    .nc-container {
+      position: relative;
+      > div {
+        font-size: 0;
+      }
+      .nc_wrapper {
+        max-width: 100%;
+        display: inline-block;
+        height: auto !important;
+      }
+      .nc_scale,
+      .nc_scale span {
+        height: @size;
+      }
+      .nc_scale span,
+      .nc-lang-cnt {
+        line-height: @size;
+      }
+    }
+  }
+}

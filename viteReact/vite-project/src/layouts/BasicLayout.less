@@ -1,0 +1,45 @@
+@import '~antd/lib/style/themes/default.less';
+.header,
+.footer {
+  padding: 0;
+}
+
+.content {
+  margin: 16px 16px 0;
+  height: 100%;
+}
+
+.layout {
+  margin-left: 200px;
+  transition: margin 0.2s;
+}
+
+:global(.ant-layout-sider-collapsed) + .layout {
+  margin-left: 80px;
+}
+
+@media screen and (max-width: @screen-md) {
+  .layout {
+    margin-left: 0;
+    padding-top: @layout-header-height;
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid @border-color-base;
+  }
+}
+
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+  .content,
+  .layout {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

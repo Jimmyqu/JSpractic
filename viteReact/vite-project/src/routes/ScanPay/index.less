@@ -1,0 +1,47 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../variable.less';
+
+.payMean {
+  border-radius: @border-radius-base;
+  font-size: @font-size-lg;
+  color: @component-background;
+  line-height: 22px;
+  cursor: pointer;
+  & .payMeanBody {
+    display: flex;
+    align-items: center;
+    > div {
+      width: calc(~'100% - 44px');
+      padding-left: 15px;
+    }
+  }
+  :global {
+    .ant-card-body {
+      padding: 10px 32px;
+    }
+    i {
+      font-size: 44px;
+    }
+  }
+}
+
+.mixedBg {
+  background-color: #2bbbb3;
+}
+
+.wechatBg {
+  background-color: @wechat-color;
+}
+
+.alipayBg {
+  background-color: @alipay-color;
+}
+
+.mainMargin {
+  margin-top: 32px;
+}
+
+.amountNum {
+  font-size: 24px;
+  color: #f5222d;
+}
