@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function dely(fn, time) {
+    return (...args) => {
+        setTimeout(()=>fn(...args), time)
+    }
+  }
+
+  function debounce(fn, time) {
+    let timer;
+    return (...args)=>{
+        if(timer) clearTimeout(timer);
+        timer = setTimeout(()=>{
+            fn(...args)
+        }, time)
+    }
+  }
+
+  function throttle(fn, time) {
+    let timer;
+    return (...args) => {
+        if(!timer) {
+            timer = setTimeout(()=>{
+                fn(...args)
+                // clearTimeout(timer) 并不能让timer归null 要显示处理
+                timer = null
+            }, time)
+        }
+    }
+  }
+
+
+  function print(v){
+    console.log(v)
+  }
+
+//   let print1000 = dely(print, 1000)
+//   print1000(1);
+
+
+//   let debounce1000 = debounce(print, 1000) // debounce某段时间内只取最后一次
+//   setTimeout(()=>debounce1000('a'), 100)
+//   setTimeout(()=>debounce1000('b'), 200)
+//   setTimeout(()=>debounce1000('c'), 300)
+//   setTimeout(()=>debounce1000('d'), 400)
+
+
+
+// let f1000 = throttle(print, 1000);
+// setInterval(()=>{
+//     f1000(1)
+// },10)
+
+</script>
+</body>
+</html>

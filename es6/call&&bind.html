@@ -28,7 +28,7 @@ var obj1={
         console.log(this.a)
     }
 }
-obj1.i()
+// obj1.i()
 
 var obj2={
     a:'asd',
@@ -36,13 +36,28 @@ var obj2={
         console.log(this.a)
     }
 }
-function goo() {
-    return ()=>{
-        console.log(this.a)
-    }
+
+function goo(a,b) {
+    console.log(this.a, [a,b])
 }
 
-goo.call(obj2)()
+goo.apply(obj2, [2,4])  // apply会调用 跟Call差不多 不过第二个参数给数组
+Function.prototype.myApply = function(context, argList){
+    context = context || window;
+    context['foo'] = this;
+    context['foo'](...argList)
+    delete context.foo
+}
+goo.myApply(obj2, [2,4])
+
+
+Function.prototype.myBind = function(){
+    if(typeof this !="function") throw new Error('caller must be function')
+    let fn = this, o = [...arguments].shift(), args = [...arguments].slice(1)
+    return fn.apply(o, args)
+}
+
+// goo.myBind(obj2, 1,2,3,4,5)()
 
 </script>
 </body>
