@@ -10,81 +10,74 @@
 
     <script>
 
-        //    function timeout(ms) {
-        //        return new Promise((resolve) => {
-        //            setTimeout(resolve, ms);
-        //        });
-        //    }
-        //
-        //    async function asyncPrint(value, ms) {
-        //        await timeout(ms);
-        //        console.log(value)
-        //        return 1111
-        //    }
-        //
-        //    //async函数的返回值是 Promise对象
-        //    asyncPrint('hello world', 3000).then((res)=>console.log(res));
+           function timeout(ms) {
+               return new Promise((resolve) => {
+                   setTimeout(()=>resolve(1), ms);
+               });
+           }
 
+           async function asyncPrint(value, ms) {
+               await timeout(ms);
+               console.log(value)
+               return 1111
+           }
+        
+           (()=>{
+            asyncPrint('hello world', 3000).then((res)=>console.log(res));
+           })()
+           console.log('outer')
+           //async函数的返回值是 Promise对象
 
         //awaitfoo start
-        function awaitfoo() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(111)
-                }, 3000)
-            })
-
-        }
-
-        async function asyncFoo() {
-            return 'Promise'
-        }
-        //async 函数 有返回值的话返回的是包装过的Promoise对象
-        console.log(asyncFoo())
-        asyncFoo().then(r => console.log(r))
+        // async function asyncFoo() {
+        //     return 'PromisePromisePromisePromise'
+        // }
+        // //async 函数 有返回值的话返回的是包装过的Promoise对象
+        // console.log(asyncFoo())
+        // asyncFoo().then(r => console.log(r))
         //awaitfoo  end
 
 
         //async/await的缺陷 start
         //await关键字阻止执行所有代码，直到promise完成，就像执行同步操作一样。它允许其他任务在此期间继续运行，但您自己的代码被阻止。
-        function timeoutPromise(interval) {
-            return new Promise((resolve, reject) => {
-                setTimeout(function () {
-                    resolve("done");
-                }, interval);
-            });
-        };
+        // function timeoutPromise(interval) {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(function () {
+        //             resolve("done");
+        //         }, interval);
+        //     });
+        // };
 
-        async function timeTest() {
-            // await timeoutPromise(1000);
-            // await timeoutPromise(1000); 
-            // await timeoutPromise(1000);
-            // let t1= await timeoutPromise(1000)
-            // let t2= await timeoutPromise(1000)
-            // let t3= await timeoutPromise(1000)
-            // console.log(t1)
-            // console.log(t2)
-            // console.log(t3)
-            //每个await将等待前一个完成 3s+
+        // async function timeTest() {
+        //     // await timeoutPromise(1000);
+        //     // await timeoutPromise(1000); 
+        //     // await timeoutPromise(1000);
+        //     // let t1= await timeoutPromise(1000)
+        //     // let t2= await timeoutPromise(1000)
+        //     // let t3= await timeoutPromise(1000)
+        //     // console.log(t1)
+        //     // console.log(t2)
+        //     // console.log(t3)
+        //     //每个await将等待前一个完成 3s+
 
-            const timeoutPromise1 = timeoutPromise(1000);
-            const timeoutPromise2 = timeoutPromise(1000);
-            const timeoutPromise3 = timeoutPromise(1000);
-            let t1 = await timeoutPromise1;
-            let t2 = await timeoutPromise2;
-            let t3 = await timeoutPromise3;
-            console.log(t1)
-            console.log(t2)
-            console.log(t3)
-            //Promise对象存储在变量中 同时启动它们关联的进程 1S
-        }
+        //     const timeoutPromise1 = timeoutPromise(1000);
+        //     const timeoutPromise2 = timeoutPromise(1000);
+        //     const timeoutPromise3 = timeoutPromise(1000);
+        //     let t1 = await timeoutPromise1;
+        //     let t2 = await timeoutPromise2;
+        //     let t3 = await timeoutPromise3;
+        //     console.log(t1)
+        //     console.log(t2)
+        //     console.log(t3)
+        //     //Promise对象存储在变量中 同时启动它们关联的进程 1S
+        // }
 
-        let startTime = Date.now();
-        timeTest().then(() => {
-            let finishTime = Date.now();
-            let timeTaken = finishTime - startTime;
-            console.log("Time taken in milliseconds: " + timeTaken);
-        })
+        // let startTime = Date.now();
+        // timeTest().then(() => {
+        //     let finishTime = Date.now();
+        //     let timeTaken = finishTime - startTime;
+        //     console.log("Time taken in milliseconds: " + timeTaken);
+        // })
           //async/await的缺陷 end
 
         //XMLhttpRequest
@@ -95,46 +88,11 @@
         //     http.onreadystatechange=function (e) {
         //         console.log(http)
         //     }
-
             // 0：未初始化，但是已经创建了XHR实例
             // 1：调用了open()函数
             // 2：已经调用了send()函数，但还未收到服务器回应
             // 3：正在接受服务器返回的数据
             // 4：完成响应
-
-        let ajax = function(type='get',url,data={}){
-            let http = new XMLHttpRequest()
-            return new Promise((resolve,reject)=>{
-                http.open(type,url)
-                http.responseType='json'
-                type=='get'?null:http.setRequestHeader('Content-type', 'application/json')
-                type=='get'?http.send():http.send(JSON.stringify(data))
-                http.onreadystatechange=function (e) {
-                    if(http.readyState==4&&http.status=='200'){
-                        resolve(http.response)
-                    }
-                    if(http.status!='200'){
-                        reject(new Error(http.statusText))
-                    }
-                }
-            })
-        }
-
-        ajax('get','https://www.easy-mock.com/mock/5a76991a3c4ca20b4f1dd68a/example/mock/:page').then(res=>{
-            console.log(res)
-        }).catch(e=>{
-            console.log(e)
-        })
-
-        ajax('post','http://192.168.0.20:9091/pst-salary-api/v1/customer/login',
-        {
-            loginName: "yuyuya",
-            loginPwd: "123456"
-        }).then(res=>{
-            console.log(res)
-        }).catch(e=>{
-            console.log(e)
-        })
 
         //XMLhttpRequest end
     </script>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      window.onload = () => {
+        let arr = [
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类一",
+                id: 1,
+              },
+            ],
+            id: 101224,
+            isSelected: 0,
+            salesName: "测试场馆（可支付）",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类一",
+                id: 1,
+              },
+            ],
+            id: 101247,
+            isSelected: 0,
+            salesName: "深圳影剧馆（测试馆）",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类一",
+                id: 1,
+              },
+            ],
+            id: 101373,
+            isSelected: 0,
+            salesName: "综合收费分时段开放馆测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类二",
+                id: 2,
+              },
+            ],
+            id: 101950,
+            isSelected: 0,
+            salesName: "宝安中心体育馆1",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类二",
+                id: 2,
+              },
+            ],
+            id: 101991,
+            isSelected: 0,
+            salesName: "新综合体验馆(体验馆)",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类二",
+                id: 2,
+              },
+            ],
+            id: 102015,
+            isSelected: 0,
+            salesName: "中二球场",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类三",
+                id: 3,
+              },
+            ],
+            id: 102037,
+            isSelected: 0,
+            salesName: "龙岗文化馆",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类三",
+                id: 3,
+              },
+            ],
+            id: 102222,
+            isSelected: 0,
+            salesName: "莲花山博物馆",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102224,
+            isSelected: 0,
+            salesName: "深圳戏院",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102228,
+            isSelected: 0,
+            salesName: "莲花山公园",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102229,
+            isSelected: 0,
+            salesName: "物料中心",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102513,
+            isSelected: 0,
+            salesName: "音乐厅测试",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102523,
+            isSelected: 0,
+            salesName: "皇岗公园场馆测试使用",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102524,
+            isSelected: 0,
+            salesName: "皇岗公园测试场2",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102527,
+            isSelected: 0,
+            salesName: "深圳音乐厅【测试正式】",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102531,
+            isSelected: 0,
+            salesName: "深圳大剧院-测试",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102533,
+            isSelected: 0,
+            salesName: "深圳市体育中心",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102534,
+            isSelected: 0,
+            salesName: "物料器材库",
+            salesType: 2,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102553,
+            isSelected: 0,
+            salesName: "新北测试球场",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102571,
+            isSelected: 0,
+            salesName: "莲花体育中心【游泳预约测试】",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102647,
+            isSelected: 0,
+            salesName: "若谷生活馆",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102659,
+            isSelected: 0,
+            salesName: "深圳音乐厅【测试】",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102757,
+            isSelected: 0,
+            salesName: "福田体育公园【测试】",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102759,
+            isSelected: 0,
+            salesName: "深圳体育中心【游泳预约】",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102784,
+            isSelected: 0,
+            salesName: "555",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102785,
+            isSelected: 0,
+            salesName: "5555",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102786,
+            isSelected: 0,
+            salesName: "332",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102793,
+            isSelected: 0,
+            salesName: "xia",
+            salesType: 2,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102794,
+            isSelected: 0,
+            salesName: "11",
+            salesType: 2,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102795,
+            isSelected: 0,
+            salesName: "福田区文化馆·音乐主题馆",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "测试分类三",
+                id: 3,
+              },
+            ],
+            id: 102822,
+            isSelected: 0,
+            salesName: "莲花中学北校区",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102887,
+            isSelected: 0,
+            salesName: "测试预约",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102937,
+            isSelected: 0,
+            salesName: "商圈测试",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102940,
+            isSelected: 0,
+            salesName: "时间设置",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102941,
+            isSelected: 0,
+            salesName: "测试-时间段",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102943,
+            isSelected: 0,
+            salesName: "xia-时间段测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102945,
+            isSelected: 0,
+            salesName: "商圈测试-xia",
+            salesType: 4,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102946,
+            isSelected: 0,
+            salesName: "换人测试场馆",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102947,
+            isSelected: 0,
+            salesName: "555",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102948,
+            isSelected: 0,
+            salesName: "2021960测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102949,
+            isSelected: 0,
+            salesName: "20210961",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102950,
+            isSelected: 0,
+            salesName: "项目预约预订测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102951,
+            isSelected: 0,
+            salesName: "商家留言测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102952,
+            isSelected: 0,
+            salesName: "商家留言-预约型",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102953,
+            isSelected: 0,
+            salesName: "测试-999",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102954,
+            isSelected: 0,
+            salesName: "留言-测试",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102955,
+            isSelected: 0,
+            salesName: "4411",
+            salesType: 1,
+          },
+          {
+            commonSalesCategoryList: [
+              {
+                categoryName: "其他",
+                id: 0,
+              },
+            ],
+            id: 102956,
+            isSelected: 0,
+            salesName: "福体问题-原价和成交价不正确",
+            salesType: 1,
+          },
+          {
+            id: 0,
+            isSelected: 0,
+            salesName: "其他",
+          },
+        ];
+
+        // let mySet = new Set()
+        // arr.forEach(cur => {
+        //     if(cur.commonSalesCategoryList && cur.commonSalesCategoryList.length) {
+        //         cur.commonSalesCategoryList.forEach(c =>{
+        //             mySet.add(JSON.stringify(c))
+        //         })
+        //     }
+        // });
+
+        // const a1 =  Array.from(mySet).map(i=>({...JSON.parse(i), child: []}))
+
+        // arr.forEach(cur =>{
+        //     if(cur.commonSalesCategoryList && cur.commonSalesCategoryList.length) {
+        //         cur.commonSalesCategoryList.forEach(c =>{
+        //             a1.forEach(type => {
+        //                 if(c.id === type.id){
+        //                     type.child.push(cur)
+        //                 }
+        //             })
+        //         })
+        //     }
+        // })
+
+        let obj = {};
+        let tree = [];
+        console.log(arr)
+        arr.forEach((i) => {
+          if (i.commonSalesCategoryList && i.commonSalesCategoryList.length) {
+            i.commonSalesCategoryList.forEach((c) => {
+              obj[c.id] == null ? (obj[c.id] = { ...c }) : null;
+            });
+          }
+        });
+        Object.keys(obj).forEach((key) => {
+          arr.forEach((i) => {
+            if (i.commonSalesCategoryList && i.commonSalesCategoryList.length) {
+              i.commonSalesCategoryList.forEach((c) => {
+                if(c.id == key) {
+                    Array.isArray(obj[key].child) ? obj[key].child.push(i):obj[key].child=[i]
+                }
+              });
+            }
+          });
+          tree.push(obj[key])
+        });
+        console.log(tree)
+      };
+    </script>
+  </body>
+</html>
