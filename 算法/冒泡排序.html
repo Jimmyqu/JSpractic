@@ -2,35 +2,41 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <script>
-            let arr1=[2,3,45,67,8,9,0,11]
-       
-           
-            for(let i =0;i< arr1.length;i++){
-                // console.log(arr1[i])
-                for(let j =0;j< arr1.length-1;j++){
-                    if(arr1[i]<arr1[j]){
-                        console.log(arr1[j],arr1[i],'-',arr1[i],arr1[j])
-                        [arr1[j],arr1[i]] = [arr1[i],arr1[j]]
-                        console.log(arr1[j],arr1[i],arr1)
-                    }
-                }
-            }
-            console.log(arr1)
-        </script>
-    </body>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <script>
+      const arr1 = [2, 3, 45, 67, 8, 9, 0, 11];
+
+      for (let i = 0; i < arr1.length; i++) {
+        console.log("i", arr1[i]);
+        for (let j = 1; j < arr1.length - 1; j++) {
+          console.log(arr1[i], arr1[j]);
+          if (arr1[i] < arr1[j]) {
+            console.log(arr1[j], arr1[i], "-", arr1[i], arr1[j])[
+              (arr1[j], arr1[i])
+            ] = [arr1[i], arr1[j]];
+            console.log(arr1[j], arr1[i], arr1);
+          }
+        }
+      }
+      console.log(arr1);
+    </script>
+  </body>
 </html>

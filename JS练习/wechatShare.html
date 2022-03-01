@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id='guide-box'>
+        <div>
+            <canvas></canvas>
+        </div>
+        <div>
+            <div class="link">
+                https://image.baidu.com/search/detail?
+            </div>
+            <div class="tips">
+                您也可以复制链接转发
+            </div>
+        </div>
+        <div id='imgList'>
+            <div>请选择一张素材图作为封面</div>
+            <div>list</div>
+        </div>
+        <div>
+            <div>
+                复制链接
+            </div>
+            <div>
+                保存图片
+            </div>
+        </div>
+    </div>
+<script >
+  $(function(){
+
+      let imglength = 2;    
+
+      $('#guide-box').css({
+        display: 'block',
+        width: '100vw',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        backgroundColor: '#ededed',
+        zIndex: 10_001,
+      })
+
+      const guideBox = $('#guide-box')
+
+      $(guideBox.children()[0]).css({
+          padding: '2vh 4vw'
+      }).children().css({
+        width: $(guideBox.children()[0]).width(),
+        height: '52vh'
+      })
+
+      $(guideBox.children()[1]).css({
+        margin: '1.5vh 4vw 0 4vw',
+        paddingTop: '2vw',
+        width: '92vw',
+        fontSize: '14px',
+        height: '14vh',
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        color: '#333'
+      }).children('.link').css({
+        backgroundColor:"#f2f2f2",
+        padding: '1vh 2vw',
+        borderRadius: '5px',
+        height: '6vh',
+        margin: '1vh 4vw',
+      }).parent().children('.tips').css({
+          textAlign: 'center',
+          color: '#999'
+      })
+
+      $(guideBox.children()[2]).css({
+        padding: '2vh 4vw',
+        fontSize: '14px',
+        color: '#333'
+      })
+
+      if(imglength < 2) {
+        $(guideBox.children()[2]).css({
+            opacity: 0
+        })
+      }
+
+      $(guideBox.children()[3]).css({
+          display: 'flex',
+          position: 'fixed',
+          bottom: 0,
+          width: "100%",
+          justifyContent: 'space-around',  
+          padding: '8px 15px',
+          backgroundColor: '#fff',
+      }).children().css({
+        height: 40,
+        width: '40%',
+        backgroundColor: '#fafafa',
+        lineHeight:'40px',
+        textAlign: 'center',
+      })
+
+      console.log($(guideBox.children()[3]).css({
+          display: 'flex',
+          position: 'fixed',
+          bottom: 0,
+          width: "100%",
+          justifyContent: 'space-around',  
+          padding: '8px 15px',
+          backgroundColor: '#fff',
+      }).children().css({
+        height: 40,
+        width: '40%',
+        backgroundColor: '#fafafa',
+        lineHeight:'40px',
+        textAlign: 'center',
+      }).eq(0).on('click', () => {
+          console.log('copy')
+      }))
+      
+      
+      $(guideBox.children()[3]).children().eq(1).on('click', () => {
+          console.log('save')
+      })
+
+  })
+</script>
+</body>
+</html>

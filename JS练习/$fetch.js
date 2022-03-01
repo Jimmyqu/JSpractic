@@ -1,12 +1,12 @@
 
 
-const $http = async (url,config)=>{
+const $http = async (url,config = {})=>{
     config.timeout?config.timeout:config.timeout=500
 
     let http = fetch(url, { 
         ...config ,
         headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'image/jpg'
         }),
         body:JSON.stringify(config.data)
     });

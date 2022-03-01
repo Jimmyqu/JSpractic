@@ -1,0 +1,32 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# production
+/dist
+/dist*
+/build
+
+# *.jsx
+# src/**/*.js
+# !src/commons/**/*.js
+
+# misc
+.DS_Store
+npm-debug.log*
+yarn-error.log
+
+/coverage
+.idea
+*bak
+
+# visual studio code
+.history
+
+report.*.json
+
+/public/build-version.json
+
+# 统一使用yarn
+package-lock.json

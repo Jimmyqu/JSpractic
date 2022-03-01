@@ -1,8 +1,5 @@
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const history = require('connect-history-api-fallback')
-const convert = require('koa-connect')
-
 // 使用 WEBPACK_SERVE 环境变量检测当前是否是在 webpack-server 启动的开发环境中
 const dev = Boolean(process.env.WEBPACK_SERVE)
 
@@ -22,16 +19,39 @@ module.exports = {
     devtool: dev ? 'cheap-module-eval-source-map' : 'hidden-source-map',
 
     // 配置页面入口 js 文件
-    entry: './index.js',
+    entry: {
+        index: './public/app.js',
+        static: './public2/app.js'
+    },
 
     // 配置打包输出相关
     output: {
         // 打包输出目录
         path: resolve(__dirname, 'dist'),
-
-        // 入口 js 的打包输出文件名
-        filename: 'index.js'
+        // 入口 js 的打包输出文件名 多个入口可用[entry.props]输出多个
+        filename: '[name].js'
     },
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: [
+                //  实际是从后向前执行  css-loader 把commonjs转 css  -》style-loader插入html
+                'style-loader',
+                'css-loader'
+            ]
+        },
+        {
+            test: /\.scss$/,
+            use: [
+                //  实际是从后向前执行  css-loader 把commonjs转 css  -》style-loader插入html
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ]
+        }
+        ]
+    },
+    plugins: [new HtmlWebpackPlugin()]
 }
 
 
