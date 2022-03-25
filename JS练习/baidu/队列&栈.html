@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <input id="queue-input" type="text">
+        <p id="queue-cont"></p>    
+        <button id="in-btn">入队</button>
+        <button id="out-btn">出队</button>
+        <button id="font-btn">打印队头元素内容</button>
+        <button id="empty-btn">判断队列是否为空</button>
+        <script>
+            const queueList = [];
+            const queueInput = document.querySelector('#queue-input')
+            const queueDom = document.querySelector('#queue-cont')
+            const inBtn = document.querySelector('#in-btn')
+            const outBtn = document.querySelector('#out-btn')
+            const fontBtn = document.querySelector('#font-btn')
+            const emptyBtn = document.querySelector('#empty-btn')
+
+            function updateText(arr) {
+                return queueDom.innerHTML = arr.join(',')
+            }
+
+            inBtn.addEventListener('click', (e) => {
+                const v = queueInput.value.trim();
+                if(v) {
+                    queueList.push(v)
+                    queueInput.value = '';
+                    updateText(queueList);
+                }
+            })
+
+            outBtn.addEventListener('click', (e) => {
+                const v = queueInput.value.trim();
+                if(v && queueList.includes(v)) {
+                    const i = queueList.findIndex(item => item == v)
+                    queueList.splice(i, 1)
+                    queueInput.value = '';
+                    updateText(queueList)
+                }
+            })
+
+            fontBtn.addEventListener('click', (e) => {
+                const lastItem = queueList[queueList.length - 1];
+                lastItem && alert(lastItem)
+            })
+
+            emptyBtn.addEventListener('click', (e) => {
+                alert(queueList.length ? 'no' : 'null null null')
+            })
+
+
+        </script>
+    </body>
+</html>

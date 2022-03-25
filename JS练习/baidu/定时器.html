@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <p class="p1">1</p>
+    <p class="p2">2</p>
+    <p class="p3">3</p>
+
+    <script>
+      const p1 = document.querySelector('.p1')
+      const p2 = document.querySelector('.p2')
+      const p3 = document.querySelector('.p3')
+
+      function p1Loop() {
+        let index = 0;
+        setInterval(() => {
+          if(index < 11) {
+            index ++;
+            p1.innerHTML = index;
+          } else {
+            p1.innerHTML = 'done';
+          }
+        }, 1000)
+      }
+      p1Loop()
+
+
+      function p2Loop() {
+        let index = -1;
+        let fuc = () => {
+          if(index< 11) {
+            index ++
+            p2.innerHTML = index;
+            setTimeout(fuc, 1000)
+          } else {
+            p2.innerHTML = 'done';
+          }
+        }
+        fuc()
+      }
+      p2Loop()   
+
+    </script>
+  </body>
+</html>

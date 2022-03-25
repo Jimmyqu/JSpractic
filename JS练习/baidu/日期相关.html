@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <div id="box"></div>
+    <select id="month-select">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+        <option value="5">6</option>
+        <option value="6">7</option>
+        <option value="7">8</option>
+        <option value="8">9</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+    </select>
+    <script>
+            class DateTools {
+              constructor(el, date) {
+                this.el = el;
+                this.date = date || new Date();
+              }
+
+              static htmlStr = "";
+              static weekInfo = [
+                { 0: "星期日" },
+                { 1: "星期一" },
+                { 2: "星期二" },
+                { 3: "星期三" },
+                { 4: "星期四" },
+                { 5: "星期五" },
+                { 6: "星期六" },
+                ];
+              static MonthInfo = [
+                { 0: "一月" },
+                { 1: "二月" },
+                { 2: "三月" },
+                { 3: "四月" },
+                { 4: "五月" },
+                { 5: "六月" },
+                { 6: "七月" },
+                { 7: "八月" },
+                { 8: "九月" },
+                { 9: "十月" },
+                { 10: "十一月" },
+                { 11: "十二月" },
+              ];
+
+              init() {
+                this.renderTools(this.getDateInfo());
+              }
+
+              getDateWeekDay(year, month, day) {
+                  return new Date(year, month, day).getDay();
+              }
+
+              getDateInfo() {
+                const now = this.date;
+                const curYear = now.getFullYear();
+                const curMonth = now.getMonth() + 1;
+                const curWeekDay = now.getDay();
+                const curDay = now.getDate();
+
+                const curMonthDays = new Date(curYear, curMonth, 0).getDate(); // 该月有多少天
+                return {
+                  curYear,
+                  curMonth,
+                  curMonthDays,
+                  curWeekDay,
+                  curDay,
+                };
+              }
+
+              renderTools(dateInfo) {
+                const {
+                  curYear,
+                  curMonth,
+                  curMonthDays,
+                  curWeekDay,
+                  curDay,
+                } = dateInfo
+
+                const weekDom = []
+                this.constructor.weekInfo.forEach((element, i) => {
+                    const div =  document.createElement('div')
+                    div.setAttribute("id", `${i}`);
+                    div.innerHTML =`${element[i]}`
+                    weekDom.push(div)
+                });
+
+                for(let j = 1; j <= curMonthDays; j ++) {
+                    weekDom.map(w => {
+                        if(this.getDateWeekDay(curYear, curMonth - 1, j) == w.id) {
+                            const div =  document.createElement('div')
+                            div.setAttribute("id", `day${j}`);
+                            if(j == curDay) {
+                                div.setAttribute("style", "background-color:red;");
+                            }
+                            div.innerHTML = `${j}`;
+                            w.appendChild(div)
+                        }
+                    })
+                }
+
+                this.el.style.display = "flex"
+                weekDom.forEach(d => {
+                    this.el.appendChild(d)
+                })
+              }
+            }
+
+            const box = document.querySelector("#box");
+            const d1 = new DateTools(box);
+            d1.init();
+    </script>
+  </body>
+</html>

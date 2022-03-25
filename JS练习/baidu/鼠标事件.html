@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            #content {
+                width: 800px;
+                background-color: rgb(39, 36, 43);
+            }
+            #content > div {
+                display: inline-block;
+                width:15px;
+                height: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            function rang(min, max) {
+                return Math.round(Math.random() * (max - min)) + min
+            }
+
+            function setColor(el) {
+                console.log()
+                el.style.background = `rgba(${rang(0, 255)}, ${rang(0, 255)}, ${rang(0, 255)})`
+                el.style.opacity = 1;
+            }
+
+            function delColor(el) {
+                setInterval(() => {
+                    if(el.style.opacity > 0 ) {
+                        el.style.opacity = el.style.opacity - 0.02
+                        console.log(el.style.opacity)
+                    }
+                }, 10)
+            }
+
+            const content = document.querySelector('#content')
+            let htmlStr = ''
+            for(let i = 0; i<1000; i ++) {
+                htmlStr += `<div></div>`
+            }
+            content.innerHTML = htmlStr
+
+            content.addEventListener('mouseover', e => {
+                if(e.target != content) {
+                    e.target.addEventListener('mouseenter', e1 => {
+                        setColor(e1.target)
+                    })
+                    e.target.addEventListener('mouseleave', e2 => {
+                        delColor(e2.target)
+                    })
+                }
+            })
+
+        </script>
+    </body>
+</html>

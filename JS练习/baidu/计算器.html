@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+      .wrapper {
+        width: 50vw;
+        background-color: #282828;
+        border-radius: 15px;
+        margin: 10vh auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      #display1 {
+        /* direction: rtl; */
+        padding: 0 10px;
+        color: #fff;
+        height: 30px;
+        width: 100%;
+      }
+
+      #display2 {
+        padding: 0 10px;
+        /* direction: rtl; */
+        color: #fff;
+        height: 50px;
+        width: 100%;
+      }
+
+      .wrapper .nums {
+        width: 25%;
+        color: #fff;
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+      }
+
+      .nums:hover {
+        background-color: #484848;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <button id="clear">clear</button>
+    <script>
+      class clactor {
+        constructor(el) {
+          this.el = document.querySelector(el);
+        }
+
+        static numList = [1, 2, 3, '+', 4, 5, 6, '-',  7, 8, 9, '*', '=', 0, '.', '/'];
+        static display1List = []
+        static display2List = []
+
+        initDom() {
+          const display1 = document.createElement('div');
+          display1.setAttribute('id', `display1`)
+          const display2 = document.createElement('div');
+          display2.setAttribute('id', `display2`)
+          this.el.appendChild(display1);
+          this.el.appendChild(display2);
+          this.constructor.numList.forEach(num => {
+            const d = document.createElement('div');
+            d.setAttribute('id', `num${num}`)
+            if(Number.isFinite(num)) {
+              d.setAttribute('class', `nums dig`)
+            } else {
+              if(num === '=') {
+                d.setAttribute('class', `nums eq`)
+              } else if (num === '.') {
+                d.setAttribute('class', `nums dot`)
+              } else {
+                d.setAttribute('class', `nums clac`)
+              }
+              
+            }
+            d.innerText = num
+            this.el.appendChild(d);
+          })
+          
+          this.el.addEventListener('click',(e) => {
+            if(e.target.className.includes('dig')) {
+              this.constructor.display2List.push(e.target.innerHTML)
+              display2.innerHTML = this.constructor.display2List.join('')
+            }
+
+            if(e.target.className.includes('clac')) {
+              this.constructor.display1List = [...this.constructor.display2List]
+              this.constructor.display1List.push(e.target.innerHTML);
+              this.constructor.display2List = [];
+              display1.innerHTML = this.constructor.display1List.join('')
+            }
+
+            if(e.target.id === 'num.') {    
+              if(this.constructor.display2List.length === 0) {
+                this.constructor.display2List.push(0)
+              }
+
+              this.constructor.display2List.push(e.target.innerHTML)
+              display2.innerHTML = this.constructor.display2List.join('')
+            }
+
+            if(e.target.id === 'num=') {    
+              display1.innerHTML = [this.constructor.display1List.join(''), this.constructor.display2List.join('')].join('')
+              display2.innerHTML = eval(display1.innerHTML)
+            }
+          })
+        }
+
+        clear() {
+          this.constructor.display1List = []
+          this.constructor.display2List = []
+          display2.innerHTML = this.constructor.display2List.join('')
+          display1.innerHTML = this.constructor.display1List.join('')
+        }
+
+      }
+
+      const c = new clactor('.wrapper')
+      c.initDom()
+
+      const clear = document.querySelector('#clear')
+      clear.addEventListener('click', () => {
+        c.clear()
+      })
+     
+
+
+    </script>
+  </body>
+</html>

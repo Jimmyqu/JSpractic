@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            .flex {
+                display: flex;
+                flex: 1;
+                border:1px silver solid;
+                padding: 10px;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex" id="root">
+            <div class="flex" id="root-a">
+                <div class="flex" id="root-a-a">
+                    <div class="flex" id="root-a-a-a">
+                        <div id="root-a-a-a-a"></div>
+                        <div id="root-a-a-a-b"></div>
+                    </div>
+                    <div class="flex" id="root-a-a-b">
+                        <div id="root-a-a-b-a"></div>
+                        <div id="root-a-a-b-b"></div>
+                    </div>
+                </div>
+                <div class="flex" id="root-a-b">
+                    <div class="flex" id="root-a-b-a">
+                        <div id="root-a-b-a-a"></div>
+                        <div id="root-a-b-a-b"></div>
+                    </div>
+                    <div class="flex" id="root-a-b-b">
+                        <div id="root-a-b-b-a"></div>
+                        <div id="root-a-b-b-b"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex" id="root-b">
+                <div class="flex" id="root-b-a">
+                    <div class="flex" id="root-b-a-a">
+                        <div id="root-b-a-a-a"></div>
+                        <div id="root-b-a-a-b"></div>
+                    </div>
+                    <div class="flex" id="root-b-a-b">
+                        <div id="root-b-a-b-a"></div>
+                        <div id="root-b-a-b-b"></div>
+                    </div>
+                </div>
+                <div class="flex" id="root-b-b">
+                    <div class="flex" id="root-b-b-a">
+                        <div id="root-b-b-a-a"></div>
+                        <div id="root-b-b-a-b"></div>
+                    </div>
+                    <div class="flex" id="root-b-b-b">
+                        <div id="root-b-b-b-a"></div>
+                        <div id="root-b-b-b-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <script>
+           const root = document.querySelector('#root')
+           const allNode = [] 
+
+           function getAllNode(root) {
+               allNode.push({
+                   tagName: root.nodeName,
+                   id: root.id,
+                   node: root,
+                   parentNode: root.parentNode
+               })
+               Array.from(root.children).forEach(e => {
+                   getAllNode(e)
+               })
+           }
+
+           getAllNode(root)
+
+           function toTree(arr) {
+            const obj = {};
+            const res = [];
+
+            arr.forEach(r => {
+                obj[r.id] = { ...r, children: [] };
+            });
+
+            Object.keys(obj).forEach(k => {
+                if (obj[k].parentNode.id != '') {
+                    obj[obj[k].parentNode.id]?.children.push(obj[k]);
+                } else {
+                    res.push(obj[k]);
+                }
+            });
+            return {
+                root: obj.root,
+                arr: res
+            }
+           }
+
+           const res = toTree(allNode);
+
+           console.log(res.root)
+        </script>
+    </body>
+</html>

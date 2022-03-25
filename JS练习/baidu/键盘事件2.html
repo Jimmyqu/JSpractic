@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+      #container {
+        width: 600px;
+        height: 600px;
+        border: 1px red solid;
+        position: relative;
+      }
+      #box {
+        width: 30px;
+        height: 30px;
+        background-color: #000;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div id="container">
+      <div id="box"></div>
+    </div>
+    <script>
+      const box = document.querySelector("#box");
+
+      function move(el, type, speed = 5) {
+        let { top, left } = el.getBoundingClientRect();
+        switch (type) {
+          case "up":
+            el.style.top = `${top - 9 - speed}px`;
+            break;
+          case "down":
+            el.style.top = `${top - 9 + speed}px`;
+            break;
+          case "left":
+            el.style.left = `${left - 9 - speed}px`;
+            break;
+          case "right":
+            el.style.left = `${left - 9 + speed}px`;
+            break;
+        }
+      }
+
+      function fuc(e) {
+        const s =   e.ctrlKey && e.keyCode ? 15 : 5
+        // 39 右 下40 上38 左37
+        switch (e.keyCode) {
+          case 38:
+            move(box, "up", s);
+            break;
+          case 40:
+            move(box, "down", s);
+            break;
+          case 39:
+            move(box, "right", s);
+            break;
+          case 37:
+            move(box, "left", s);
+            break;
+        }
+      }
+
+      window.addEventListener("keydown", fuc);
+
+      window.addEventListener("keyup", (e) => {
+        document.body.removeEventListener("keydown", fuc);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div style="height: 100px;"></div>
+        <div id="content" style="height: 300px;overflow: auto;">
+            <div id="box" style="height: 1200px;position: relative;">  
+                <div id="up" style="position: absolute;bottom: 50px; right: 50px;display: none;">up</div>
+            </div>
+        </div>
+        <script>
+            let content = document.querySelector('#content')
+            let box = document.querySelector('#box')
+            let up = document.querySelector('#up')
+
+            up.addEventListener('click', e => {
+                toTop(content, 300)
+            })
+
+            function toTop(el, ms) {
+                // let startTime = new Date().valueOf();
+                // let endTime = startTime + ms;
+                console.time('click')
+                if(el.scrollTop > 0) {
+                    let index = 0
+                    let timer = setInterval(() => {
+                        if(el.scrollTop > 0) {
+                            index++
+                            el.scrollTop = el.scrollTop - index * el.scrollTop/50
+                        } else {
+                            clearInterval(timer);
+                        }
+                    }, ms/10)
+
+                }
+            }
+
+            content.onscroll = (e) => {
+                // 输入事件和动画帧常常以差不多的频率被触发，因此小于等于17ms的优化常常不必要
+                // content.scrollTop content.scrollHeight 都是在父级上的属性
+                if(content.scrollHeight - content.scrollTop - content.offsetHeight === 0 ){
+                    up.style.display = 'block'
+                } else {
+                    up.style.display = 'none'
+                }
+            }
+        </script>
+    </body>
+</html>
