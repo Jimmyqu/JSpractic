@@ -36,6 +36,7 @@ const options = {
   devMiddleware: {
     publicPath: '/'
   },
+  https: true,
   proxy: {
     '/v3': {
       target: 'http://localhost:8080/',

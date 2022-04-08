@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta
+            name="viewport"
+            content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0"
+    />
+    <link rel="stylesheet" href="" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #app {
+            height: 90vh;
+            width: 100vw;
+        }
+        .clip {
+            position: absolute;
+            top: calc(50% - 150px);
+            left: calc(50% - 150px);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid red;
+        }
+
+        .canvas-wrapper {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="canvas-wrapper" @wheel="handleWheel">
+        <canvas ref="canvas"></canvas>
+        <div class="clip"></div>
+    </div>
+    <label class="btn" for="singleUploader">选择照片 </label>
+    <input
+            id="singleUploader"
+            ref="singleUploader"
+            type="file"
+            style="position: absolute; clip: rect(0 0 0 0)"
+            accept="image/png, image/jpeg, image/gif, image/jpg"
+            @change="uploadImg($event)"
+    />
+    <div @click="handleRotate">转</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        console.log(document)
+        var app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    originImg: null,
+                    circleWidth: 300,
+                    wheelScale: 1,
+                    imgScale: 1,
+                    touchStore: {
+                        top: 0,
+                        left: 0,
+                        maxScale: 3,
+                        minScale: 1,
+                    },
+                };
+            },
+            methods: {
+                handleWheel(e) {
+                    const canvas = this.$refs.canvas;
+                    const { minScale, maxScale } = this.touchStore;
+                    const ctx = this.$refs.canvas.getContext("2d");
+                    const { width: useWidth, height: useHeight } = canvas;
+
+                    this.wheelScale = this.wheelScale + (e.deltaY > 0 ? -0.1 : 0.1);
+
+                    console.log(-(this.wheelScale * useWidth - useWidth) / 2 + e.offsetX);
+
+                    console.log(this.wheelScale * useWidth)
+                    this.wheelScale = Math.max(
+                        minScale,
+                        Math.min(this.wheelScale, maxScale)
+                    );
+
+                    Object.assign(this.touchStore, {
+                        top: -(this.wheelScale * useHeight - useHeight) / 2,
+                        left: -(this.wheelScale * useWidth - useWidth) / 2,
+                        scale: this.wheelScale,
+                    });
+
+                    this.updateCanvas(ctx);
+                },
+                uploadImg(e) {
+                    // 上传图片
+                    const file = e.target.files[0];
+                    if (
+                        !/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)
+                    ) {
+                        alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+                        return false;
+                    }
+                    const reader = new FileReader();
+                    reader.addEventListener("load", (e1) => {
+                        const data =
+                            typeof e1.target.result === "object"
+                                ? window.URL.createObjectURL(new Blob([e1.target.result]))
+                                : e1.target.result;
+
+                        this.originImg = new Image();
+
+                        this.originImg.addEventListener("load", () => {
+                            this.imgScale = this.originImg.width / this.originImg.height;
+
+                            const canvas = this.$refs.canvas;
+                            const ctx = canvas.getContext("2d");
+
+                            canvas.width =
+                                window.innerWidth ||
+                                document.documentElement.clientWidth ||
+                                document.body.clientWidth;
+
+                            const isHeightShort =
+                                canvas.width / this.imgScale < this.circleWidth;
+
+                            canvas.height = isHeightShort
+                                ? this.circleWidth
+                                : canvas.width / this.imgScale;
+
+                            this.touchStore = {
+                                ...this.touchStore,
+                                minScale:
+                                    this.imgScale > 1
+                                        ? this.circleWidth / canvas.height
+                                        : this.circleWidth / canvas.width,
+                                isHeightShort:
+                                    canvas.width / this.imgScale < this.circleWidth,
+                                shortScale:
+                                    this.circleWidth / (canvas.width / this.imgScale),
+                            };
+
+                            console.log(
+                                (this.circleWidth / (canvas.width / this.imgScale)) *
+                                canvas.width
+                            );
+                            ctx.drawImage(
+                                this.originImg,
+                                0,
+                                0,
+                                isHeightShort
+                                    ? (this.circleWidth / (canvas.width / this.imgScale)) *
+                                    canvas.width
+                                    : canvas.width,
+                                canvas.height
+                            );
+                        });
+                        this.originImg.src = data;
+                    });
+                    // 转化为base64
+                    // reader.readAsDataURL(file)
+                    // 转化为blob
+                    reader.readAsArrayBuffer(file);
+                },
+                updateCanvas(ctx) {
+                    const canvas = this.$refs.canvas;
+                    const { width: useWidth, height: useHeight } = canvas;
+                    const { scale, left, top, shortScale, isHeightShort } =
+                        this.touchStore;
+
+                    ctx.clearRect(0, 0, useWidth, useHeight);
+
+                    ctx.drawImage(
+                        this.originImg,
+                        left,
+                        top,
+                        isHeightShort
+                            ? shortScale * useWidth * scale
+                            : useWidth * scale,
+                        useHeight * scale
+                    );
+                },
+            },
+            mounted() {
+                console.log(this.$refs.canvas);
+            },
+        });
+    });
+</script>
+</body>
+</html>
