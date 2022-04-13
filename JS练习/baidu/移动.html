@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0"
+    />
+    <link rel="stylesheet" href="" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        height: 100vh;
+        width: 100vw;
+      }
+      .canvas-wrapper {
+
+      }
+      #box {
+        width: 50px;
+        height: 50px;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="canvas-wrapper">
+        <div id="box" :style="{marginLeft: `${left1}px`}"></div>
+        <button @click="handleMove1">匀速运动</button>
+        <div id="box" :style="{marginLeft: `${left2}px`}"></div>
+        <button @click="handleMove2">减速运动</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        console.log(document)
+        var app = new Vue({
+          el: "#app",
+          data() {
+            return {
+              left1: 0,
+              left2: 0,
+              speed: 5,
+            };
+          },
+          methods: {
+            handleMove1() {
+              console.log(window.innerWidth)
+              const cWidth = window.innerWidth
+              const timer = setInterval(() => {
+                const restWidth = (cWidth - 50) - this.left1;
+                if(restWidth > 0) {
+                  this.left1 += this.speed
+                }else {
+                  clearInterval(timer)
+                }
+              }, 10)
+            },
+            handleMove2() {
+              const cWidth = window.innerWidth
+              let index = 0;
+              const timer = setInterval(() => {
+                const restWidth = (cWidth - 50) - this.left2;
+                index++
+                this.left += this.speed
+                console.log(this.left)
+
+              }, 10)
+            },
+          },
+          mounted() {
+
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

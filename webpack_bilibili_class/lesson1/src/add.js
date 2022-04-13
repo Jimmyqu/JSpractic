@@ -1,5 +1,3 @@
-import {resolve} from "uri-js";
-
 export default  function mii(x, y) {
     console.log(x - y);
     return x - y;
@@ -11,10 +9,10 @@ export  const add = (x, y) => {
     return x + y;
 }
 
-export const asy = function *(){
-    console.log('yield');
-    yield 1
-}
+// export const asy = function *(){
+//     console.log('yield');
+//     yield 1
+// }
 
 export const p = function () {
     console.log('ppppppp')
