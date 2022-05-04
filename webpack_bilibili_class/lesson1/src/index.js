@@ -1,4 +1,4 @@
-import mii, {add, asy, p} from './add'
+import mii, {add, p} from './add'
 import imgS from './static/1648089014(1).png'
 import './static/index.css'
 
@@ -8,7 +8,7 @@ img.src = imgS
 document.body.appendChild(img)
 
 mii(9,4)
-asy();
+// asy();
 p().then(() => {
     console.log('done done')
 })
