@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id=app>
+        <template>
+            <input ref="file" type="file">
+            <div @click="upload">上传</div>
+        </template>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            props: {
+            },
+
+            mounted() {
+            },
+
+            data() {
+                return {
+                };
+            },
+
+            methods: {
+                upload() {
+                    const formData = new FormData();
+                    formData.append('avatar', this.$refs.file.files[0]);
+                    fetch('http://localhost:9999/upload', {
+                        method: 'POST',
+                        body: formData
+                    }).then(res => {
+                        console.log(res.json())
+                    })
+                }
+            },
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

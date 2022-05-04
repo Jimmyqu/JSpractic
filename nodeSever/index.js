@@ -1,13 +1,15 @@
 const express = require('express');
 const multer = require('multer')
+var cors = require('cors')
 const path = require('path')
 var fs = require('fs-extra')
 const formidable  = require('formidable')
 
 const app = express()
+// app.use(cors())
 
 const port = 9999;
-
+let imgNum = 1;
 const fileList = []
 const upload = multer({
     storage: multer.diskStorage({   // multer直接处理了上传的文件
@@ -15,15 +17,8 @@ const upload = multer({
             cb(null, './static/upload');
           },
         filename: (req, file, cb) => {
-            // fs.ensureDir('./static/target', function (err) {
-            //     const fileBuffer =  fs.readFileSync('./static/upload')
-            //     console.log(fileBuffer)
-            //     fileList.push(fileBuffer)
-            //     if(fileList.length === 6) {
-            //         fs.writeFile('./static/target/text.txt', Buffer.concat(fileList));
-            //     }
-            // })
-            cb(null, file.fieldname);
+            const name = path.extname(file.originalname)
+            cb(null, imgNum+name);
         }
     })
 })
@@ -33,7 +28,7 @@ app.use(upload.any()) //提交from-data格式数据  和文件上传
 app.use(express.static('./static/')) // 这里默认处理了/路径 返回参数目录下index.html
 
 app.post('/login', (req, res, next) => {
-    console.log(req.body)
+    console.log('req', req, res)
     res.send({
         error: 0,
         data: req.body,
@@ -49,13 +44,16 @@ app.post('/upload', (req, res, next) => {
     //     console.log('fields',fields);//表单传递的input数据  
     //     console.log('files',files);//上传文件数据  
     //     //do somthing......  
-    // });  
-    console.log(req.files[0])
+    // });
+
+    const name = path.extname(req.files[0].originalname)
+
     res.send({
         error: 0,
-        data: {...req.body, url: `http://localhost:${port}/upload/${req.files[0].filename}`},
+        data: {...req.body, url: `http://localhost:${port}/upload/${imgNum + name}`},
         msg: '上传成功'
     })
+    imgNum ++
 })
 
 // fetch form-data

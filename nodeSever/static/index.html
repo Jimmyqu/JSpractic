@@ -12,183 +12,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
     <style>
-        .bar {
-            width: 200px;
-            height: 5px;
-            border:1px solid #e7e7e7
-        }
-        .active-bar {
-            /* display: none; */
-            width: 0;
-            height: 5px;
-            background-color: aquamarine;
-        }
+      .bar {
+        width: 200px;
+        height: 5px;
+        border: 1px solid #e7e7e7;
+      }
+      .active-bar {
+        /* display: none; */
+        width: 0;
+        height: 5px;
+        background-color: aquamarine;
+      }
     </style>
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
-    <h3>Fetch提交</h3>
-    <form action="#">
-      用户：<input type="text" name="username" id="username" /><br />
-      密码：<input type="text" name="password" id="password" /><br />
-    </form>
-
-    <input type="button" value="POST登录" id="login" />
-    <hr />
-
-    <form action="#">
-      <input type="text" name="uploadname" />
-      <input type="text" name="uploadpass" />
-      <input type="file" name="file" id="file" />
-      <div class="bar">
-        <div class="active-bar"></div>  
-      </div>
-      <br />
-      <input type="button" value="带字段的上传" id="upload" />
-    </form>
-    <hr />
-
-    <form action="#">
-      <input type="file" name="file2" id="file2" />
-    </form>
-    <input type="button" value="普通上传" id="upload2" />
-    <hr />
-    <form action="#">
-        <input type="file" name="file" id="fileChunk" />
-        <br />
-        <input type="button" value="切片上传" id="chunk_upload" />
-      </form>
-      <hr />
-    <h3>Fetch提交</h3>
-    
-
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <div id="app">
+      <template>
+        <input ref="file" type="file" />
+        <div @click="upload">上传</div>
+      </template>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script>
-      // 1024*1024 1mb
-      const creatFileChunk = (file, size = 1024*200) => {
-        console.log(file)
-        if(!file) return;
-        const fileArr = [];
-        let cur = 0;
-        console.log(file.size , size)
-        while(file.size > cur) {
-            fileArr.push(file.slice(cur, size+cur));
-            cur += size;
-        }
-        return fileArr;
-      }
-
-      // 切片上传
-      document.querySelector("#chunk_upload").addEventListener("click", async () => {
-        let files = document.querySelector("#fileChunk").files;
-        console.log(files)
-        const chunkList = creatFileChunk(files[0]);
-
-        chunkList.map((chunk,i) => {
-            let formData = new FormData();
-            formData.append(`chunk${chunkList.length}-chunk-${i}`, chunk);
-            $.ajax({
-                method: "post",
-                url: "http://localhost:9999/chunkUpload",
-                data: formData,
-                processData: false, // 传formdata必要设置
-                contentType: false, // 传formdata必要设置
-                success: (res) => {
-                    console.log(res);
-                },
-            });
-        })
-      });
-
-
-
-
-      // 表单登录
-      console.log(document.querySelector("#login"));
-      document
-        .querySelector("#login")
-        .addEventListener("click", async function () {
-          const response = await fetch(`/login`, {
+      const timer = function (time = 10000) {
+        return new Promise((resolve, rejeact) => {
+          setTimeout(() => {
+            rejeact(new Error("超时"));
+          }, time);
+        });
+      };
+      const timerFetch = function (url, data) {
+        return Promise.race([
+          fetch(url, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify({
-              username: document.querySelector("#username").value,
-              password: document.querySelector("#password").value,
-            }),
-          });
-          const result = await response.json();
-          console.log(result);
-          alert(result.msg);
-        });
+            body: data,
+          })
+            .then((res) => res.json()),
+          timer(),
+        ]);
+      };
+      let vm = new Vue({
+        props: {},
 
+        mounted() {},
 
-
-      document.querySelector("#upload").addEventListener("click", async () => {
-        let files = document.querySelector("#file").files;
-        const activeBar = document.querySelector('.active-bar')
-        var formData = new FormData();
-
-        formData.append(
-          "username",
-          document.querySelector("input[name = 'uploadname']").value
-        );
-        formData.append(
-          "accountnum",
-          document.querySelector("input[name = 'uploadpass']").value
-        );
-        formData.append("selectFile", files[0]);
-
-        $.ajax({
-          method: "post",
-          url: "http://localhost:9999/upload",
-          data: formData,
-          processData: false, // 传formdata必要设置
-          contentType: false, // 传formdata必要设置
-          xhr: () => {
-            //获取原生的xhr对象
-            const xhr = $.ajaxSettings.xhr();
-            if (xhr.upload) {
-              //添加 progress 事件监听
-              xhr.upload.addEventListener(
-                "progress",
-                (e) => {
-                  //e.loaded 已上传文件字节数
-                  //e.total 文件总字节数
-                  const percentage = parseInt((e.loaded / e.total) * 100);
-                  const activeBar = document.querySelector('.active-bar')
-                  activeBar.style.width = `${percentage}%`
-                },
-                false
-              );
+        data() {
+          return {};
+        },
+        methods: {
+          upload() {
+            if (this.$refs.file.files[0]) {
+              const formData = new FormData();
+              formData.append("avatar", this.$refs.file.files[0]);
+              timerFetch("http://localhost:9999/upload", formData).then(res => {
+                console.log(res)
+              }).catch(e => {
+                console.log(e)
+              })
+            } else {
+              console.warn("请选择文件");
             }
-            return xhr;
           },
-          success: (res) => {
-            console.log(res);
-          },
-        });
-        // var request = new XMLHttpRequest();
-        // request.open("POST", "http://localhost:9999/upload");
-        // request.send(formData);
-      });
-
-      document.querySelector("#upload2").addEventListener("click", async () => {
-        var formData = new FormData();
-        let files = document.querySelector("#file2").files;
-
-        formData.append("username", "Groucho");
-        formData.append("accountnum", 123456);
-        formData.append("selectFile", files);
-        var request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:9999/upload2");
-        request.send(formData);
+        },
+        el: "#app",
       });
     </script>
   </body>

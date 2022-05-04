@@ -44,7 +44,7 @@
 </head>
 <body>
 <div id="app">
-    <div class="canvas-wrapper" @wheel="handleWheel">
+    <div class="canvas-wrapper" @touchStart="doStart" @touchMove="doMove" @touchEnd="doEnd" @wheel="handleWheel">
         <canvas ref="canvas"></canvas>
         <div class="clip"></div>
     </div>
@@ -57,7 +57,7 @@
             accept="image/png, image/jpeg, image/gif, image/jpg"
             @change="uploadImg($event)"
     />
-    <div @click="handleRotate">转</div>
+    <!-- <div @click="handleRotate">转</div> -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script>
@@ -72,37 +72,90 @@
                     wheelScale: 1,
                     imgScale: 1,
                     touchStore: {
+                        canMove: false,
+                        startX: 0,
+                        startY: 0,
+                        originX: 0,
+                        originY: 0,
                         top: 0,
                         left: 0,
                         maxScale: 3,
                         minScale: 1,
+                        tanslateX: 0,
+                        tanslateY: 0,
                     },
                 };
             },
             methods: {
+                doStart(e) {
+                    const [t1, t2] = e.touches
+                    const { left, top, scale} = this.touchStore;
+
+                    Object.assign(this.touchStore, {
+                        startX: t1.clientX,
+                        startY: t1.clientY,
+                        scale: scale || 1,
+                        canMoving: true,
+                        originX: left,
+                        originY: top,
+                    });
+                },
+                doMove(e) {
+                    const {startX, startY, canMoving, originX, originY} = this.touchStore
+                    const [t1, t2] = e.touches
+                    const canvas = this.$refs.canvas;
+                    const ctx = this.$refs.canvas.getContext("2d");
+                    if(!canMoving) {
+                        return
+                    }
+
+                    if(t2 == null) {
+                        const {clientX, clientY} = t1;
+                        const moveX = clientX - startX + originX;
+                        const moveY = clientY - startY + originY;
+                        
+                        
+                        Object.assign(this.touchStore, {
+                            left: moveX,
+                            top: moveY,
+                            tanslateX: moveX,
+                            tanslateY: moveY
+                        });
+                        console.log(moveX, moveY)
+                        this.updateCanvas(ctx, this.touchStore);
+                    }
+                },
+                doEnd() {
+                    Object.assign(this.touchStore, {
+                        startX: 0,
+                        startY: 0,
+                        canMoving: false,
+                    });
+                },
                 handleWheel(e) {
                     const canvas = this.$refs.canvas;
-                    const { minScale, maxScale } = this.touchStore;
                     const ctx = this.$refs.canvas.getContext("2d");
+
+                    const { minScale, maxScale, left, top } = this.touchStore;
                     const { width: useWidth, height: useHeight } = canvas;
 
                     this.wheelScale = this.wheelScale + (e.deltaY > 0 ? -0.1 : 0.1);
 
-                    console.log(-(this.wheelScale * useWidth - useWidth) / 2 + e.offsetX);
-
-                    console.log(this.wheelScale * useWidth)
                     this.wheelScale = Math.max(
                         minScale,
                         Math.min(this.wheelScale, maxScale)
                     );
+                    
 
-                    Object.assign(this.touchStore, {
-                        top: -(this.wheelScale * useHeight - useHeight) / 2,
-                        left: -(this.wheelScale * useWidth - useWidth) / 2,
-                        scale: this.wheelScale,
-                    });
+                    console.log('nowCenter', this.wheelScale * useWidth, this.wheelScale * useHeight )
 
-                    this.updateCanvas(ctx);
+                    // Object.assign(this.touchStore, {
+                    //     top: -(this.wheelScale * useHeight - useHeight) / 2,
+                    //     left: -(this.wheelScale * useWidth - useWidth) / 2 ,
+                    //     scale: this.wheelScale,
+                    // });
+
+                    // this.updateCanvas(ctx);
                 },
                 uploadImg(e) {
                     // 上传图片
@@ -152,10 +205,6 @@
                                     this.circleWidth / (canvas.width / this.imgScale),
                             };
 
-                            console.log(
-                                (this.circleWidth / (canvas.width / this.imgScale)) *
-                                canvas.width
-                            );
                             ctx.drawImage(
                                 this.originImg,
                                 0,
@@ -182,6 +231,7 @@
 
                     ctx.clearRect(0, 0, useWidth, useHeight);
 
+                    console.log('drawImageleft', left)
                     ctx.drawImage(
                         this.originImg,
                         left,
