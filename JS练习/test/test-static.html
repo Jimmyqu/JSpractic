@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
+    <title>Title</title>
+    <!-- <link rel="stylesheet" href="index.css" type="media"> -->
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h3>目录</h3>
+      </div>
+    </header>
+    <section class="container mx-auto content" id="listContainer">
+        1111
+    </section>
+    <footer class="container mx-auto"></footer>
+  </body>
+  <script>
+
+    console.log()
+    const listContainer = document.getElementById('listContainer')
+    const creatStr = () => {
+      let arr =[];
+      for(let i =0; i<100; i++) {
+        arr.push(window.btoa(Math.random()))
+      }
+      return arr
+    }
+
+    const strList = creatStr();
+    
+    const addListItem = () => {
+      let list = ''
+      strList.map(s =>　{
+        list+= `<div class="list-item"><a>${s}</a> <span>${Date()}</span></div>`
+      })
+
+      listContainer.innerHTML = list
+    }
+
+    addListItem()
+  </script>
+</html>

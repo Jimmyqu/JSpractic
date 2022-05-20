@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
+    <title>Title</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="box">
+      <p>{{ message }}</p>
+      <button @click="changeP1">changeP1</button>
+      <Child :p1="p1"></Child>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        data() {
+          return {
+            message: "Hello Vue.js!",
+            p1: {
+              a: 1,
+              b: 3,
+            },
+          };
+        },
+        methods: {
+            changeP1() {
+                this.p1.b = 4
+            }
+        },
+      };
+      const app = Vue.createApp(App).component("Child", {
+        props: {
+          p1: Object,
+        },
+        data() {
+          return {
+            msg: "child",
+            localp1: {...this.p1},
+          };
+        },
+        template: `<div>
+            {{ msg }}
+            <p>p1:{{p1}}</p>
+            <p>localp1: {{localp1}}</p>
+            </div>`,
+      });
+      app.mount("#box");
+    </script>
+  </body>
+</html>
