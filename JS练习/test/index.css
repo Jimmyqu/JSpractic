@@ -55,6 +55,41 @@ body {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
  }
 
+ .flex {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .flex img{
+    height: 40px;
+}
+
+ .search {
+     height: 40px;
+     padding: 0 2px;
+     background-color: #b3e6f9;
+     border-radius: 4px;
+     display: flex;
+     align-items: center;
+ }
+
+ .search input {
+    height: 30px;
+    width: 400px;
+    outline: none;
+}
+
+.search i {
+    display: inline-block;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+}
+ 
  .content {
      padding-top: 80px;
  }
@@ -77,6 +112,13 @@ body {
     .content {
         padding-top: 40px;
     }
+
+    .search input {
+        height: 30px;
+        width: 150px;
+        outline: none;
+    }
+    
 
     .list-item {
         padding: 4px 10px;
