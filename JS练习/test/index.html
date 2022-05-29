@@ -25,7 +25,27 @@
     </header>
     <section class="container mx-auto content" id="listContainer">
     </section>
-    <footer class="container mx-auto"></footer>
+    <section class="last">
+      <h4>最近更新</h4>
+      <div class="last-info">1222</div>
+      <div class="last-info">212121</div>
+      <div class="last-info">3431</div>
+      <div class="last-info">4444</div>
+      <div class="last-info">5665645</div>
+      
+    </section>
+    <footer class="container mx-auto">
+      <div class="pre dis">
+        上一页
+      </div>
+      <div class="nums active">1</div>
+      <div class="nums">2</div>
+      <div class="nums">3</div>
+      <div class="nums">4</div>
+      <div class="next">
+        下一页
+      </div>
+    </footer>
   </body>
   <script>
 
@@ -44,7 +64,7 @@
     const addListItem = () => {
       let list = ''
       strList.map(s =>　{
-        list+= `<div class="list-item"><a>${s}</a> <span>${Date()}</span></div>`
+        list+= `<a href="/detail.html" class="list-item">${s} <span>${Date()}</span></a>`
       })
 
       listContainer.innerHTML = list

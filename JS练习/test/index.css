@@ -94,9 +94,25 @@ body {
      padding-top: 80px;
  }
 
+ .tags {
+     background-color: #b3e6f9;
+     border-radius: 4px;
+     padding: 2px 6px;
+ }
+
+ .selet {
+     margin: 20px 0;
+ }
+
+ .selet li {
+     padding: 4px;
+ }
+
  .list-item {
      padding: 4px 10px;
      background-color: #ededed;
+    text-decoration: none;
+
      border-radius: 4px;
      margin-top: 10px;
      display: flex;
@@ -108,7 +124,65 @@ body {
     color: #5e5e5e;
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.nums {
+    width: 30px;
+    border: 1px solid #b3e6f9;
+    background-color: #b3e6f9;
+    color: #fff;
+    margin: 0 2px;
+}
+.pre,.next {
+    padding: 2px 4px;
+    background-color: #b3e6f9;
+    color: #fff;
+}
+
+.active {
+    background-color: #fff;
+    color: #b3e6f9;
+}
+
+.dis {
+    background-color: #c0c0c0;
+}
+
+.qustion {
+    line-height: 20px;
+}
+
+@media (min-width: 1200px) {
+    .last {
+        position: fixed;
+        top: 50px;
+        right: 0px;
+        width: 160px;
+        background-color: #fff;
+        padding: 10px;
+    }
+    .last h4 {
+        margin: 10px 0;
+    }
+
+    .last div {
+        margin: 5px 0;
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 768px) { 
+
+    .last {
+        display: none;
+    }
+
     .content {
         padding-top: 40px;
     }
@@ -123,6 +197,7 @@ body {
     .list-item {
         padding: 4px 10px;
         background-color: #ededed;
+        text-decoration: none;
         border-radius: 4px;
         margin-top: 10px;
         display: flex;
