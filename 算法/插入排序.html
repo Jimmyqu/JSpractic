@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+ let arr1=[17, 9, 19, 15, 13, 5, 3, 6, 10, 14, 20, 16, 1]
+
+
+ function findSmallIndex(arr, s1) {
+    let s = 0
+    for(let i = 0; i< arr.length; i ++){
+       if(arr[i] < s1 && arr[i+1] >s1) {
+         s = arr[i]
+       }
+    }
+    return arr.findIndex(el => el === s)
+ }
+
+ function sort(arr){
+   let res = []
+   res[0] = arr[0]
+
+   for (let i = 1; i < arr1.length; i ++) {
+      if(arr[i] < res[0]) {
+         res.unshift(arr[i])
+      } else if(arr[i] > res[res.length -1]) {
+         res.push(arr[i])
+      }else{
+         const idx = findSmallIndex(res, arr[i]);
+         res.splice(idx+1, 0, arr[i])
+      }
+   }
+   console.log(res)
+ }
+
+sort(arr1)
+</script>
+</body>
+</html>

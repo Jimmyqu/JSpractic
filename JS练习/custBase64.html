@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <style></style>
+
+  <body>
+    <script>
+      function b64EncodeUnicode(str) {
+        return btoa(str);
+      }
+
+      function b64DecodeUnicode(str) {
+        return atob(str);
+      }
+
+      let str1 = "/case/123545";
+      let str2 = "http://test-portal.ydmap.cn:9086/team/search";
+
+      console.log(b64EncodeUnicode(str2));
+      console.log(b64DecodeUnicode(b64EncodeUnicode(str2)));
+    </script>
+  </body>
+</html>

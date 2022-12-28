@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
+    <title>Title</title>
+    <style>
+      #box {
+        /* white-space: pre-line;  单处理换行符*/
+        /* white-space: pre-wrap; 换行 tab 都处理*/
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+    </div>
+    <script>
+      const str = "添加课节【269402 - (2022-10-21 09:30-10:00)】 \n\t添加课节人员【106454-李超 108182-吴教练 】\n\t添加课节场地【104586-培训班(未锁定) 】课节【269403 - (2022-10-22 09:30-10:00)】 \n\t添加课节人员【106454-李超 108182-吴教练 】\n\t添加课节场地【104586-培训班(未锁定) 】"
+      const box=document.querySelector('#box')
+      box.innerHTML = str
+   </script>
+  </body>
+</html>

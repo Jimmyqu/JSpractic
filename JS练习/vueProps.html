@@ -44,7 +44,7 @@
         data() {
           return {
             msg: "child",
-            localp1: {...this.p1},
+            localp1: {...this.p1}, //解构会失去响应
           };
         },
         template: `<div>
